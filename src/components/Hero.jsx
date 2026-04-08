@@ -20,11 +20,11 @@ const Hero = () => {
       {/* Animated Yellow Lines Layer */}
       <div className="animated-lines-container" style={{ height: '300px', zIndex: 3 }}>
         <div className="lines-track">
-          {[...Array(40)].map((_, i) => (
+          {[...Array(250)].map((_, i) => (
             <div key={i} className="line-item"></div>
           ))}
-          {[...Array(40)].map((_, i) => (
-            <div key={i + 40} className="line-item"></div>
+          {[...Array(250)].map((_, i) => (
+            <div key={i + 250} className="line-item"></div>
           ))}
         </div>
       </div>
