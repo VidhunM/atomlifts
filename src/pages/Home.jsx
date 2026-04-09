@@ -1,5 +1,11 @@
 import Hero from '../components/Hero';
 import Services from '../components/Services';
+import Partners from '../components/Partners';
+import AboutEngineering from '../components/AboutEngineering';
+import Projects from '../components/Projects';
+import VisualPrecision from '../components/VisualPrecision';
+import Industries from '../components/Industries';
+import TestimonialsStats from '../components/TestimonialsStats';
 import ContactForm from '../components/ContactForm';
 
 const Home = () => {
@@ -7,8 +13,13 @@ const Home = () => {
     <>
       <Hero />
       <Services />
-      <div className="section-divider py-5 bg-dark"></div>
-      <ContactForm />
+      <Partners />
+      <AboutEngineering />
+      <Projects />
+      <VisualPrecision />
+      <Industries />
+      <TestimonialsStats />
+      {/*<ContactForm />*/}
     </>
   );
 };

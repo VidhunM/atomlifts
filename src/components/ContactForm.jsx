@@ -6,45 +6,12 @@ const ContactForm = () => {
       <div className="container">
         <div className="glass-card p-4 p-md-5 overflow-hidden">
           <div className="row g-5">
-            <div className="col-lg-5" data-aos="fade-right">
-              <h2 className="display-6 fw-bold text-white mb-4">Start Your <br /><span className="text-gradient">Project Today</span></h2>
-              <p className="text-white-50 mb-5">Have a question or ready to upgrade your facility? Our experts are here to help you find the perfect vertical solution.</p>
-              
-              <div className="d-flex flex-column gap-4">
-                <div className="d-flex align-items-center gap-4 group">
-                  <div className="bg-primary bg-opacity-10 text-primary p-3 rounded-circle">
-                    <Mail size={24} />
-                  </div>
-                  <div>
-                    <h6 className="mb-1 text-white opacity-50 small text-uppercase fw-bold">Email Us</h6>
-                    <p className="mb-0 fw-medium">hello@atomlifts.com</p>
-                  </div>
-                </div>
-                
-                <div className="d-flex align-items-center gap-4 group">
-                  <div className="bg-primary bg-opacity-10 text-primary p-3 rounded-circle">
-                    <Phone size={24} />
-                  </div>
-                  <div>
-                    <h6 className="mb-1 text-white opacity-50 small text-uppercase fw-bold">Call Anytime</h6>
-                    <p className="mb-0 fw-medium">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-                
-                <div className="d-flex align-items-center gap-4 group">
-                  <div className="bg-primary bg-opacity-10 text-primary p-3 rounded-circle">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <h6 className="mb-1 text-white opacity-50 small text-uppercase fw-bold">Visit Our HQ</h6>
-                    <p className="mb-0 fw-medium">Silicon Valley, CA 94025</p>
-                  </div>
-                </div>
+            <div className="col-lg-8 mx-auto" data-aos="fade-up">
+              <div className="text-center mb-5">
+                <h6 className="text-primary text-uppercase tracking-widest fw-bold mb-3 small">CONTACT US</h6>
+                <h2 className="display-5 fw-bold text-white mb-0">Get In <span className="text-primary">Touch</span></h2>
               </div>
-            </div>
-            
-            <div className="col-lg-7" data-aos="fade-left">
-              <form className="row g-4 bg-white bg-opacity-5 p-4 rounded-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="row g-4 bg-white bg-opacity-5 p-4 p-md-5 rounded-4" onSubmit={(e) => e.preventDefault()}>
                 <div className="col-md-6">
                   <label className="form-label text-white small opacity-75">Full Name</label>
                   <input type="text" className="form-control bg-transparent border-white border-opacity-10 text-white p-3" placeholder="John Doe" />
