@@ -1,7 +1,7 @@
 import { Star } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
-const Counter = ({ end, duration = 2000 }) => {
+const Counter = ({ end, duration = 2000, suffix = "" }) => {
   const [count, setCount] = useState(0);
   const countRef = useRef(null);
   const hasStarted = useRef(false);
@@ -28,7 +28,7 @@ const Counter = ({ end, duration = 2000 }) => {
     return () => observer.disconnect();
   }, [end, duration]);
 
-  return <span ref={countRef}>{count}</span>;
+  return <span ref={countRef}>{count}{suffix}</span>;
 };
 
 const testimonials = [
@@ -60,10 +60,10 @@ const TestimonialsStats = () => {
   }, []);
 
   const stats = [
-    { label: 'Hours of Works', value: 8240 },
-    { label: 'Projects Done', value: 315 },
-    { label: 'Satisfied Customers', value: 250 },
-    { label: 'Awards Winning', value: 32 }
+    { label: 'Project', value: 500, suffix: '+' },
+    { label: 'Satisfied Customer', value: 1000, suffix: '+' },
+    { label: 'On Going', value: 200, suffix: '+' },
+    { label: 'Own R&D Unit', isIcon: true }
   ];
 
   return (
@@ -97,15 +97,29 @@ const TestimonialsStats = () => {
           </div>
         </div>
 
-        {/* Stats Counter Grid */}
+        {/* Stats Counter Grid - REVERTED TO OLD 4-COLUMN DESIGN */}
         <div className="row g-4 pt-5">
           {stats.map((stat, index) => (
             <div className="col-lg-3 col-md-6" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
-              <div className="stat-card-new shadow-xl">
-                <div className="stat-number-new">
-                  <Counter end={stat.value} />
+              <div className="stat-card-new shadow-xl bg-glass border-glass rounded-4 p-4 text-center h-100">
+                <div className="stat-number-new display-4 fw-800 mb-2">
+                  {stat.isIcon ? (
+                    <div className="text-primary py-2">
+                      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="m15 11-1-1q-1-1-2-1t-2 1l-1 1" />
+                        <path d="M15 11c1 0 2 .5 3 1.5s1 2.5 1 3.5-1 2-2 3-2 1-3 1h-4c-1 0-2-.5-3-1.5S6 16.5 6 15.5s1-2 2-3 2-1 3-1" />
+                        <path d="M12 9V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2" />
+                        <path d="M10 21v-3" />
+                        <path d="M14 21v-3" />
+                      </svg>
+                    </div>
+                  ) : (
+                    <Counter end={stat.value} suffix={stat.suffix} />
+                  )}
                 </div>
-                <div className="stat-label-new">{stat.label}</div>
+                <div className="stat-label-new opacity-75 text-uppercase tracking-wider small fw-bold text-white">
+                  {stat.label}
+                </div>
               </div>
             </div>
           ))}
