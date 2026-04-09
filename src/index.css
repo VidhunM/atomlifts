@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+ï»¿@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
   --primary: #f8c02d;
@@ -116,7 +116,7 @@ a {
 }
 
 .bg-celestial::before {
-  content: '';
+  content: '\2022';
   position: absolute;
   top: 0;
   left: 0;
@@ -799,7 +799,7 @@ a {
 }
 
 .footer-title-new::before {
-  content: '';
+  content: '\2022';
   width: 3px;
   height: 20px;
   background: var(--primary);
@@ -839,7 +839,7 @@ a {
 }
 
 .footer-contact-list li::before {
-  content: '¦';
+  content: '\2022';
   position: absolute;
   left: 0;
   color: var(--primary);
