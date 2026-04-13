@@ -38,14 +38,14 @@ const Header = () => {
   ];
 
   return (
-    <nav className={`navbar navbar-expand-lg fixed-top transition-all ${scrolled ? 'glass-nav py-3' : 'bg-transparent py-4'}`}
+    <nav className={`navbar navbar-expand-lg fixed-top transition-all ${scrolled ? 'glass-nav py-1' : 'bg-transparent py-2'}`}
          style={{ transform: visible ? 'translateY(0)' : 'translateY(-100%)', transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)' }}>
       <div className="container">
         <Link className="navbar-brand d-flex align-items-center" to="/">
            <img 
              src={logoImg} 
              alt="Atomlifts Logo" 
-             style={{ height: '50px', objectFit: 'contain' }} 
+             style={{ height: '40px', objectFit: 'contain' }} 
              className="me-2"
            />
         </Link>
