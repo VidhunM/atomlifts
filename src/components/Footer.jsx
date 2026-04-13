@@ -10,7 +10,7 @@ const Footer = () => {
           
           {/* Column 1: Brand & Social */}
           <div className="col-lg-4">
-            <img src={logoImg} alt="AtomLifts Logo" style={{ height: '60px', marginBottom: '30px', filter: 'invert(78%) sepia(58%) saturate(718%) hue-rotate(338deg) brightness(101%) contrast(97%)' }} />
+            <img src={logoImg} alt="AtomLifts Logo" style={{ height: '60px', marginBottom: '30px' }} />
             <p className="text-secondary mb-4 leading-relaxed" style={{ maxWidth: '350px', fontSize: '1.05rem' }}>
               Our service is mainly focused on maintenance, repair, and installation of elevators and 
               escalators to ensure safe and efficient travel for passengers.

@@ -38,7 +38,7 @@ const Header = () => {
         </Link>
 
         <button 
-          className="navbar-toggler border-0 text-white shadow-none" 
+          className={`navbar-toggler border-0 ${scrolled ? 'text-dark' : 'text-white'} shadow-none`} 
           type="button" 
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -50,7 +50,7 @@ const Header = () => {
             {navLinks.map((link) => (
               <li key={link.name} className="nav-item mx-lg-2">
                 <Link 
-                  className={`nav-link fw-bold text-uppercase small tracking-widest transition-all ${location.pathname === link.path ? 'text-primary' : 'text-white'}`}
+                  className={`nav-link fw-bold text-uppercase small tracking-widest transition-all ${location.pathname === link.path ? 'text-primary' : (scrolled ? 'text-dark' : 'text-white')}`}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
                 >
@@ -63,7 +63,7 @@ const Header = () => {
              <Link to="/contact" className="btn-premium py-2 px-4 small">
                 Get Started
              </Link>
-             <div className="text-white opacity-50 cursor-pointer d-none d-lg-block">
+             <div className={`${scrolled ? 'text-dark' : 'text-white'} opacity-50 cursor-pointer d-none d-lg-block`}>
                 <Grid size={24} />
              </div>
           </div>
