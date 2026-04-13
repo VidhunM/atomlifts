@@ -5,16 +5,28 @@ import logoImg from '../assets/images/ATOM-Logo02.png';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      setScrolled(currentScrollY > 50);
+
+      if (currentScrollY > lastScrollY && currentScrollY > 500) {
+        setVisible(false);
+      } else {
+        setVisible(true);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -26,7 +38,8 @@ const Header = () => {
   ];
 
   return (
-    <nav className={`navbar navbar-expand-lg fixed-top transition-all ${scrolled ? 'glass-nav py-3' : 'bg-transparent py-4'}`}>
+    <nav className={`navbar navbar-expand-lg fixed-top transition-all ${scrolled ? 'glass-nav py-3' : 'bg-transparent py-4'}`}
+         style={{ transform: visible ? 'translateY(0)' : 'translateY(-100%)', transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)' }}>
       <div className="container">
         <Link className="navbar-brand d-flex align-items-center" to="/">
            <img 
