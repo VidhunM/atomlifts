@@ -1,25 +1,25 @@
-import service1 from '../assets/service1.png';
-import service2 from '../assets/service2.png';
-import service3 from '../assets/service3.png';
+import passengerImg from '../assets/images/passenger_elevator.png';
+import homeLiftImg from '../assets/images/home_lift.png';
+import goodsLiftImg from '../assets/images/goods_elevator.png';
 
 const services = [
   {
     id: '01',
-    image: service1,
-    title: 'Precision Elevator Engineering',
+    image: passengerImg,
+    title: 'Passenger Elevator',
     desc: 'Advanced architectural lift solutions designed for luxury residential and commercial complexes.'
   },
   {
     id: '02',
-    image: service2,
-    title: 'Smart Control Systems',
-    desc: 'Intelligent IoT-enabled elevator management for optimized traffic and efficiency.'
+    image: homeLiftImg,
+    title: 'Home Lift',
+    desc: 'Elegant and space-efficient vertical mobility solutions tailored for private residences.'
   },
   {
     id: '03',
-    image: service3,
-    title: 'Premium Maintenance',
-    desc: 'Expert technical support and proactive safety inspections to ensure zero downtime.'
+    image: goodsLiftImg,
+    title: 'Goods Elevator',
+    desc: 'Heavy-duty freight elevators built for industrial efficiency and maximum payload capacity.'
   }
 ];
 
@@ -28,12 +28,12 @@ const Services = () => {
     <section className="services-section bg-dark py-5 position-relative">
       <div className="container py-5">
         
-        {/* Section Header based on reference image */}
+        {/* Section Header */}
         <div className="row justify-content-center text-center mb-5 pb-5">
           <div className="col-lg-8" data-aos="fade-up">
-            <h6 className="text-primary text-uppercase tracking-widest fw-bold mb-3 small">OUR SERVICES</h6>
+            <h6 className="text-primary text-uppercase tracking-widest fw-bold mb-3 small">OUR PRODUCTS</h6>
             <h2 className="display-4 fw-800 text-white mb-0">
-              Innovative and <span className="text-primary">Efficient</span> Lift Services
+              Innovative and <span className="text-primary">Efficient</span> Lift Solutions
             </h2>
           </div>
         </div>

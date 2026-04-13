@@ -1,17 +1,17 @@
-import engineerImg from '../assets/engineer.png';
+import engineerImg from '../assets/engineer_new.png';
 
 const AboutEngineering = () => {
   const tags = [
-    { prefix: 'Certified', title: 'Global Standards' },
-    { prefix: 'Safety', title: 'Zero-Fail Rated' },
-    { prefix: 'Licensed', title: 'Building Code Expert' },
-    { prefix: 'Data', title: 'Cloud Integrated' },
-    { prefix: 'Insured', title: 'Global Liability' },
+    { prefix: 'ISO 9001', title: 'Quality Standards' },
+    { prefix: '24/7', title: 'Smart Monitoring' },
+    { prefix: 'Predictive', title: 'Maintenance' },
+    { prefix: 'Safety', title: 'First Protocol' },
+    { prefix: 'Global', title: 'Parts Network' },
   ];
 
   return (
-    <section className="about-eng-section bg-dark py-5 overflow-hidden">
-      <div className="container py-5 mt-5">
+    <section className="about-eng-section bg-dark py-4 overflow-hidden">
+      <div className="container py-2">
         <div className="row g-5 align-items-center">
           
           {/* Left Side: Image with Animated Bars */}
@@ -37,12 +37,12 @@ const AboutEngineering = () => {
           <div className="col-lg-6 ps-lg-5" data-aos="fade-left">
             <h6 className="text-primary text-uppercase tracking-widest fw-bold mb-3 small">OUR EXPERTISE</h6>
             <h2 className="display-4 fw-800 text-white mb-4">
-              Authorized <span className="text-primary">Professionals</span>
+              Precision <span className="text-primary">Engineering</span> Systems
             </h2>
             <p className="text-white-50 fs-5 mb-5 leading-relaxed">
-              Ascend with confidence knowing your projects are in the hands of certified lift engineers. 
-              Our team combines extensive training, industry-leading certifications, and real-world 
-              mechanical experience to deliver precise, efficient, and safe vertical mobility solutions for every building.
+              At Atomlifts, we don't just maintain elevators; we engineer the future of vertical mobility. 
+              Our certified specialists deploy advanced diagnostics and IoT-integrated solutions to ensure 
+              your systems operate with surgical precision and absolute safety, day and night.
             </p>
 
             {/* Horizontal Scrolling Tags */}
