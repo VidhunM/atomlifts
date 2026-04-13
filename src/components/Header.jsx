@@ -38,20 +38,20 @@ const Header = () => {
   ];
 
   return (
-    <nav className={`navbar navbar-expand-lg fixed-top transition-all ${scrolled ? 'glass-nav py-3' : 'bg-transparent py-4'}`}
+    <nav className={`navbar navbar-expand-lg fixed-top transition-all ${scrolled ? 'glass-nav py-1' : 'bg-transparent py-2'}`}
          style={{ transform: visible ? 'translateY(0)' : 'translateY(-100%)', transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)' }}>
       <div className="container">
         <Link className="navbar-brand d-flex align-items-center" to="/">
            <img 
              src={logoImg} 
              alt="Atomlifts Logo" 
-             style={{ height: '50px', objectFit: 'contain' }} 
+             style={{ height: '40px', objectFit: 'contain' }} 
              className="me-2"
            />
         </Link>
 
         <button 
-          className={`navbar-toggler border-0 ${scrolled ? 'text-dark' : 'text-white'} shadow-none`} 
+          className="navbar-toggler border-0 text-white shadow-none" 
           type="button" 
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -63,7 +63,7 @@ const Header = () => {
             {navLinks.map((link) => (
               <li key={link.name} className="nav-item mx-lg-2">
                 <Link 
-                  className={`nav-link fw-bold text-uppercase small tracking-widest transition-all ${location.pathname === link.path ? 'text-primary' : (scrolled ? 'text-dark' : 'text-white')}`}
+                  className={`nav-link fw-bold text-uppercase small tracking-widest transition-all nav-link-custom ${location.pathname === link.path ? 'text-white' : ''}`}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
                 >
@@ -72,13 +72,10 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <div className="d-flex align-items-center gap-3">
-             <Link to="/contact" className="btn-premium py-2 px-4 small">
+          <div className="d-flex align-items-center">
+             <Link to="/contact" className="btn-premium py-2 px-4 small text-decoration-none">
                 Get Started
              </Link>
-             <div className={`${scrolled ? 'text-dark' : 'text-white'} opacity-50 cursor-pointer d-none d-lg-block`}>
-                <Grid size={24} />
-             </div>
           </div>
         </div>
       </div>

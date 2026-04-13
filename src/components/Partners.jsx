@@ -1,22 +1,61 @@
-import partnersImg from '../assets/partners.png';
 
 const Partners = () => {
-  // We duplicate the list to create a seamless loop
-  const logos = [partnersImg, partnersImg, partnersImg, partnersImg];
+  const logos = [
+    { name: 'OTIS', font: '900' },
+    { name: 'Schindler', font: '800', italic: true },
+    { name: 'KONE', font: '900' },
+    { name: 'ThyssenKrupp', font: '800' },
+    { name: 'MITSUBISHI', font: '900' },
+    { name: 'FUJITEC', font: '900' }
+  ];
 
   return (
-    <section className="partner-slider">
-      <div className="container-fluid px-0">
-        <div className="partner-track">
-          {logos.map((logo, index) => (
-            <div className="partner-logo" key={index}>
-              <img src={logo} alt={`Partner ${index}`} />
+    <section className="partner-slider bg-dark py-4">
+      <div className="container-fluid overflow-hidden">
+        <div className="d-flex align-items-center logo-scroll-container">
+          {/* First set */}
+          {logos.map((logo, idx) => (
+            <div className="partner-logo-item" key={`logo-1-${idx}`}>
+               <span style={{ 
+                 color: '#ffffff', 
+                 fontWeight: logo.font, 
+                 fontSize: '1.1rem', 
+                 letterSpacing: '0.15em',
+                 fontStyle: logo.italic ? 'italic' : 'normal',
+                 opacity: 0.5
+               }}>
+                 {logo.name}
+               </span>
             </div>
           ))}
-          {/* Repeat for seamless loop */}
-          {logos.map((logo, index) => (
-            <div className="partner-logo" key={`repeat-${index}`}>
-              <img src={logo} alt={`Partner Repeat ${index}`} />
+          {/* Repeat set */}
+          {logos.map((logo, idx) => (
+            <div className="partner-logo-item" key={`logo-2-${idx}`}>
+               <span style={{ 
+                 color: '#ffffff', 
+                 fontWeight: logo.font, 
+                 fontSize: '1.1rem', 
+                 letterSpacing: '0.15em',
+                 fontStyle: logo.italic ? 'italic' : 'normal',
+                 opacity: 0.5
+               }}>
+                 {logo.name}
+               </span>
+            </div>
+          ))}
+          {/* Triplicate set */}
+          {logos.map((logo, idx) => (
+            <div className="partner-logo-item" key={`logo-3-${idx}`}>
+               <span style={{ 
+                 color: '#ffffff', 
+                 fontWeight: logo.font, 
+                 fontSize: '1.1rem', 
+                 letterSpacing: '0.15em',
+                 fontStyle: logo.italic ? 'italic' : 'normal',
+                 opacity: 0.5
+               }}>
+                 {logo.name}
+               </span>
             </div>
           ))}
         </div>

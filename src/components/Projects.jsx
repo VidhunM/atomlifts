@@ -25,8 +25,8 @@ const Projects = () => {
   ];
 
   return (
-    <section className="projects-section bg-dark py-5 position-relative">
-      <div className="container py-5 mt-5">
+    <section className="projects-section bg-dark py-4 position-relative">
+      <div className="container py-2">
         
         {/* Section Header */}
         <div className="row justify-content-center text-center mb-5 pb-4">
