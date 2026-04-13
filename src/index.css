@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
   --primary: #f8c02d;
@@ -809,11 +809,11 @@ a {
 .social-btn-footer {
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #333;
   border-radius: 4px;
   transition: var(--transition);
   text-decoration: none;
@@ -834,7 +834,7 @@ a {
   position: relative;
   padding-left: 20px;
   margin-bottom: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   font-size: 0.95rem;
 }
 
@@ -858,12 +858,12 @@ a {
 .footer-social-btn {
   width: 35px;
   height: 35px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #333;
   transition: var(--transition);
 }
 
@@ -874,7 +874,7 @@ a {
 }
 
 .footer-link-new {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   text-decoration: none;
   transition: var(--transition);
   display: block;
@@ -891,7 +891,7 @@ a {
   display: flex;
   gap: 15px;
   margin-bottom: 20px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.6);
   font-size: 0.95rem;
 }
 
@@ -902,9 +902,9 @@ a {
 }
 
 .copyright-bar {
-  background: rgba(0,0,0,0.3);
+  background: #f8f8f8;
   padding: 20px 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 /* Floating WhatsApp Button */
