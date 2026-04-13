@@ -4,12 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 const Counter = ({ end, duration = 2000, suffix = "" }) => {
   const [count, setCount] = useState(0);
   const countRef = useRef(null);
-  const hasStarted = useRef(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !hasStarted.current) {
-        hasStarted.current = true;
+      if (entries[0].isIntersecting) {
         let start = 0;
         const increment = end / (duration / 16);
         const timer = setInterval(() => {
@@ -21,8 +19,10 @@ const Counter = ({ end, duration = 2000, suffix = "" }) => {
             setCount(Math.floor(start));
           }
         }, 16);
+      } else {
+        setCount(0);
       }
-    }, { threshold: 0.5 });
+    }, { threshold: 0.1 });
 
     if (countRef.current) observer.observe(countRef.current);
     return () => observer.disconnect();
@@ -63,7 +63,7 @@ const TestimonialsStats = () => {
     { label: 'Project', value: 500, suffix: '+' },
     { label: 'Satisfied Customer', value: 1000, suffix: '+' },
     { label: 'On Going', value: 200, suffix: '+' },
-    { label: 'Own R&D Unit', isIcon: true }
+    { label: 'Own R&D Unit', image: '/strength.png' }
   ];
 
   return (
@@ -77,12 +77,19 @@ const TestimonialsStats = () => {
               {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
             </div>
 
-            <div className="testimonial-slider-content min-h-200">
-               <h2 className="display-5 fw-bold text-white mb-4 leading-tight italic">
-                 "{testimonials[activeIndex].text}"
-               </h2>
-               <h5 className="text-primary fw-bold mb-1">{testimonials[activeIndex].author}</h5>
-               <p className="text-white-50 small tracking-widest text-uppercase">{testimonials[activeIndex].location}</p>
+            <div className="testimonial-slider-content min-h-200 position-relative overflow-hidden">
+               {/* Background Number Animation */}
+               <div className="testimonial-bg-number" key={`bg-${activeIndex}`}>
+                 {(activeIndex + 1).toString().padStart(2, '0')}
+               </div>
+               
+               <div className="fade-in-up" key={activeIndex}>
+                 <h2 className="display-5 fw-bold text-white mb-4 leading-tight italic">
+                   "{testimonials[activeIndex].text}"
+                 </h2>
+                 <h5 className="text-primary fw-bold mb-1">{testimonials[activeIndex].author}</h5>
+                 <p className="text-white-50 small tracking-widest text-uppercase">{testimonials[activeIndex].location}</p>
+               </div>
             </div>
 
             <div className="d-flex justify-content-center mt-5">
@@ -103,7 +110,21 @@ const TestimonialsStats = () => {
             <div className="col-lg-3 col-md-6" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
               <div className="stat-card-new shadow-xl bg-glass border-glass rounded-4 p-4 text-center h-100">
                 <div className="stat-number-new display-4 fw-800 mb-2">
-                  {stat.isIcon ? (
+                  {stat.image ? (
+                    <div className="py-2 d-flex justify-content-center align-items-center">
+                      <img 
+                        src={stat.image} 
+                        alt={stat.label} 
+                        style={{ 
+                          height: '60px', 
+                          width: 'auto', 
+                          objectFit: 'contain',
+                          filter: 'brightness(0) saturate(100%) invert(80%) sepia(61%) saturate(1131%) hue-rotate(345deg) brightness(101%) contrast(96%)'
+                        }} 
+                        className="img-fluid"
+                      />
+                    </div>
+                  ) : stat.isIcon ? (
                     <div className="text-primary py-2">
                       <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="m15 11-1-1q-1-1-2-1t-2 1l-1 1" />
