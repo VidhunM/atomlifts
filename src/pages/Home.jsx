@@ -7,6 +7,7 @@ import Projects from '../components/Projects';
 import VisualPrecision from '../components/VisualPrecision';
 import Industries from '../components/Industries';
 import TestimonialsStats from '../components/TestimonialsStats';
+import FAQ from '../components/FAQ';
 import ContactForm from '../components/ContactForm';
 
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
       <VisualPrecision />
       <Industries />
       <TestimonialsStats />
+      <FAQ />
       {/*<ContactForm />*/}
     </>
   );
