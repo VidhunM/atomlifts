@@ -21,8 +21,8 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="faq-section bg-dark py-5 position-relative overflow-hidden">
-      <div className="container py-5 position-relative z-10">
+    <section className="faq-section bg-dark py-2 position-relative overflow-hidden">
+      <div className="container py-2 position-relative z-10">
         <div className="row mb-5">
           <div className="col-lg-8" data-aos="fade-right">
             <div className="d-flex flex-column align-items-start mb-4">
@@ -71,8 +71,8 @@ const FAQ = () => {
       <style>{`
         .faq-section {
           border-top: 1px solid var(--glass-border);
-          padding-top: 100px !important;
-          padding-bottom: 100px !important;
+          padding-top: 30px !important;
+          padding-bottom: 30px !important;
         }
 
         .faq-item-new {
