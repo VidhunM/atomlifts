@@ -314,7 +314,20 @@ const About = () => {
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in-up { animation: fadeInUp 0.5s ease forwards; }
-        @media (max-width: 991px) { .huge-contact-title { font-size: 4rem; } }
+        @media (max-width: 991px) { 
+          .huge-contact-title { font-size: 3.5rem; } 
+          .about-hero-section { min-height: 400px !important; text-align: center; }
+          .smoky-gradient-bg { background: rgba(26, 36, 54, 0.9); }
+          .max-w-400 { margin-left: auto; margin-right: auto; }
+          .team-img-professional { height: 350px; }
+        }
+        @media (max-width: 576px) {
+          .huge-contact-title { font-size: 2.5rem; }
+          .display-4 { font-size: 2rem !important; }
+          .display-6 { font-size: 1.5rem !important; }
+          .established-box { width: 100px; height: 100px; }
+          .established-box h2 { font-size: 1.5rem; }
+        }
       `}</style>
     </div>
   );

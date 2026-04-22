@@ -1343,3 +1343,202 @@ a {
 .industry-item {
   cursor: pointer;
 }
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS
+   ========================================================================== */
+
+@media (max-width: 991px) {
+  .huge-heading, .huge-heading-3d, .huge-heading-3d-primary {
+    font-size: clamp(40px, 10vw, 80px);
+    line-height: 1.1;
+  }
+  
+  .huge-title {
+    font-size: 3.5rem;
+  }
+  
+  .video-title-large {
+    font-size: 3rem;
+  }
+  
+  .hero-section {
+    min-height: 140vh !important;
+  }
+  
+  .hero-section .row {
+    min-height: auto !important;
+  }
+  
+  .hero-section .row:first-of-type {
+    min-height: 80vh !important;
+  }
+  
+  .hero-section .row:nth-of-type(2) {
+    min-height: 60vh !important;
+  }
+  
+  .lift-main-image {
+    max-height: 60vh !important;
+  }
+  
+  .scroll-indicator-vertical {
+    display: none !important;
+  }
+  
+  .eng-bars-overlay {
+    height: 80px;
+  }
+  
+  .eng-bar {
+    width: 25px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 60px 0 !important;
+  }
+  
+  .huge-heading, .huge-heading-3d, .huge-heading-3d-primary {
+    font-size: 3.5rem;
+    letter-spacing: -0.01em;
+  }
+  
+  .hero-section {
+    min-height: 120vh !important;
+  }
+  
+  .hero-content {
+    padding-top: 100px !important;
+  }
+  
+  .btn-premium {
+    padding: 12px 30px;
+    font-size: 0.85rem;
+  }
+  
+  .service-card-new {
+    margin-bottom: 30px;
+  }
+  
+  .service-number-tag {
+    padding: 10px 15px;
+    font-size: 1.4rem;
+  }
+  
+  .partner-logo {
+    flex: 0 0 180px;
+    padding: 0 20px;
+  }
+  
+  .partner-logo img {
+    max-width: 100px;
+  }
+
+  @keyframes tickerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-180px * 6)); }
+  }
+
+  @keyframes scroll-partners {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-180px * 6)); }
+  }
+  
+  .video-showcase, .visual-precision-section {
+    height: 60vh;
+  }
+  
+  .stat-number-new {
+    font-size: 2.5rem;
+  }
+  
+  .footer-section {
+    padding-top: 60px;
+  }
+  
+  .footer-bottom-bar {
+    margin-top: 40px;
+  }
+  
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .play-btn-large, .play-btn-circle {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .play-btn-circle svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .animated-lines-container {
+    height: 150px;
+    top: 50%;
+  }
+  
+  .line-item {
+    height: 100px;
+    width: 4px;
+  }
+  
+  .core-icon-box {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 576px) {
+  .huge-heading, .huge-heading-3d, .huge-heading-3d-primary {
+    font-size: 2.8rem;
+  }
+  
+  .display-4 {
+    font-size: 2.2rem !important;
+  }
+  
+  .display-5 {
+    font-size: 1.8rem !important;
+  }
+  
+  .hero-sub-text {
+    font-size: 1rem !important;
+  }
+  
+  .project-overlay {
+    padding: 15px;
+  }
+  
+  .project-title {
+    font-size: 1rem;
+  }
+  
+  .tag-track {
+    gap: 30px;
+  }
+  
+  .tag-item {
+    font-size: 0.75rem;
+  }
+}
+
+/* Custom Fixes for Bootstrap Layouts that might break */
+.row {
+  --bs-gutter-x: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+

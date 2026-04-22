@@ -294,7 +294,15 @@ const Contact = () => {
         }
 
         @media (max-width: 991px) {
-          .huge-contact-title { font-size: 4rem; }
+          .huge-contact-title { font-size: 3.5rem; }
+          .contact-hero-section { min-height: 400px !important; text-align: center; }
+          .smoky-gradient-bg { background: rgba(26, 36, 54, 0.9); }
+          .max-w-400 { margin-left: auto; margin-right: auto; }
+          .yellow-ticker-right-aligned { width: 100%; mask-image: none; }
+        }
+        @media (max-width: 576px) {
+          .huge-contact-title { font-size: 2.5rem; }
+          .display-4 { font-size: 2rem !important; }
         }
       `}</style>
     </div>

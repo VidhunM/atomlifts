@@ -1,13 +1,27 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
+import Escalator from './pages/Escalator';
+import MovingWalkways from './pages/MovingWalkways';
+import HomeLifts from './pages/HomeLifts';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out',
+    });
+  }, []);
+
   return (
     <Router>
       <ScrollToTop />
@@ -19,6 +33,10 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/escalators" element={<Escalator />} />
+            <Route path="/escalators/standard" element={<Escalator />} />
+            <Route path="/escalators/moving-walkways" element={<MovingWalkways />} />
+            <Route path="/lifts/residential/home" element={<HomeLifts />} />
           </Routes>
         </main>
         <Footer />

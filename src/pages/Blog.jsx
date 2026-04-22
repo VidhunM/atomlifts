@@ -229,6 +229,16 @@ const Blog = () => {
         .blog-card-new:hover .blog-title-hover {
           color: var(--primary);
         }
+        @media (max-width: 991px) {
+          .huge-contact-title { font-size: 3.5rem; }
+          .blog-hero-section { min-height: 400px !important; text-align: center; }
+          .smoky-gradient-bg { background: rgba(26, 36, 54, 0.9); }
+          .max-w-400 { margin-left: auto; margin-right: auto; }
+          .yellow-ticker-right-aligned { width: 100%; mask-image: none; }
+        }
+        @media (max-width: 576px) {
+          .huge-contact-title { font-size: 2.5rem; }
+        }
       `}</style>
     </div>
   );

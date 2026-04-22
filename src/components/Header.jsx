@@ -2,6 +2,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import logoImg from '../assets/images/ATOM-Logo02.png';
+import escalatorThumb from '../assets/escalator-hero.png';
+import walkwayThumb from '../assets/moving-walkway-hero.png';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,9 +35,10 @@ const Header = () => {
     { 
       name: 'Escalators', 
       path: '/escalators',
+      isMega: true,
       dropdown: [
-        { name: 'Escalator', path: '/escalators/standard' },
-        { name: 'Moving Walkways', path: '/escalators/moving-walkways' },
+        { name: 'Escalator', path: '/escalators/standard', img: escalatorThumb },
+        { name: 'Moving Walkways', path: '/escalators/moving-walkways', img: walkwayThumb },
       ]
     },
     { 
@@ -119,40 +122,60 @@ const Header = () => {
                     >
                       {link.name} <ChevronDown size={14} className="ms-1 dropdown-chevron" />
                     </Link>
-                    <ul className="dropdown-menu glass-nav-dropdown border-0 shadow-2xl" aria-labelledby={`dropdown-${link.name}`}>
-                      {link.dropdown.map((sub) => (
-                        <li key={sub.name} className={sub.subDropdown ? 'dropdown-submenu' : ''}>
-                          {sub.subDropdown ? (
-                            <>
-                              <Link className="dropdown-item text-white-50 d-flex justify-content-between align-items-center" to={sub.path}>
-                                {sub.name} <ChevronRight size={14} className="submenu-chevron" />
+                    {link.isMega ? (
+                      <div className="dropdown-menu mega-menu-box border-0 shadow-2xl overflow-hidden" aria-labelledby={`dropdown-${link.name}`}>
+                        <div className="p-4">
+                          <div className="row g-4" style={{ minWidth: '600px' }}>
+                            {link.dropdown.map((sub) => (
+                              <div className="col-6" key={sub.name}>
+                                <Link to={sub.path} className="mega-menu-item text-decoration-none" onClick={() => setIsOpen(false)}>
+                                  <div className="mega-img-container mb-3 overflow-hidden shadow-lg">
+                                    <img src={sub.img} alt={sub.name} className="mega-img" />
+                                    <div className="mega-overlay"></div>
+                                  </div>
+                                  <h6 className="text-white text-uppercase tracking-widest small fw-800 text-center mb-0 mega-title">{sub.name}</h6>
+                                </Link>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <ul className="dropdown-menu glass-nav-dropdown border-0 shadow-2xl" aria-labelledby={`dropdown-${link.name}`}>
+                        {link.dropdown.map((sub) => (
+                          <li key={sub.name} className={sub.subDropdown ? 'dropdown-submenu' : ''}>
+                            {sub.subDropdown ? (
+                              <>
+                                <Link className="dropdown-item text-white-50 d-flex justify-content-between align-items-center" to={sub.path}>
+                                  {sub.name} <ChevronRight size={14} className="submenu-chevron" />
+                                </Link>
+                                <ul className="dropdown-menu glass-nav-dropdown border-0 shadow-2xl submenu-left">
+                                  {sub.subDropdown.map((subChild) => (
+                                    <li key={subChild.name}>
+                                      <Link 
+                                        className="dropdown-item text-white-50" 
+                                        to={subChild.path}
+                                        onClick={() => setIsOpen(false)}
+                                      >
+                                        {subChild.name}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </>
+                            ) : (
+                              <Link 
+                                className="dropdown-item text-white-50" 
+                                to={sub.path}
+                                onClick={() => setIsOpen(false)}
+                              >
+                                {sub.name}
                               </Link>
-                              <ul className="dropdown-menu glass-nav-dropdown border-0 shadow-2xl submenu-left">
-                                {sub.subDropdown.map((subChild) => (
-                                  <li key={subChild.name}>
-                                    <Link 
-                                      className="dropdown-item text-white-50" 
-                                      to={subChild.path}
-                                      onClick={() => setIsOpen(false)}
-                                    >
-                                      {subChild.name}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </>
-                          ) : (
-                            <Link 
-                              className="dropdown-item text-white-50" 
-                              to={sub.path}
-                              onClick={() => setIsOpen(false)}
-                            >
-                              {sub.name}
-                            </Link>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </>
                 ) : (
                   <Link 
@@ -185,6 +208,53 @@ const Header = () => {
           min-width: 240px;
           padding: 15px 0;
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .mega-menu-box {
+          background: rgba(10, 10, 10, 0.98) !important;
+          backdrop-filter: blur(30px);
+          border: 1px solid rgba(255, 255, 255, 0.1) !important;
+          left: 50% !important;
+          transform: translateX(-50%) translateY(20px) !important;
+          border-radius: 8px !important;
+          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) !important;
+        }
+
+        .custom-dropdown:hover .mega-menu-box {
+          transform: translateX(-50%) translateY(0) !important;
+        }
+
+        .mega-img-container {
+          position: relative;
+          height: 140px;
+          border-radius: 4px;
+        }
+
+        .mega-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .mega-overlay {
+          position: absolute;
+          top: 0; left: 0; width: 100%; height: 100%;
+          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+          opacity: 0.6;
+          transition: opacity 0.3s ease;
+        }
+
+        .mega-menu-item:hover .mega-img {
+          transform: scale(1.1);
+        }
+
+        .mega-menu-item:hover .mega-overlay {
+          opacity: 0.2;
+        }
+
+        .mega-menu-item:hover .mega-title {
+          color: var(--primary) !important;
         }
         
         .dropdown-item {
@@ -262,8 +332,71 @@ const Header = () => {
           }
         }
         
-        .dropdown-toggle::after {
-          display: none;
+        @media (max-width: 991px) {
+          .navbar-collapse {
+            background: rgba(10, 10, 10, 0.98);
+            margin: 0 -1rem;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+          }
+          
+          .nav-item {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
+          }
+          
+          .glass-nav-dropdown {
+            position: static !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            padding: 0 !important;
+            display: block !important;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+          }
+          
+          .dropdown:hover .glass-nav-dropdown,
+          .dropdown-submenu:hover > .glass-nav-dropdown {
+            max-height: 1000px;
+          }
+          
+          .dropdown-submenu .dropdown-menu {
+            position: static !important;
+            display: block !important;
+            background: rgba(255, 255, 255, 0.03) !important;
+            margin-left: 0 !important;
+            max-height: 0;
+            overflow: hidden;
+          }
+          
+          .dropdown-submenu:hover > .dropdown-menu {
+             max-height: 500px;
+          }
+          
+          .dropdown-item {
+            padding: 10px !important;
+            text-align: center;
+            opacity: 0.7;
+          }
+          
+          .dropdown-item:hover {
+            padding-left: 10px !important;
+            opacity: 1;
+          }
+          
+          .submenu-chevron {
+            transform: rotate(90deg);
+          }
+          
+          .dropdown-toggle::after {
+            display: none;
+          }
         }
       `}</style>
     </nav>
