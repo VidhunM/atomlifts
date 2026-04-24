@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import logoImg from '../assets/images/ATOM-Logo02.png';
 import escalatorThumb from '../assets/escalator-hero.png';
 import walkwayThumb from '../assets/moving-walkway-hero.png';
+import QuoteModal from './QuoteModal';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [scrolled, setScrolled] = useState(false);
@@ -87,6 +89,7 @@ const Header = () => {
   ];
 
   return (
+    <>
     <nav className={`navbar navbar-expand-lg fixed-top transition-all ${scrolled ? 'glass-nav py-1' : 'bg-transparent py-2'}`}
          style={{ transform: visible ? 'translateY(0)' : 'translateY(-100%)', transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)' }}>
       <div className="container">
@@ -190,14 +193,18 @@ const Header = () => {
             ))}
           </ul>
           <div className="d-flex align-items-center">
-             <Link to="/contact" className="btn-premium py-2 px-4 small text-decoration-none">
+             <button 
+                onClick={() => setIsQuoteOpen(true)}
+                className="btn-premium py-2 px-4 small text-decoration-none border-0"
+             >
                 Get Started
-             </Link>
+             </button>
           </div>
         </div>
       </div>
-      
-      <style>{`
+    </nav>
+    <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
+    <style>{`
         .glass-nav-dropdown {
           background: rgba(10, 10, 10, 0.95) !important;
           backdrop-filter: blur(25px) saturate(200%);
@@ -399,7 +406,7 @@ const Header = () => {
           }
         }
       `}</style>
-    </nav>
+    </>
   );
 };
 

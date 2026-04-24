@@ -144,6 +144,7 @@ const Escalator = () => {
                 </p>
               </div>
             </div>
+
             <div className="col-lg-5" data-aos="fade-left">
               <div className="glass-card-dark p-4 p-md-5 shadow-2xl">
                 <h4 className="text-primary text-uppercase tracking-widest fw-800 mb-4 small">Technical Specifications</h4>
