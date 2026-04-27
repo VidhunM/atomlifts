@@ -10,17 +10,17 @@ const AboutEngineering = () => {
   ];
 
   return (
-    <section className="about-eng-section bg-dark py-4 overflow-hidden">
+    <section className="about-eng-section bg-dark py-5 overflow-hidden">
       <div className="container py-2">
         <div className="row g-5 align-items-center">
           
           {/* Left Side: Image with Animated Bars */}
           <div className="col-lg-6" data-aos="fade-right">
             <div className="eng-image-container shadow-2xl">
-              <img src={engineerImg} alt="Lead Engineer" className="eng-image" />
+              <img src={engineerImg} alt="Lead Engineer" className="eng-image w-100" />
               
-              {/* Animated Bars Over Image */}
-              <div className="eng-bars-overlay">
+              {/* Animated Bars Over Image - Hidden on mobile for performance and overflow prevention */}
+              <div className="eng-bars-overlay d-none d-md-flex">
                 <div className="eng-bars-track">
                   {[...Array(20)].map((_, i) => (
                     <div key={i} className="eng-bar"></div>
@@ -59,6 +59,32 @@ const AboutEngineering = () => {
 
         </div>
       </div>
+      <style>{`
+        @media (max-width: 991px) {
+          .about-eng-section { text-align: center; padding: 60px 0 !important; overflow: hidden; }
+          .about-eng-section .container { padding-left: 20px !important; padding-right: 20px !important; }
+          .ps-lg-5 { 
+            padding-left: 0 !important; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          }
+          .display-4 { 
+            word-break: break-word; 
+            overflow-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+          }
+          .tag-cloud-container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .tag-track { animation-duration: 20s; }
+          .eng-image-container { margin-bottom: 40px; max-width: 100%; overflow: hidden; }
+        }
+      `}</style>
     </section>
   );
 };

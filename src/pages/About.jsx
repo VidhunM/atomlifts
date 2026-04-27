@@ -240,22 +240,6 @@ const About = () => {
       </section>
 
       <style>{`
-        .about-hero-section { background: #1a2436; }
-        .smoky-gradient-bg {
-          position: absolute; top:0; left:0; width:100%; height:100%;
-          background: linear-gradient(to right, #1a2436 0%, #1a2436 45%, transparent 85%); z-index:2;
-        }
-        .about-hero-image-overlay { position:absolute; top:0; right:0; width:60%; height:100%; z-index:1; }
-        .hero-clip-img { width:100%; height:100%; object-fit:cover; filter:brightness(0.85); }
-        .huge-contact-title { font-size: clamp(3rem, 10vw, 6rem); font-weight:900; color:white; text-transform:uppercase;}
-        .yellow-ticker-right-aligned {
-          position:absolute; bottom:0; right:0; width:100%; height:40px; overflow:hidden; z-index:10;
-          mask-image: linear-gradient(to right, transparent 50%, black 70%);
-        }
-        .ticker-track-right { display:flex; gap:15px; width:max-content; animation: tickerScrollSeamless 25s linear infinite; }
-        .ticker-bar-yellow { width:5px; height:25px; background:#f8c02d; flex-shrink:0; }
-        @keyframes tickerScrollSeamless { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .glass-card-dark { background:#141b2b; border: 1px solid rgba(255,255,255,0.05); border-radius:4px; }
         .icon-box-stat { background:rgba(248,192,45,0.1); border:1px solid rgba(248,192,45,0.2); border-radius:4px; }
         .about-grid-layout { padding: 15px; }
         .established-box {
@@ -314,17 +298,9 @@ const About = () => {
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in-up { animation: fadeInUp 0.5s ease forwards; }
+        
         @media (max-width: 991px) { 
-          .huge-contact-title { font-size: 3.5rem; } 
-          .about-hero-section { min-height: 400px !important; text-align: center; }
-          .smoky-gradient-bg { background: rgba(26, 36, 54, 0.9); }
-          .max-w-400 { margin-left: auto; margin-right: auto; }
           .team-img-professional { height: 350px; }
-        }
-        @media (max-width: 576px) {
-          .huge-contact-title { font-size: 2.5rem; }
-          .display-4 { font-size: 2rem !important; }
-          .display-6 { font-size: 1.5rem !important; }
           .established-box { width: 100px; height: 100px; }
           .established-box h2 { font-size: 1.5rem; }
         }

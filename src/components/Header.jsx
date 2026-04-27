@@ -128,283 +128,311 @@ const Header = () => {
                     {link.isMega ? (
                       <div className="dropdown-menu mega-menu-box border-0 shadow-2xl overflow-hidden" aria-labelledby={`dropdown-${link.name}`}>
                         <div className="p-4">
-                          <div className="row g-4" style={{ minWidth: '600px' }}>
-                            {link.dropdown.map((sub) => (
-                              <div className="col-6" key={sub.name}>
-                                <Link to={sub.path} className="mega-menu-item text-decoration-none" onClick={() => setIsOpen(false)}>
-                                  <div className="mega-img-container mb-3 overflow-hidden shadow-lg">
-                                    <img src={sub.img} alt={sub.name} className="mega-img" />
-                                    <div className="mega-overlay"></div>
-                                  </div>
-                                  <h6 className="text-white text-uppercase tracking-widest small fw-800 text-center mb-0 mega-title">{sub.name}</h6>
-                                </Link>
-                              </div>
-                            ))}
+                            <div className="row g-4">
+                              {link.dropdown.map((sub) => (
+                                <div className="col-12 col-md-6" key={sub.name}>
+                                  <Link to={sub.path} className="mega-menu-item text-decoration-none" onClick={() => setIsOpen(false)}>
+                                    <div className="mega-img-container mb-3 overflow-hidden shadow-lg">
+                                      <img src={sub.img} alt={sub.name} className="mega-img" />
+                                      <div className="mega-overlay"></div>
+                                    </div>
+                                    <h6 className="text-white text-uppercase tracking-widest small fw-800 text-center mb-0 mega-title">{sub.name}</h6>
+                                  </Link>
+                                </div>
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ) : (
-                      <ul className="dropdown-menu glass-nav-dropdown border-0 shadow-2xl" aria-labelledby={`dropdown-${link.name}`}>
-                        {link.dropdown.map((sub) => (
-                          <li key={sub.name} className={sub.subDropdown ? 'dropdown-submenu' : ''}>
-                            {sub.subDropdown ? (
-                              <>
-                                <Link className="dropdown-item text-white-50 d-flex justify-content-between align-items-center" to={sub.path}>
-                                  {sub.name} <ChevronRight size={14} className="submenu-chevron" />
+                      ) : (
+                        <ul className="dropdown-menu glass-nav-dropdown border-0 shadow-2xl" aria-labelledby={`dropdown-${link.name}`}>
+                          {link.dropdown.map((sub) => (
+                            <li key={sub.name} className={sub.subDropdown ? 'dropdown-submenu' : ''}>
+                              {sub.subDropdown ? (
+                                <>
+                                  <Link className="dropdown-item text-white-50 d-flex justify-content-between align-items-center" to={sub.path} onClick={(e) => {
+                                    if (window.innerWidth < 992) {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      const parent = e.currentTarget.parentElement;
+                                      const submenu = parent.querySelector('.dropdown-menu');
+                                      if (submenu) {
+                                        submenu.style.maxHeight = submenu.style.maxHeight === '500px' ? '0px' : '500px';
+                                      }
+                                    } else {
+                                      setIsOpen(false);
+                                    }
+                                  }}>
+                                    {sub.name} <ChevronRight size={14} className="submenu-chevron" />
+                                  </Link>
+                                  <ul className="dropdown-menu glass-nav-dropdown border-0 shadow-2xl submenu-left">
+                                    {sub.subDropdown.map((subChild) => (
+                                      <li key={subChild.name}>
+                                        <Link 
+                                          className="dropdown-item text-white-50" 
+                                          to={subChild.path}
+                                          onClick={() => setIsOpen(false)}
+                                        >
+                                          {subChild.name}
+                                        </Link>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </>
+                              ) : (
+                                <Link 
+                                  className="dropdown-item text-white-50" 
+                                  to={sub.path}
+                                  onClick={() => setIsOpen(false)}
+                                >
+                                  {sub.name}
                                 </Link>
-                                <ul className="dropdown-menu glass-nav-dropdown border-0 shadow-2xl submenu-left">
-                                  {sub.subDropdown.map((subChild) => (
-                                    <li key={subChild.name}>
-                                      <Link 
-                                        className="dropdown-item text-white-50" 
-                                        to={subChild.path}
-                                        onClick={() => setIsOpen(false)}
-                                      >
-                                        {subChild.name}
-                                      </Link>
-                                    </li>
-                                  ))}
-                                </ul>
-                              </>
-                            ) : (
-                              <Link 
-                                className="dropdown-item text-white-50" 
-                                to={sub.path}
-                                onClick={() => setIsOpen(false)}
-                              >
-                                {sub.name}
-                              </Link>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </>
-                ) : (
-                  <Link 
-                    className={`nav-link fw-bold text-uppercase small tracking-widest transition-all nav-link-custom ${location.pathname === link.path ? 'text-white' : ''}`}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-          <div className="d-flex align-items-center">
-             <button 
-                onClick={() => setIsQuoteOpen(true)}
-                className="btn-premium py-2 px-4 small text-decoration-none border-0"
-             >
-                Get Started
-             </button>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </>
+                  ) : (
+                    <Link 
+                      className={`nav-link fw-bold text-uppercase small tracking-widest transition-all nav-link-custom ${location.pathname === link.path ? 'text-white' : ''}`}
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+            <div className="d-flex align-items-center justify-content-center pb-3 pb-lg-0">
+               <button 
+                  onClick={() => { setIsQuoteOpen(true); setIsOpen(false); }}
+                  className="btn-premium py-2 px-4 small text-decoration-none border-0"
+               >
+                  Get Started
+               </button>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
-    <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
-    <style>{`
-        .glass-nav-dropdown {
-          background: rgba(10, 10, 10, 0.95) !important;
-          backdrop-filter: blur(25px) saturate(200%);
-          -webkit-backdrop-filter: blur(25px) saturate(200%);
-          border: 1px solid rgba(255, 255, 255, 0.08) !important;
-          border-radius: 4px !important;
-          margin-top: 5px !important;
-          min-width: 240px;
-          padding: 15px 0;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
-        }
-
-        .mega-menu-box {
-          background: rgba(10, 10, 10, 0.98) !important;
-          backdrop-filter: blur(30px);
-          border: 1px solid rgba(255, 255, 255, 0.1) !important;
-          left: 50% !important;
-          transform: translateX(-50%) translateY(20px) !important;
-          border-radius: 8px !important;
-          transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) !important;
-        }
-
-        .custom-dropdown:hover .mega-menu-box {
-          transform: translateX(-50%) translateY(0) !important;
-        }
-
-        .mega-img-container {
-          position: relative;
-          height: 140px;
-          border-radius: 4px;
-        }
-
-        .mega-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .mega-overlay {
-          position: absolute;
-          top: 0; left: 0; width: 100%; height: 100%;
-          background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-          opacity: 0.6;
-          transition: opacity 0.3s ease;
-        }
-
-        .mega-menu-item:hover .mega-img {
-          transform: scale(1.1);
-        }
-
-        .mega-menu-item:hover .mega-overlay {
-          opacity: 0.2;
-        }
-
-        .mega-menu-item:hover .mega-title {
-          color: var(--primary) !important;
-        }
-        
-        .dropdown-item {
-          padding: 10px 25px;
-          font-size: 0.75rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .dropdown-item:hover {
-          background: rgba(248, 192, 45, 0.08) !important;
-          color: var(--primary) !important;
-          padding-left: 32px !important;
-        }
-        
-        .dropdown-submenu {
-          position: relative;
-        }
-        
-        .dropdown-submenu .dropdown-menu {
-          top: -15px;
-          left: 100%;
-          margin-left: 2px;
-          display: none;
-        }
-        
-        .dropdown-submenu:hover > .dropdown-menu {
-          display: block;
-          animation: slideInRight 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .dropdown-chevron, .submenu-chevron {
-          opacity: 0.4;
-          transition: transform 0.3s ease;
-        }
-        
-        .dropdown:hover .dropdown-chevron {
-          transform: rotate(180deg);
-          opacity: 1;
-        }
-        
-        .dropdown-submenu:hover .submenu-chevron {
-          transform: translateX(5px);
-          opacity: 1;
-        }
-        
-        @keyframes slideInRight {
-          from { 
-            opacity: 0;
-            transform: translateX(15px);
-          }
-          to { 
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-        
-        @media (min-width: 992px) {
-          .custom-dropdown:hover > .dropdown-menu {
-            display: block;
-            animation: fadeInMoveUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-          }
-        }
-        
-        @keyframes fadeInMoveUp {
-          from { 
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to { 
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @media (max-width: 991px) {
-          .navbar-collapse {
-            background: rgba(10, 10, 10, 0.98);
-            margin: 0 -1rem;
-            padding: 20px;
-            max-height: 80vh;
-            overflow-y: auto;
-          }
-          
-          .nav-item {
-            width: 100%;
-            text-align: center;
-            margin: 10px 0;
-          }
-          
+      </nav>
+      <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
+      <style>{`
           .glass-nav-dropdown {
-            position: static !important;
-            background: transparent !important;
-            box-shadow: none !important;
-            border: none !important;
-            width: 100% !important;
-            min-width: 100% !important;
-            padding: 0 !important;
-            display: block !important;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
+            background: rgba(10, 10, 10, 0.95) !important;
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-radius: 4px !important;
+            margin-top: 5px !important;
+            min-width: 240px;
+            padding: 15px 0;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
           }
-          
-          .dropdown:hover .glass-nav-dropdown,
-          .dropdown-submenu:hover > .glass-nav-dropdown {
-            max-height: 1000px;
+  
+          .mega-menu-box {
+            background: rgba(10, 10, 10, 0.98) !important;
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            left: 50% !important;
+            transform: translateX(-50%) translateY(20px) !important;
+            border-radius: 8px !important;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) !important;
+            width: 90vw !important;
+            max-width: 800px !important;
           }
-          
-          .dropdown-submenu .dropdown-menu {
-            position: static !important;
-            display: block !important;
-            background: rgba(255, 255, 255, 0.03) !important;
-            margin-left: 0 !important;
-            max-height: 0;
-            overflow: hidden;
+  
+          .custom-dropdown:hover .mega-menu-box {
+            transform: translateX(-50%) translateY(0) !important;
           }
-          
-          .dropdown-submenu:hover > .dropdown-menu {
-             max-height: 500px;
+  
+          .mega-img-container {
+            position: relative;
+            height: 140px;
+            border-radius: 4px;
+          }
+  
+          .mega-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+          }
+  
+          .mega-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+          }
+  
+          .mega-menu-item:hover .mega-img {
+            transform: scale(1.1);
+          }
+  
+          .mega-menu-item:hover .mega-overlay {
+            opacity: 0.2;
+          }
+  
+          .mega-menu-item:hover .mega-title {
+            color: var(--primary) !important;
           }
           
           .dropdown-item {
-            padding: 10px !important;
-            text-align: center;
-            opacity: 0.7;
+            padding: 10px 25px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
           }
           
           .dropdown-item:hover {
-            padding-left: 10px !important;
+            background: rgba(248, 192, 45, 0.08) !important;
+            color: var(--primary) !important;
+            padding-left: 32px !important;
+          }
+          
+          .dropdown-submenu {
+            position: relative;
+          }
+          
+          .dropdown-submenu .dropdown-menu {
+            top: -15px;
+            left: 100%;
+            margin-left: 2px;
+            display: none;
+          }
+          
+          .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+            animation: slideInRight 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+          }
+          
+          .dropdown-chevron, .submenu-chevron {
+            opacity: 0.4;
+            transition: transform 0.3s ease;
+          }
+          
+          .dropdown:hover .dropdown-chevron {
+            transform: rotate(180deg);
             opacity: 1;
           }
           
-          .submenu-chevron {
-            transform: rotate(90deg);
+          .dropdown-submenu:hover .submenu-chevron {
+            transform: translateX(5px);
+            opacity: 1;
           }
           
-          .dropdown-toggle::after {
-            display: none;
+          @keyframes slideInRight {
+            from { 
+              opacity: 0;
+              transform: translateX(15px);
+            }
+            to { 
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
-        }
+          
+          @media (min-width: 992px) {
+            .custom-dropdown:hover > .dropdown-menu {
+              display: block;
+              animation: fadeInMoveUp 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            }
+          }
+          
+          @keyframes fadeInMoveUp {
+            from { 
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to { 
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @media (max-width: 991px) {
+            .navbar-collapse {
+              background: rgba(10, 10, 10, 0.98);
+              margin: 0 -1rem;
+              padding: 20px;
+              max-height: 85vh;
+              overflow-y: auto;
+              border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .nav-item {
+              width: 100%;
+              text-align: center;
+              margin: 5px 0;
+            }
+            
+            .glass-nav-dropdown {
+              position: static !important;
+              background: rgba(255, 255, 255, 0.02) !important;
+              box-shadow: none !important;
+              border: none !important;
+              width: 100% !important;
+              min-width: 100% !important;
+              padding: 0 !important;
+              display: block !important;
+              max-height: 0;
+              overflow: hidden;
+              transition: max-height 0.4s ease;
+              transform: none !important;
+            }
+            
+            .mega-menu-box {
+              position: static !important;
+              transform: none !important;
+              width: 100% !important;
+              max-width: 100% !important;
+              background: transparent !important;
+              border: none !important;
+              padding: 0 !important;
+            }
+  
+            .mega-img-container {
+              height: 100px;
+            }
+  
+            .dropdown:hover .glass-nav-dropdown,
+            .dropdown-submenu:hover > .glass-nav-dropdown {
+              max-height: 1000px;
+            }
+            
+            .dropdown-submenu .dropdown-menu {
+              position: static !important;
+              display: block !important;
+              background: rgba(255, 255, 255, 0.04) !important;
+              margin-left: 0 !important;
+              max-height: 0;
+              overflow: hidden;
+            }
+            
+            .dropdown-item {
+              padding: 12px !important;
+              text-align: center;
+              opacity: 0.7;
+              font-size: 0.7rem;
+            }
+            
+            .dropdown-item:hover {
+              padding-left: 12px !important;
+              opacity: 1;
+            }
+            
+            .submenu-chevron {
+              transform: rotate(90deg);
+            }
+            
+            .dropdown-toggle::after {
+              display: none;
+            }
+          }
+
       `}</style>
     </>
   );

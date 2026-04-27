@@ -146,23 +146,6 @@ const GoodsLifts = () => {
       </section>
 
       <style>{`
-        .product-page { background: #000000; }
-        .about-hero-section { background: #1a2436; }
-        .smoky-gradient-bg {
-          position: absolute; top:0; left:0; width:100%; height:100%;
-          background: linear-gradient(to right, #1a2436 0%, #1a2436 45%, transparent 85%); z-index:2;
-        }
-        .about-hero-image-overlay { position:absolute; top:0; right:0; width:60%; height:100%; z-index:1; }
-        .hero-clip-img { width:100%; height:100%; object-fit:cover; filter:brightness(0.85); }
-        .huge-contact-title { font-size: clamp(3rem, 10vw, 6rem); font-weight:900; color:white; text-transform:uppercase;}
-        .yellow-ticker-right-aligned {
-          position:absolute; bottom:0; right:0; width:100%; height:40px; overflow:hidden; z-index:10;
-          mask-image: linear-gradient(to right, transparent 50%, black 70%);
-        }
-        .ticker-track-right { display:flex; gap:15px; width:max-content; animation: tickerScrollSeamless 25s linear infinite; }
-        .ticker-bar-yellow { width:5px; height:25px; background:#f8c02d; flex-shrink:0; }
-        @keyframes tickerScrollSeamless { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .glass-card-dark { background:#0a0a0a; border: 1px solid rgba(255,255,255,0.05); border-radius:4px; }
         .model-card-premium { background: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; transition: 0.4s; overflow: hidden; display: flex; flex-direction: column; }
         .model-card-premium:hover { transform: translateY(-10px); border-color: var(--primary); }
         .featured-model { border-color: rgba(248,192,45,0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
@@ -177,14 +160,6 @@ const GoodsLifts = () => {
         .feature-icon-box { color: var(--primary); }
         .btn-outline-premium { border: 1px solid var(--primary); color: var(--primary); padding: 10px 20px; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; transition: 0.3s; }
         .btn-outline-premium:hover { background: var(--primary); color: #000; }
-        .max-w-600 { max-width: 600px; }
-        .max-w-400 { max-width: 400px; }
-        @media (max-width: 991px) {
-          .huge-contact-title { font-size: 3.5rem; }
-          .about-hero-section { min-height: 400px !important; text-align: center; }
-          .smoky-gradient-bg { background: rgba(26, 36, 54, 0.9); }
-          .max-w-400 { margin-left: auto; margin-right: auto; }
-        }
       `}</style>
     </div>
   );

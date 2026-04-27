@@ -1,6 +1,6 @@
 
 import { Settings, Hammer, Zap, RefreshCcw, SearchCheck, UserCheck, FileSignature, PhoneForwarded, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const coreServices = [
   // Group 1
@@ -49,13 +49,23 @@ const coreServices = [
 
 const CoreServices = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const totalSlides = 2; // Fixed since we have 8 items and show 4 at a time
+  const [itemsPerPage, setItemsPerPage] = useState(window.innerWidth < 768 ? 1 : (window.innerWidth < 1024 ? 2 : 4));
+
+  useEffect(() => {
+    const handleResize = () => {
+      setItemsPerPage(window.innerWidth < 768 ? 1 : (window.innerWidth < 1024 ? 2 : 4));
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const totalSlides = Math.ceil(coreServices.length / itemsPerPage);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
 
   return (
-    <section className="core-services-section bg-dark py-4 position-relative overflow-hidden">
+    <section className="core-services-section bg-dark py-5 position-relative overflow-hidden">
       <div className="container py-2">
         
         {/* Section Header with Slider Navigation */}
@@ -82,7 +92,7 @@ const CoreServices = () => {
         {/* Core Services Slider Track */}
         <div className="core-slider-overflow">
           <div 
-            className="row g-4 transition-all duration-700" 
+            className="row g-0 transition-all duration-700" 
             style={{ 
               transform: `translateX(-${currentSlide * 100}%)`,
               display: 'flex',
@@ -92,11 +102,11 @@ const CoreServices = () => {
           >
             {coreServices.map((service, index) => (
               <div 
-                className="col-lg-3 col-md-6 flex-shrink-0" 
+                className="flex-shrink-0 px-2" 
                 key={index}
-                style={{ width: 'calc(25% - 24px)', margin: '0 12px' }}
+                style={{ width: `${100 / itemsPerPage}%` }}
               >
-                <div className="core-service-card shadow-xl p-4 text-center h-100">
+                <div className="core-service-card shadow-xl p-4 text-center h-100 mx-1">
                   <div className="core-icon-box mb-4 text-primary">
                     {service.icon}
                   </div>
@@ -122,6 +132,12 @@ const CoreServices = () => {
         </div>
 
       </div>
+      <style>{`
+        @media (max-width: 991px) {
+          .core-services-section .row.align-items-end { text-align: center; }
+          .core-services-section .d-flex.flex-column.align-items-start { align-items: center !important; }
+        }
+      `}</style>
     </section>
   );
 };

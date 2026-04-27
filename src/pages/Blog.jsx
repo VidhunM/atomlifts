@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import blogHero from '../assets/blog-hero.png';
 import blog1 from '../assets/blog-1.png';
 import blog2 from '../assets/blog-2.png';
@@ -78,21 +78,23 @@ const Blog = () => {
           <div className="row g-4">
             {blogPosts.map((post, idx) => (
               <div className="col-lg-4 col-md-6" key={post.id} data-aos="fade-up" data-aos-delay={idx * 100}>
-                <div className="blog-card-new">
-                  <div className="blog-img-wrapper position-relative overflow-hidden mb-4">
-                    <img src={post.img} alt={post.title} className="blog-img w-100" />
-                    <div className="blog-date-tag">
-                      <span className="date-number">{post.date.split(' ')[0]}</span>
-                      <span className="date-month">{post.date.split(' ')[1]}</span>
+                <Link to={`/blog/${post.id}`} className="text-decoration-none">
+                  <div className="blog-card-new">
+                    <div className="blog-img-wrapper position-relative overflow-hidden mb-4">
+                      <img src={post.img} alt={post.title} className="blog-img w-100" />
+                      <div className="blog-date-tag">
+                        <span className="date-number">{post.date.split(' ')[0]}</span>
+                        <span className="date-month">{post.date.split(' ')[1]}</span>
+                      </div>
+                    </div>
+                    <div className="blog-body p-1">
+                      <h4 className="text-white fw-bold mb-3 blog-title-hover">{post.title}</h4>
+                      <p className="text-white-50 small leading-relaxed mb-4">
+                        {post.excerpt}
+                      </p>
                     </div>
                   </div>
-                  <div className="blog-body p-1">
-                    <h4 className="text-white fw-bold mb-3 blog-title-hover">{post.title}</h4>
-                    <p className="text-white-50 small leading-relaxed mb-4">
-                      {post.excerpt}
-                    </p>
-                  </div>
-                </div>
+                </Link>
               </div>
             ))}
           </div>
@@ -100,78 +102,6 @@ const Blog = () => {
       </section>
 
       <style>{`
-        .blog-hero-section {
-          background: #1a2436;
-          min-height: 550px;
-        }
-
-        .smoky-gradient-bg {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          /* Solid dark color on left, fading to transparent on right */
-          background: linear-gradient(to right, #1a2436 0%, #1a2436 45%, transparent 85%);
-          z-index: 2;
-        }
-
-        .blog-hero-image-overlay {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 60%;
-          height: 100%;
-          z-index: 1;
-        }
-
-        .hero-clip-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          filter: brightness(0.85);
-        }
-
-        .huge-contact-title {
-          font-size: clamp(3rem, 10vw, 6rem);
-          font-weight: 900;
-          color: white;
-          letter-spacing: -0.02em;
-          text-transform: uppercase;
-        }
-
-        .yellow-ticker-right-aligned {
-          position: absolute;
-          bottom: 0px;
-          right: 0;
-          width: 60%; /* Occupies the right part */
-          height: 40px;
-          overflow: hidden;
-          z-index: 10;
-          mask-image: linear-gradient(to right, transparent, black 20%);
-          -webkit-mask-image: linear-gradient(to right, transparent, black 20%);
-        }
-
-        .ticker-track-right {
-          display: flex;
-          gap: 15px;
-          width: max-content;
-          animation: tickerScrollSeamless 25s linear infinite;
-        }
-
-        .ticker-bar-yellow {
-          width: 5px;
-          height: 25px;
-          background: #f8c02d;
-          flex-shrink: 0;
-        }
-
-        @keyframes tickerScrollSeamless {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
         .blog-card-new {
           transition: transform 0.4s ease;
         }
@@ -228,16 +158,6 @@ const Blog = () => {
 
         .blog-card-new:hover .blog-title-hover {
           color: var(--primary);
-        }
-        @media (max-width: 991px) {
-          .huge-contact-title { font-size: 3.5rem; }
-          .blog-hero-section { min-height: 400px !important; text-align: center; }
-          .smoky-gradient-bg { background: rgba(26, 36, 54, 0.9); }
-          .max-w-400 { margin-left: auto; margin-right: auto; }
-          .yellow-ticker-right-aligned { width: 100%; mask-image: none; }
-        }
-        @media (max-width: 576px) {
-          .huge-contact-title { font-size: 2.5rem; }
         }
       `}</style>
     </div>

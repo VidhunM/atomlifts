@@ -156,80 +156,6 @@ const Contact = () => {
       </section>
 
       <style>{`
-        .contact-hero-section {
-          background: #1a2436;
-        }
-        
-        .smoky-gradient-bg {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(to right, #1a2436 0%, #1a2436 45%, transparent 85%);
-          z-index: 2;
-        }
-
-        .contact-hero-image-overlay {
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 60%;
-          height: 100%;
-          z-index: 1;
-        }
-
-        .hero-clip-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          filter: brightness(0.85);
-        }
-
-        .huge-contact-title {
-          font-size: clamp(3rem, 10vw, 6rem);
-          font-weight: 900;
-          color: white;
-          letter-spacing: -0.02em;
-          text-transform: uppercase;
-        }
-
-        .yellow-ticker-right-aligned {
-          position: absolute;
-          bottom: 0px;
-          right: 0;
-          width: 60%;
-          height: 40px;
-          overflow: hidden;
-          z-index: 10;
-          mask-image: linear-gradient(to right, transparent, black 20%);
-          -webkit-mask-image: linear-gradient(to right, transparent, black 20%);
-        }
-
-        .ticker-track-right {
-          display: flex;
-          gap: 15px;
-          width: max-content;
-          animation: tickerScrollSeamless 25s linear infinite;
-        }
-
-        .ticker-bar-yellow {
-          width: 5px;
-          height: 25px;
-          background: #f8c02d;
-          flex-shrink: 0;
-        }
-
-        @keyframes tickerScrollSeamless {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        .max-w-400 {
-          max-width: 450px;
-        }
-
         .icon-box-yellow {
           background: var(--primary);
           color: var(--dark);
@@ -292,16 +218,7 @@ const Contact = () => {
           -moz-appearance: none;
           appearance: none;
         }
-
-        @media (max-width: 991px) {
-          .huge-contact-title { font-size: 3.5rem; }
-          .contact-hero-section { min-height: 400px !important; text-align: center; }
-          .smoky-gradient-bg { background: rgba(26, 36, 54, 0.9); }
-          .max-w-400 { margin-left: auto; margin-right: auto; }
-          .yellow-ticker-right-aligned { width: 100%; mask-image: none; }
-        }
         @media (max-width: 576px) {
-          .huge-contact-title { font-size: 2.5rem; }
           .display-4 { font-size: 2rem !important; }
         }
       `}</style>

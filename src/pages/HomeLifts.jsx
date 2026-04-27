@@ -260,16 +260,6 @@ const HomeLifts = () => {
       </section>
 
       <style>{`
-        .homelifts-page { background: #000000; }
-        .about-hero-section { background: #1a2436; }
-        .smoky-gradient-bg {
-          position: absolute; top:0; left:0; width:100%; height:100%;
-          background: linear-gradient(to right, #1a2436 0%, #1a2436 45%, transparent 85%); z-index:2;
-        }
-        .about-hero-image-overlay { position:absolute; top:0; right:0; width:55%; height:100%; z-index:1; }
-        .hero-clip-img { width:100%; height:100%; object-fit:cover; filter:brightness(0.9); }
-        .huge-contact-title { font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight:900; color:white; line-height: 1.1; }
-        
         /* Gallery Card Styles */
         .zen-gallery-card { transition: transform 0.4s ease; }
         .zen-gallery-card:hover { transform: translateY(-8px); }
@@ -339,7 +329,6 @@ const HomeLifts = () => {
         
         @media (max-width: 991px) {
           .zen-img-wrapper { height: 400px; }
-          .huge-contact-title { font-size: 3rem; }
           .zen-modal-content { height: 95vh; overflow-y: auto; }
         }
       `}</style>

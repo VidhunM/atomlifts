@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Blog from './pages/Blog';
+import BlogDetails from './pages/BlogDetails';
 import Escalator from './pages/Escalator';
 import MovingWalkways from './pages/MovingWalkways';
 import HomeLifts from './pages/HomeLifts';
@@ -43,6 +44,7 @@ function App() {
             <Route path="/careers" element={<Careers />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogDetails />} />
             <Route path="/escalators" element={<Escalator />} />
             <Route path="/escalators/standard" element={<Escalator />} />
             <Route path="/escalators/moving-walkways" element={<MovingWalkways />} />
