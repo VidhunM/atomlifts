@@ -5,6 +5,16 @@ import blog1 from '../assets/blog-1.png';
 import blog2 from '../assets/blog-2.png';
 import blog3 from '../assets/blog-3.png';
 
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')     // Replace spaces with -
+    .replace(/[^\w-]+/g, '')   // Remove all non-word chars
+    .replace(/--+/g, '-');    // Replace multiple - with single -
+};
+
 const blogPosts = [
   {
     id: 1,
@@ -69,8 +79,8 @@ const blogPosts = [
 ];
 
 const BlogDetails = () => {
-  const { id } = useParams();
-  const post = blogPosts.find(p => p.id === parseInt(id)) || blogPosts[0];
+  const { slug } = useParams();
+  const post = blogPosts.find(p => slugify(p.title) === slug) || blogPosts[0];
 
   return (
     <div className="blog-details-page bg-dark min-vh-100 pb-5">
@@ -80,7 +90,7 @@ const BlogDetails = () => {
           <img src={post.img} alt={post.title} className="detail-hero-img" />
           <div className="detail-hero-overlay"></div>
         </div>
-        
+
         <div className="container position-relative z-10 pt-150">
           <div className="row justify-content-center">
             <div className="col-lg-10">
@@ -125,33 +135,33 @@ const BlogDetails = () => {
                   </div>
                 </div>
                 <Link to="/contact" className="text-primary text-decoration-none fw-900 d-flex align-items-center gap-2">
-                   GET EXPERT CONSULTATION <ArrowRight size={18} />
+                  GET EXPERT CONSULTATION <ArrowRight size={18} />
                 </Link>
               </div>
             </div>
-            
+
             {/* Sidebar / Related */}
             <div className="col-lg-3 offset-lg-1 mt-5 mt-lg-0">
-               <div className="sidebar-sticky pt-lg-5">
-                  <h5 className="text-white fw-900 mb-4 tracking-widest small uppercase">Latest Insights</h5>
-                  <div className="d-flex flex-column gap-4">
-                     {blogPosts.filter(p => p.id !== post.id).map(related => (
-                        <Link key={related.id} to={`/blog/${related.id}`} className="related-post-card text-decoration-none group">
-                           <div className="mb-2 overflow-hidden rounded">
-                              <img src={related.img} alt="" className="w-100 h-100 object-fit-cover transition-all" style={{ height: '120px' }} />
-                           </div>
-                           <h6 className="text-white mb-1 fw-bold small leading-tight group-hover:text-primary transition-all">{related.title}</h6>
-                           <span className="text-white-50 extra-small">{related.date}</span>
-                        </Link>
-                     ))}
-                  </div>
+              <div className="sidebar-sticky pt-lg-5">
+                <h5 className="text-white fw-900 mb-4 tracking-widest small uppercase">Latest Insights</h5>
+                <div className="d-flex flex-column gap-4">
+                  {blogPosts.filter(p => p.id !== post.id).map(related => (
+                    <Link key={related.id} to={`/blog/${slugify(related.title)}`} className="related-post-card text-decoration-none group">
+                      <div className="mb-2 overflow-hidden rounded">
+                        <img src={related.img} alt="" className="w-100 h-100 object-fit-cover transition-all" style={{ height: '120px' }} />
+                      </div>
+                      <h6 className="text-white mb-1 fw-bold small leading-tight group-hover:text-primary transition-all">{related.title}</h6>
+                      <span className="text-white-50 extra-small">{related.date}</span>
+                    </Link>
+                  ))}
+                </div>
 
-                  <div className="cta-box-sidebar mt-5 p-4 rounded bg-primary text-dark">
-                     <h6 className="fw-900 mb-3">Need Engineering Solutions?</h6>
-                     <p className="small mb-4 opacity-80">Consult with our specialists for high-end vertical mobility systems.</p>
-                     <Link to="/contact" className="btn btn-dark w-100 rounded-0 fw-bold small">Contact Us</Link>
-                  </div>
-               </div>
+                <div className="cta-box-sidebar mt-5 p-4 rounded bg-primary text-dark">
+                  <h6 className="fw-900 mb-3">Need Engineering Solutions?</h6>
+                  <p className="small mb-4 opacity-80">Consult with our specialists for high-end vertical mobility systems.</p>
+                  <Link to="/contact" className="btn btn-dark w-100 rounded-0 fw-bold small">Contact Us</Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

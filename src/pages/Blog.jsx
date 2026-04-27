@@ -5,6 +5,16 @@ import blog1 from '../assets/blog-1.png';
 import blog2 from '../assets/blog-2.png';
 import blog3 from '../assets/blog-3.png';
 
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')     // Replace spaces with -
+    .replace(/[^\w-]+/g, '')   // Remove all non-word chars
+    .replace(/--+/g, '-');    // Replace multiple - with single -
+};
+
 const blogPosts = [
   {
     id: 1,
@@ -52,13 +62,13 @@ const Blog = () => {
 
         {/* Right Corner Image */}
         <div className="blog-hero-image-overlay d-none d-lg-block" data-aos="fade-left">
-          <img 
-            src={blogHero} 
-            alt="Engineering Specialists" 
-            className="hero-clip-img" 
+          <img
+            src={blogHero}
+            alt="Engineering Specialists"
+            className="hero-clip-img"
           />
         </div>
-        
+
         <div className="yellow-ticker-right-aligned">
           <div className="ticker-track-right">
             {[...Array(100)].map((_, i) => (
@@ -78,7 +88,7 @@ const Blog = () => {
           <div className="row g-4">
             {blogPosts.map((post, idx) => (
               <div className="col-lg-4 col-md-6" key={post.id} data-aos="fade-up" data-aos-delay={idx * 100}>
-                <Link to={`/blog/${post.id}`} className="text-decoration-none">
+                <Link to={`/blog/${slugify(post.title)}`} className="text-decoration-none">
                   <div className="blog-card-new">
                     <div className="blog-img-wrapper position-relative overflow-hidden mb-4">
                       <img src={post.img} alt={post.title} className="blog-img w-100" />
