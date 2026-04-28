@@ -15,11 +15,11 @@ const Contact = () => {
   return (
     <div className="contact-page bg-dark min-vh-100">
       {/* Hero Section - EXACTLY matching the refined Blog style */}
-      <section className="contact-hero-section position-relative pt-5 overflow-hidden mb-5 d-flex align-items-center" style={{ minHeight: '600px' }}>
+      <section className="contact-hero-section position-relative pt-5 overflow-hidden mb-4 mb-lg-5 d-flex align-items-center">
         {/* Smoky Gradient Background */}
         <div className="smoky-gradient-bg"></div>
 
-        <div className="container position-relative py-5" style={{ zIndex: 5 }}>
+        <div className="container position-relative py-5 mt-3 mt-lg-0" style={{ zIndex: 5 }}>
           <div className="row align-items-center min-vh-50">
             <div className="col-lg-7 d-flex flex-column justify-content-center" data-aos="fade-right">
               <h1 className="huge-contact-title mb-4">
@@ -56,20 +56,20 @@ const Contact = () => {
       </section>
 
       {/* Content Section - Contents from Image 2 */}
-      <section className="contact-content-section py-5 mt-5">
+      <section className="contact-content-section py-3 py-lg-5 mt-3 mt-lg-5">
         <div className="container">
-          <div className="row g-5">
+          <div className="row g-4 g-lg-5">
             {/* Left Side: Contact Info */}
             <div className="col-lg-6" data-aos="fade-up">
               <div className="pe-lg-5">
-                <h6 className="text-primary text-uppercase tracking-widest fw-800 mb-4 small">WRITE A MESSAGE</h6>
-                <h2 className="display-4 fw-800 text-white mb-4">Feel Free To <span className="text-primary">Contact Us</span></h2>
-                <p className="text-white-50 mb-5">
+                <h6 className="text-primary text-uppercase tracking-widest fw-800 mb-3 mb-lg-4 small">WRITE A MESSAGE</h6>
+                <h2 className="display-4 fw-800 text-white mb-3 mb-lg-4">Feel Free To <span className="text-primary">Contact Us</span></h2>
+                <p className="text-white-50 mb-4 mb-lg-5">
                   Have a query or project in mind? Fill out the form and our team will get back to you shortly. 
                   We're here and happy to hear from you!
                 </p>
 
-                <div className="row g-4 pt-4">
+                <div className="row g-3 g-lg-4 pt-2 pt-lg-4">
                   <div className="col-md-6">
                     <div className="contact-info-card d-flex gap-3 align-items-start">
                       <div className="icon-box-yellow">
@@ -92,7 +92,7 @@ const Contact = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-12 mt-5">
+                  <div className="col-md-12 mt-3 mt-md-5 contact-info-card-wrapper">
                     <div className="contact-info-card d-flex gap-3 align-items-start">
                       <div className="icon-box-yellow">
                         <MapPin size={24} />
@@ -217,6 +217,29 @@ const Contact = () => {
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
+        }
+
+        /* Responsive Fixes */
+        .contact-hero-section {
+          min-height: 600px;
+        }
+
+        @media (max-width: 991px) {
+          .contact-hero-section {
+            min-height: 400px;
+          }
+          .huge-contact-title {
+            font-size: clamp(3rem, 10vw, 5rem);
+          }
+          .contact-form-wrapper {
+            padding: 24px !important;
+          }
+          .contact-info-card {
+            margin-bottom: 0.5rem;
+          }
+          .mt-5.contact-info-card-wrapper {
+            margin-top: 1rem !important;
+          }
         }
         @media (max-width: 576px) {
           .display-4 { font-size: 2rem !important; }

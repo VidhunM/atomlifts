@@ -12,7 +12,7 @@ const AboutEngineering = () => {
   return (
     <section className="about-eng-section bg-dark py-5 overflow-hidden">
       <div className="container py-2">
-        <div className="row g-5 align-items-center">
+        <div className="row gy-5 gx-0 gx-lg-5 align-items-center">
           
           {/* Left Side: Image with Animated Bars */}
           <div className="col-lg-6" data-aos="fade-right">
@@ -34,7 +34,7 @@ const AboutEngineering = () => {
           </div>
 
           {/* Right Side: Content and Animated Tags */}
-          <div className="col-lg-6 ps-lg-5" data-aos="fade-left">
+          <div className="col-lg-6 ps-lg-5 text-center text-lg-start" data-aos="fade-left">
             <h6 className="text-primary text-uppercase tracking-widest fw-bold mb-3 small">OUR EXPERTISE</h6>
             <h2 className="display-4 fw-800 text-white mb-4">
               Precision <span className="text-primary">Engineering</span> Systems
@@ -61,14 +61,10 @@ const AboutEngineering = () => {
       </div>
       <style>{`
         @media (max-width: 991px) {
-          .about-eng-section { text-align: center; padding: 60px 0 !important; overflow: hidden; }
+          .about-eng-section { padding: 60px 0 !important; overflow: hidden; }
           .about-eng-section .container { padding-left: 20px !important; padding-right: 20px !important; }
           .ps-lg-5 { 
             padding-left: 0 !important; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
           }
           .display-4 { 
             word-break: break-word; 

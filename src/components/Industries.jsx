@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Plus, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import stainlessImg from '../assets/Stainless/Stainless.jpg';
 import mildSteelsImg from '../assets/Stainless/Mild steels.jpg';
@@ -92,6 +92,34 @@ const industries = [
 const Industries = () => {
   const [activeGallery, setActiveGallery] = useState(null);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
+  const sliderRef = useRef(null);
+
+  // Auto-slide for mobile grid
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let isMobile = window.innerWidth <= 767;
+    
+    const handleResize = () => { isMobile = window.innerWidth <= 767; };
+    window.addEventListener('resize', handleResize);
+
+    const autoSlideInterval = setInterval(() => {
+      if (!isMobile || !slider) return;
+      
+      const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+      if (slider.scrollLeft >= maxScrollLeft - 10) {
+        slider.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        slider.scrollBy({ left: slider.clientWidth * 0.85, behavior: 'smooth' });
+      }
+    }, 2500);
+
+    return () => {
+      clearInterval(autoSlideInterval);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const openGallery = (gallery) => {
     setActiveGallery(gallery);
@@ -112,7 +140,7 @@ const Industries = () => {
     setCurrentImgIndex((prev) => (prev - 1 + activeGallery.length) % activeGallery.length);
   };
   return (
-    <section className="industries-section bg-dark py-5 position-relative">
+    <section className="industries-section bg-dark py-5 position-relative overflow-hidden">
       <div className="container py-5 mt-5">
         
         {/* Section Header with Nav Arrows */}
@@ -134,7 +162,7 @@ const Industries = () => {
         </div>
 
         {/* Industry Cards Grid */}
-        <div className="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-5">
+        <div className="row g-4 row-cols-1 row-cols-md-2 row-cols-lg-5 mobile-slider-row" ref={sliderRef}>
           {industries.map((ind, index) => (
             <div className="col" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
               <div className="industry-item" onClick={() => openGallery(ind.gallery)}>

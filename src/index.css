@@ -73,6 +73,10 @@ a {
 
 /* Button Styling */
 .btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: var(--gradient);
   color: var(--dark);
   border: none;
@@ -90,6 +94,10 @@ a {
 }
 
 .btn-outline-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: transparent;
   color: var(--primary);
   border: 1px solid var(--primary);
@@ -107,7 +115,7 @@ a {
 
 /* Huge Typography */
 .huge-heading {
-  font-size: clamp(60px, 12vw, 180px);
+  font-size: clamp(32px, 12vw, 180px);
   font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.05em;
@@ -122,6 +130,101 @@ a {
 }
 
 /* Background Utility */
+.hero-bg-parallax {
+  background-attachment: fixed;
+}
+
+.hero-btn-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-top-section {
+  min-height: 100vh;
+}
+.hero-top-inner {
+  padding-top: 150px;
+}
+.hero-bottom-section {
+  min-height: 80vh;
+}
+
+@media (max-width: 991px) {
+  .hero-top-section {
+    min-height: auto;
+  }
+  .hero-top-inner {
+    padding-top: 100px;
+    padding-bottom: 0 !important;
+  }
+  .hero-bottom-section {
+    min-height: auto !important;
+    margin-top: -30px;
+  }
+  .hero-bg-parallax {
+    background-attachment: scroll !important;
+  }
+  .hero-btn-container {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 10px 0 0px 0 !important;
+  }
+  
+  /* Native Swipe Slider for Mobile */
+  .mobile-slider-row {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+  .mobile-slider-row::-webkit-scrollbar {
+    display: none; /* Chrome */
+  }
+  .mobile-slider-row > .col, 
+  .mobile-slider-row > [class*="col-"] {
+    flex: 0 0 85% !important;
+    max-width: 85% !important;
+    scroll-snap-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .stat-card-new {
+    padding: 1rem !important;
+  }
+  .stat-number-new {
+    font-size: 1.75rem !important;
+  }
+  .stat-label-new {
+    font-size: 0.75rem !important;
+    line-height: 1.2;
+  }
+  
+  /* Global Space Reduction for Sections on Mobile */
+  section.py-5, section .py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  section.pt-5, section .pt-5 {
+    padding-top: 2rem !important;
+  }
+  section.pb-5, section .pb-5 {
+    padding-bottom: 2rem !important;
+  }
+  section .mt-5 {
+    margin-top: 1.5rem !important;
+  }
+  section .mb-5 {
+    margin-bottom: 1.5rem !important;
+  }
+}
+
 .bg-celestial {
   background: url('./assets/lift-bg.png') no-repeat center center;
   background-size: cover;
@@ -129,7 +232,7 @@ a {
 }
 
 .bg-celestial::before {
-  content: '\2022';
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -146,6 +249,10 @@ a {
 
 /* Button Refinement */
 .btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: var(--primary);
   color: var(--dark);
   border: none;
@@ -164,6 +271,14 @@ a {
   transform: translateY(-5px);
   box-shadow: 0 20px 40px rgba(248, 192, 45, 0.4);
   color: var(--dark);
+}
+
+@media (max-width: 991px) {
+  .btn-premium, .btn-outline-premium {
+    padding: 10px 20px !important;
+    font-size: 0.8rem !important;
+    gap: 6px !important;
+  }
 }
 
 /* Custom Scrollbar */
@@ -1622,7 +1737,9 @@ a {
   z-index: 2;
 }
 
-.about-hero-image-overlay {
+.about-hero-image-overlay,
+.contact-hero-image-overlay,
+.blog-hero-image-overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -1680,7 +1797,9 @@ a {
 }
 
 @media (max-width: 991px) {
-  .about-hero-section {
+  .about-hero-section,
+  .contact-hero-section,
+  .blog-hero-section {
     min-height: 400px !important;
     text-align: center;
     padding-top: 100px !important;
@@ -1694,7 +1813,9 @@ a {
     font-size: 3.5rem;
   }
   
-  .about-hero-image-overlay {
+  .about-hero-image-overlay,
+  .contact-hero-image-overlay,
+  .blog-hero-image-overlay {
     display: none !important;
   }
   

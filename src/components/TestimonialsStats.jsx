@@ -51,12 +51,40 @@ const testimonials = [
 
 const TestimonialsStats = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const sliderRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Auto-slide for mobile stats grid
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let isMobile = window.innerWidth <= 767;
+    
+    const handleResize = () => { isMobile = window.innerWidth <= 767; };
+    window.addEventListener('resize', handleResize);
+
+    const autoSlideInterval = setInterval(() => {
+      if (!isMobile || !slider) return;
+      
+      const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+      if (slider.scrollLeft >= maxScrollLeft - 10) {
+        slider.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        slider.scrollBy({ left: slider.clientWidth * 0.85, behavior: 'smooth' });
+      }
+    }, 2500);
+
+    return () => {
+      clearInterval(autoSlideInterval);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const stats = [
@@ -67,7 +95,7 @@ const TestimonialsStats = () => {
   ];
 
   return (
-    <section className="testi-stats-section bg-dark py-5 position-relative">
+    <section className="testi-stats-section bg-dark py-5 position-relative overflow-hidden">
       <div className="container py-5">
         
         {/* Testimonial Slider */}
@@ -105,7 +133,7 @@ const TestimonialsStats = () => {
         </div>
 
         {/* Stats Counter Grid - REVERTED TO OLD 4-COLUMN DESIGN */}
-        <div className="row g-4 pt-5">
+        <div className="row g-4 pt-5 mobile-slider-row" ref={sliderRef}>
           {stats.map((stat, index) => (
             <div className="col-lg-3 col-md-6" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
               <div className="stat-card-new shadow-xl bg-glass border-glass rounded-4 p-4 text-center h-100">

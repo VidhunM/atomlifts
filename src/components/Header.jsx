@@ -122,6 +122,17 @@ const Header = () => {
                       id={`dropdown-${link.name}`}
                       role="button"
                       aria-expanded="false"
+                      onClick={(e) => {
+                        if (window.innerWidth < 992) {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          const parent = e.currentTarget.parentElement;
+                          const menu = parent.querySelector('.dropdown-menu');
+                          if (menu) {
+                            menu.style.maxHeight = menu.style.maxHeight === '1000px' ? '0px' : '1000px';
+                          }
+                        }
+                      }}
                     >
                       {link.name} <ChevronDown size={14} className="ms-1 dropdown-chevron" />
                     </Link>
@@ -369,7 +380,7 @@ const Header = () => {
               margin: 5px 0;
             }
             
-            .glass-nav-dropdown {
+            .glass-nav-dropdown, .mega-menu-box, .custom-dropdown:hover .mega-menu-box {
               position: static !important;
               background: rgba(255, 255, 255, 0.02) !important;
               box-shadow: none !important;
@@ -385,13 +396,7 @@ const Header = () => {
             }
             
             .mega-menu-box {
-              position: static !important;
-              transform: none !important;
-              width: 100% !important;
-              max-width: 100% !important;
               background: transparent !important;
-              border: none !important;
-              padding: 0 !important;
             }
   
             .mega-img-container {
@@ -399,7 +404,8 @@ const Header = () => {
             }
   
             .dropdown:hover .glass-nav-dropdown,
-            .dropdown-submenu:hover > .glass-nav-dropdown {
+            .dropdown-submenu:hover > .glass-nav-dropdown,
+            .dropdown:hover .mega-menu-box {
               max-height: 1000px;
             }
             

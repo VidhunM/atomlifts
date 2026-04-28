@@ -98,7 +98,7 @@ const HomeLifts = () => {
   return (
     <div className="homelifts-page bg-dark min-vh-100 pb-5">
       {/* Hero Section */}
-      <section className="about-hero-section position-relative pt-5 overflow-hidden mb-5 d-flex align-items-center" style={{ minHeight: '650px' }}>
+      <section className="about-hero-section position-relative pt-5 overflow-hidden mb-4 mb-lg-5 d-flex align-items-center">
         <div className="smoky-gradient-bg"></div>
         <div className="container position-relative py-5" style={{ zIndex: 5 }}>
           <div className="row align-items-center min-vh-50">
@@ -232,15 +232,15 @@ const HomeLifts = () => {
       )}
 
       {/* CTA Section */}
-      <section className="cta-section py-5 my-5">
+      <section className="cta-section py-0 my-0 py-lg-5 my-lg-5">
         <div className="container">
-          <div className="glass-card-dark p-5 text-center overflow-hidden position-relative" data-aos="zoom-in">
+          <div className="glass-card-dark p-3 p-lg-5 text-center overflow-hidden position-relative" data-aos="zoom-in">
             <div className="position-relative z-10">
-              <h2 className="display-5 fw-800 text-white mb-4">Elevate Your Living Experience.</h2>
-              <p className="text-white-50 mb-5 max-w-600 mx-auto">
+              <h2 className="display-5 fw-800 text-white mb-2 mb-lg-4">Elevate Your Living Experience.</h2>
+              <p className="text-white-50 mb-3 mb-lg-5 max-w-600 mx-auto">
                 Consult with our residential specialists to find the perfect Zen Series lift for your home.
               </p>
-              <div className="d-flex justify-content-center gap-5">
+              <div className="d-flex justify-content-center flex-wrap gap-4 gap-lg-5">
                 <div className="text-center">
                    <div className="icon-badge-premium mb-3"><Smartphone size={24} /></div>
                    <div className="text-white small fw-bold uppercase">IoT Control</div>
@@ -327,8 +327,12 @@ const HomeLifts = () => {
 
         .extra-small { font-size: 0.65rem; }
         
+        @media (min-width: 992px) {
+          .about-hero-section { min-height: 650px; }
+        }
         @media (max-width: 991px) {
-          .zen-img-wrapper { height: 400px; }
+          .about-hero-section { min-height: 400px; }
+          .zen-img-wrapper { width: 100%; height: auto; aspect-ratio: 4/5; }
           .zen-modal-content { height: 95vh; overflow-y: auto; }
         }
       `}</style>

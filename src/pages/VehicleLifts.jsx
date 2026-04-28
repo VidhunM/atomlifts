@@ -129,12 +129,12 @@ const VehicleLifts = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section py-5 my-5">
+      <section className="cta-section py-0 my-0 py-lg-5 my-lg-5">
         <div className="container">
-          <div className="glass-card-dark p-5 text-center overflow-hidden position-relative" data-aos="zoom-in">
+          <div className="glass-card-dark p-3 p-lg-5 text-center overflow-hidden position-relative" data-aos="zoom-in">
             <div className="position-relative z-10">
               <h2 className="display-5 fw-800 text-white mb-4">Protect Your Asset, Save Your Space</h2>
-              <p className="text-white-50 mb-5 max-w-600 mx-auto">
+              <p className="text-white-50 mb-3 mb-lg-5 max-w-600 mx-auto">
                 Consult with our parking specialists for the best vehicle lift solution for your property.
               </p>
               <Link to="/contact" className="btn-premium px-5 py-3 text-decoration-none">
