@@ -1,41 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, MapPin, Briefcase, Clock, ChevronRight, CheckCircle2, Users, Rocket, ZapIcon, Globe, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import trustedImg from '../assets/images/trusted-grid.png';
 
 const Careers = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const jobs = [
-    {
-      title: "Store & Dispatch Incharge",
-      category: "Factory",
-      type: "Full time",
-      location: "Chennai",
-      id: 1
-    },
-    {
-      title: "Site Coordinators",
-      category: "Development",
-      type: "Full time",
-      location: "Chennai",
-      id: 2
-    },
-    {
-      title: "Branch Manager",
-      category: "Management",
-      type: "Full time",
-      location: "Bangalore, Chennai...",
-      id: 3
-    },
-    {
-      title: "Senior Business Development",
-      category: "Development",
-      type: "Full time",
-      location: "Coimbatore",
-      id: 4
-    }
-  ];
+  useEffect(() => {
+    fetch('http://localhost:5000/api/jobs')
+      .then((res) => res.json())
+      .then((data) => {
+        setJobs(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Failed to fetch jobs:', err);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div className="careers-page bg-dark min-vh-100 pb-5">

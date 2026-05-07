@@ -1,9 +1,7 @@
-
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import blogHero from '../assets/blog-hero.png';
 import blog1 from '../assets/blog-1.png';
-import blog2 from '../assets/blog-2.png';
-import blog3 from '../assets/blog-3.png';
 
 const slugify = (text) => {
   return text
@@ -15,31 +13,33 @@ const slugify = (text) => {
     .replace(/--+/g, '-');    // Replace multiple - with single -
 };
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "Innovations in Vertical Mobility for 2025",
-    date: "20 Jun",
-    excerpt: "Explore the latest trends in high-speed elevator technology, from AI-driven dispatch systems to energy-efficient magnetic motors...",
-    img: blog1
-  },
-  {
-    id: 2,
-    title: "The Science Behind High-Rise Cable Tension",
-    date: "19 Jun",
-    excerpt: "Understanding the physics of elevator mechanics ensures smoother rides and longer infrastructure life. Depth dive into rope dynamics...",
-    img: blog2
-  },
-  {
-    id: 3,
-    title: "Eco-Friendly Escalator Solutions for Modern Hubs",
-    date: "18 Jun",
-    excerpt: "Sustainability meets accessibility. Discover how our latest escalator designs reduce power consumption by up to 40% using smart sensors...",
-    img: blog3
-  }
-];
-
 const Blog = () => {
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/blogs')
+      .then((res) => res.json())
+      .then((data) => {
+        // Map backend fields to frontend if needed
+        const mappedData = data.map(blog => {
+          const createdAtDate = new Date(blog.createdAt);
+          return {
+            ...blog,
+            id: blog._id,
+            date: `${createdAtDate.getDate()} ${createdAtDate.toLocaleString('default', { month: 'short' })}`,
+            img: blog.imageUrl || blog1
+          };
+        });
+        setBlogPosts(mappedData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error('Failed to fetch blogs:', err);
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <div className="blog-page bg-dark min-vh-100 pb-5">
       {/* Blog Hero section - EXACTLY matching the provided image */}

@@ -2007,5 +2007,43 @@ a {
   }
 }
 
+/* =========================================
+   Admin Panel Styles
+   ========================================= */
+.admin-container {
+  font-family: 'Inter', sans-serif;
+}
 
+.hover-bg-dark:hover {
+  background-color: #222 !important;
+}
 
+.hover-shadow-lg:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.admin-sidebar .nav-link {
+  opacity: 0.8;
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.bg-primary {
+  opacity: 1;
+}
+
+.admin-content form .form-control,
+.admin-content form .form-select,
+.admin-content form .form-check-input,
+.admin-content form textarea {
+  border-color: #333;
+}
+
+.admin-content form .form-control:focus,
+.admin-content form .form-select:focus,
+.admin-content form textarea:focus {
+  background-color: #1a1a1a;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  color: white;
+}
