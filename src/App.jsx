@@ -18,6 +18,12 @@ import PremiumLifts from './pages/PremiumLifts';
 import GoodsLifts from './pages/GoodsLifts';
 import ExpressLifts from './pages/ExpressLifts';
 import VehicleLifts from './pages/VehicleLifts';
+import CommercialLifts from './pages/CommercialLifts';
+import ResidentialLiftsHub from './pages/ResidentialLiftsHub';
+import IndustrialHub from './pages/IndustrialHub';
+import ParkingHub from './pages/ParkingHub';
+import LiftsHub from './pages/LiftsHub';
+import EscalatorsHub from './pages/EscalatorsHub';
 import IndustrialLifts from './pages/IndustrialLifts';
 import ParkingSolutions from './pages/ParkingSolutions';
 import Careers from './pages/Careers';
@@ -77,19 +83,22 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogDetails />} />
-            <Route path="/escalators" element={<Escalator />} />
+            <Route path="/escalators" element={<EscalatorsHub />} />
             <Route path="/escalators/standard" element={<Escalator />} />
             <Route path="/escalators/moving-walkways" element={<MovingWalkways />} />
-            <Route path="/lifts" element={<HomeLifts />} />
-            <Route path="/lifts/residential" element={<HomeLifts />} />
+            <Route path="/lifts" element={<LiftsHub />} />
+            <Route path="/lifts/residential" element={<ResidentialLiftsHub />} />
             <Route path="/lifts/residential/home" element={<HomeLifts />} />
             <Route path="/lifts/residential/passenger" element={<PassengerLifts />} />
+            <Route path="/lifts/commercial" element={<CommercialLifts />} />
             <Route path="/lifts/commercial/hospital" element={<HospitalLifts />} />
             <Route path="/lifts/commercial/premium" element={<PremiumLifts />} />
             <Route path="/lifts/commercial/goods" element={<GoodsLifts />} />
             <Route path="/lifts/commercial/express" element={<ExpressLifts />} />
             <Route path="/lifts/commercial/vehicle" element={<VehicleLifts />} />
+            <Route path="/lifts/industrial" element={<IndustrialHub />} />
             <Route path="/lifts/industrial/material" element={<IndustrialLifts />} />
+            <Route path="/lifts/parking" element={<ParkingHub />} />
             <Route path="/lifts/parking/car" element={<ParkingSolutions />} />
           </Route>
         </Routes>
