@@ -1,6 +1,40 @@
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { useState } from 'react';
 
 const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    projectType: 'Residential Lift',
+    message: ''
+  });
+  const [status, setStatus] = useState({ type: '', message: '' });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ type: 'loading', message: 'Sending message...' });
+    try {
+      const response = await fetch('http://localhost:5000/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, type: 'contact' })
+      });
+      if (response.ok) {
+        setStatus({ type: 'success', message: 'Message sent successfully!' });
+        setFormData({ name: '', email: '', phone: '', projectType: 'Residential Lift', message: '' });
+      } else {
+        setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+      }
+    } catch (error) {
+      setStatus({ type: 'error', message: 'Error sending message. Please check your connection.' });
+    }
+  };
+
   return (
     <section className="contact-section position-relative overflow-hidden">
       <div className="container">
@@ -11,18 +45,51 @@ const ContactForm = () => {
                 <h6 className="text-primary text-uppercase tracking-widest fw-bold mb-3 small">CONTACT US</h6>
                 <h2 className="display-5 fw-bold text-white mb-0">Get In <span className="text-primary">Touch</span></h2>
               </div>
-              <form className="row g-4 bg-white bg-opacity-5 p-4 p-md-5 rounded-4" onSubmit={(e) => e.preventDefault()}>
-                <div className="col-md-6">
+              <form className="row g-4 bg-white bg-opacity-5 p-4 p-md-5 rounded-4" onSubmit={handleSubmit}>
+                <div className="col-md-4">
                   <label className="form-label text-white small opacity-75">Full Name</label>
-                  <input type="text" className="form-control bg-transparent border-white border-opacity-10 text-white p-3" placeholder="John Doe" />
+                  <input 
+                    type="text" 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="form-control bg-transparent border-white border-opacity-10 text-white p-3" 
+                    placeholder="John Doe" 
+                    required
+                  />
                 </div>
-                <div className="col-md-6">
+                <div className="col-md-4">
                   <label className="form-label text-white small opacity-75">Work Email</label>
-                  <input type="email" className="form-control bg-transparent border-white border-opacity-10 text-white p-3" placeholder="john@company.com" />
+                  <input 
+                    type="email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="form-control bg-transparent border-white border-opacity-10 text-white p-3" 
+                    placeholder="john@company.com" 
+                    required
+                  />
+                </div>
+                <div className="col-md-4">
+                  <label className="form-label text-white small opacity-75">Phone Number</label>
+                  <input 
+                    type="tel" 
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="form-control bg-transparent border-white border-opacity-10 text-white p-3" 
+                    placeholder="+91 12345 67890" 
+                    required
+                  />
                 </div>
                 <div className="col-12">
                   <label className="form-label text-white small opacity-75">Project Type</label>
-                  <select className="form-select bg-transparent border-white border-opacity-10 text-white p-3">
+                  <select 
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleChange}
+                    className="form-select bg-transparent border-white border-opacity-10 text-white p-3"
+                  >
                     <option className="bg-dark">Residential Lift</option>
                     <option className="bg-dark">Commercial Building</option>
                     <option className="bg-dark">Freight Elevator</option>
@@ -31,12 +98,25 @@ const ContactForm = () => {
                 </div>
                 <div className="col-12">
                   <label className="form-label text-white small opacity-75">Message</label>
-                  <textarea className="form-control bg-transparent border-white border-opacity-10 text-white p-3" rows="4" placeholder="Tell us about your project..."></textarea>
+                  <textarea 
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="form-control bg-transparent border-white border-opacity-10 text-white p-3" 
+                    rows="4" 
+                    placeholder="Tell us about your project..."
+                    required
+                  ></textarea>
                 </div>
                 <div className="col-12">
-                  <button type="submit" className="btn-premium w-100 d-flex align-items-center justify-content-center gap-2 py-3">
-                    Send Message <Send size={20} />
+                  <button type="submit" className="btn-premium w-100 d-flex align-items-center justify-content-center gap-2 py-3" disabled={status.type === 'loading'}>
+                    {status.type === 'loading' ? 'Sending...' : 'Send Message'} <Send size={20} />
                   </button>
+                  {status.message && (
+                    <div className={`mt-3 text-center small ${status.type === 'success' ? 'text-success' : 'text-danger'}`}>
+                      {status.message}
+                    </div>
+                  )}
                 </div>
               </form>
             </div>

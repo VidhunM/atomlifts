@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Briefcase } from 'lucide-react';
+import { FileText, Briefcase, Mail } from 'lucide-react';
 
 const AdminDashboard = () => {
   return (
@@ -38,6 +38,23 @@ const AdminDashboard = () => {
                 Post new career opportunities, update job requirements, or toggle the active status of current listings.
               </p>
               <Link to="/admin/jobs" className="btn btn-success w-100">Go to Jobs</Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6">
+          <div className="card bg-dark text-white border-secondary h-100 shadow-sm hover-shadow-lg" style={{ transition: 'all 0.3s' }}>
+            <div className="card-body p-4">
+              <div className="d-flex align-items-center mb-3">
+                <div className="bg-warning p-3 rounded-circle me-3">
+                  <Mail size={24} className="text-dark" />
+                </div>
+                <h4 className="card-title mb-0">Form Inquiries</h4>
+              </div>
+              <p className="card-text text-secondary mb-4">
+                View and manage submissions from contact forms and quote requests across your website.
+              </p>
+              <Link to="/admin/inquiries" className="btn btn-warning w-100">View Inquiries</Link>
             </div>
           </div>
         </div>

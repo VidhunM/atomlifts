@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, Link, useLocation, Navigate, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FileText, Briefcase, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, Briefcase, Mail, LogOut } from 'lucide-react';
 import '../index.css';
 
 const AdminLayout = () => {
@@ -23,6 +23,7 @@ const AdminLayout = () => {
     { name: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={20} /> },
     { name: 'Manage Blogs', path: '/admin/blogs', icon: <FileText size={20} /> },
     { name: 'Manage Jobs', path: '/admin/jobs', icon: <Briefcase size={20} /> },
+    { name: 'Form Inquiries', path: '/admin/inquiries', icon: <Mail size={20} /> },
   ];
 
   return (

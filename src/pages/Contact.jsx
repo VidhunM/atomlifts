@@ -8,9 +8,34 @@ const Contact = () => {
     name: '',
     phone: '',
     email: '',
-    liftType: '',
+    projectType: '',
     message: ''
   });
+  const [status, setStatus] = useState({ type: '', message: '' });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ type: 'loading', message: 'Sending message...' });
+    try {
+      const response = await fetch('http://localhost:5000/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, type: 'contact' })
+      });
+      if (response.ok) {
+        setStatus({ type: 'success', message: 'Message sent successfully!' });
+        setFormData({ name: '', phone: '', email: '', projectType: '', message: '' });
+      } else {
+        setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+      }
+    } catch (error) {
+      setStatus({ type: 'error', message: 'Error sending message. Please check your connection.' });
+    }
+  };
 
   return (
     <div className="contact-page bg-dark min-vh-100">
@@ -113,23 +138,52 @@ const Contact = () => {
             {/* Right Side: Form */}
             <div className="col-lg-6" data-aos="fade-left">
               <div className="contact-form-wrapper glass-card-dark p-4 p-md-5">
-                <form className="row g-4" onSubmit={(e) => e.preventDefault()}>
+                <form className="row g-4" onSubmit={handleSubmit}>
                   <div className="col-md-6">
                     <label className="form-label-contact">Full Name</label>
-                    <input type="text" className="form-input-contact" placeholder="Enter Your Full Name" />
+                    <input 
+                      type="text" 
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="form-input-contact" 
+                      placeholder="Enter Your Full Name" 
+                      required
+                    />
                   </div>
                   <div className="col-md-6">
                     <label className="form-label-contact">Phone/Mobile</label>
-                    <input type="text" className="form-input-contact" placeholder="Mobile Number" />
+                    <input 
+                      type="text" 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="form-input-contact" 
+                      placeholder="Mobile Number" 
+                      required
+                    />
                   </div>
                   <div className="col-md-6">
                     <label className="form-label-contact">Email</label>
-                    <input type="email" className="form-input-contact" placeholder="Email Address" />
+                    <input 
+                      type="email" 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="form-input-contact" 
+                      placeholder="Email Address" 
+                      required
+                    />
                   </div>
                   <div className="col-md-6">
                     <label className="form-label-contact">Lift Type</label>
                     <div className="position-relative">
-                      <select className="form-input-contact appearance-none">
+                      <select 
+                        name="projectType"
+                        value={formData.projectType}
+                        onChange={handleChange}
+                        className="form-input-contact appearance-none"
+                      >
                         <option value="">Select lift type</option>
                         <option>Residential</option>
                         <option>Commercial</option>
@@ -141,12 +195,25 @@ const Contact = () => {
                   </div>
                   <div className="col-12">
                     <label className="form-label-contact">Your Message *</label>
-                    <textarea className="form-input-contact" rows="4" placeholder="Your Message"></textarea>
+                    <textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="form-input-contact" 
+                      rows="4" 
+                      placeholder="Your Message"
+                      required
+                    ></textarea>
                   </div>
                   <div className="col-12 mt-4">
-                    <button type="submit" className="btn-premium w-100 py-3 d-flex align-items-center justify-content-center gap-2">
-                      Submit Form <Send size={20} />
+                    <button type="submit" className="btn-premium w-100 py-3 d-flex align-items-center justify-content-center gap-2" disabled={status.type === 'loading'}>
+                      {status.type === 'loading' ? 'Submitting...' : 'Submit Form'} <Send size={20} />
                     </button>
+                    {status.message && (
+                      <div className={`mt-3 text-center small ${status.type === 'success' ? 'text-success' : 'text-danger'}`}>
+                        {status.message}
+                      </div>
+                    )}
                   </div>
                 </form>
               </div>

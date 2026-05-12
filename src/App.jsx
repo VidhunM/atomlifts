@@ -35,6 +35,7 @@ import AdminLayout from './pages/AdminLayout';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminBlogs from './pages/AdminBlogs';
 import AdminJobs from './pages/AdminJobs';
+import AdminInquiries from './pages/AdminInquiries';
 import AdminLogin from './pages/AdminLogin';
 
 const MainLayout = () => (
@@ -73,6 +74,7 @@ function App() {
             <Route index element={<AdminDashboard />} />
             <Route path="blogs" element={<AdminBlogs />} />
             <Route path="jobs" element={<AdminJobs />} />
+            <Route path="inquiries" element={<AdminInquiries />} />
           </Route>
 
           {/* Public Routes */}

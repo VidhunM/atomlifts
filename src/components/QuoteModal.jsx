@@ -1,11 +1,47 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Send, Phone, Mail, User, MessageSquare, ChevronDown } from 'lucide-react';
 import escalatorImg from '../assets/escalator-hero.png';
 
 const QuoteModal = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    projectType: '',
+    message: ''
+  });
+  const [status, setStatus] = useState({ type: '', message: '' });
+
   if (!isOpen) return null;
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ type: 'loading', message: 'Submitting...' });
+    try {
+      const response = await fetch('http://localhost:5000/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, type: 'quote' })
+      });
+      if (response.ok) {
+        setStatus({ type: 'success', message: 'Quote request submitted successfully!' });
+        setFormData({ name: '', phone: '', email: '', projectType: '', message: '' });
+        setTimeout(() => {
+          onClose();
+          setStatus({ type: '', message: '' });
+        }, 2000);
+      } else {
+        setStatus({ type: 'error', message: 'Failed to submit. Please try again.' });
+      }
+    } catch (error) {
+      setStatus({ type: 'error', message: 'Error submitting. Please check your connection.' });
+    }
+  };
 
   return createPortal(
     <div className="modal-overlay" onClick={onClose}>
@@ -32,30 +68,60 @@ const QuoteModal = ({ isOpen, onClose }) => {
                 Get a customized quote for your lift requirements. Simply fill in the details below, and our team will get back to you with the best solution tailored to your needs.
               </p>
 
-              <form className="quote-form">
+              <form className="quote-form" onSubmit={handleSubmit}>
                 <div className="row g-3">
                   <div className="col-md-6">
                     <div className="input-group-premium">
                       <User size={18} className="input-icon" />
-                      <input type="text" placeholder="Enter Your Full Name" className="form-control-premium" required />
+                      <input 
+                        type="text" 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Enter Your Full Name" 
+                        className="form-control-premium" 
+                        required 
+                      />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="input-group-premium">
                       <Phone size={18} className="input-icon" />
-                      <input type="tel" placeholder="Mobile Number" className="form-control-premium" required />
+                      <input 
+                        type="tel" 
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Mobile Number" 
+                        className="form-control-premium" 
+                        required 
+                      />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="input-group-premium">
                       <Mail size={18} className="input-icon" />
-                      <input type="email" placeholder="Email Address" className="form-control-premium" required />
+                      <input 
+                        type="email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Email Address" 
+                        className="form-control-premium" 
+                        required 
+                      />
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="input-group-premium select-wrapper">
                       <ChevronDown size={18} className="select-icon" />
-                      <select className="form-control-premium appearance-none" required>
+                      <select 
+                        name="projectType"
+                        value={formData.projectType}
+                        onChange={handleChange}
+                        className="form-control-premium appearance-none" 
+                        required
+                      >
                         <option value="">Select lift type</option>
                         <option value="passenger">Passenger Lift</option>
                         <option value="home">Home Lift</option>
@@ -68,13 +134,25 @@ const QuoteModal = ({ isOpen, onClose }) => {
                   <div className="col-12">
                     <div className="input-group-premium align-items-start">
                       <MessageSquare size={18} className="input-icon mt-3" />
-                      <textarea placeholder="Your Message" rows="4" className="form-control-premium pt-3"></textarea>
+                      <textarea 
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Your Message" 
+                        rows="4" 
+                        className="form-control-premium pt-3"
+                      ></textarea>
                     </div>
                   </div>
                   <div className="col-12 mt-4">
-                    <button type="submit" className="btn-submit-premium w-100 py-3">
-                      Submit Form <Send size={18} className="ms-2" />
+                    <button type="submit" className="btn-submit-premium w-100 py-3" disabled={status.type === 'loading'}>
+                      {status.type === 'loading' ? 'Submitting...' : 'Submit Form'} <Send size={18} className="ms-2" />
                     </button>
+                    {status.message && (
+                      <div className={`mt-2 text-center small ${status.type === 'success' ? 'text-success' : 'text-danger'}`}>
+                        {status.message}
+                      </div>
+                    )}
                   </div>
                 </div>
               </form>
