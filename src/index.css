@@ -2018,6 +2018,31 @@ a {
   font-family: 'Inter', sans-serif;
 }
 
+.admin-login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #050505;
+  padding: 1.5rem;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem;
+}
+
+@media (max-width: 576px) {
+  .admin-login-container {
+    padding: 1rem;
+  }
+  
+  .admin-login-card {
+    padding: 1.5rem;
+  }
+}
+
 .admin-sidebar {
   width: 250px;
   background-color: #111;

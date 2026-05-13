@@ -157,9 +157,9 @@ const AdminJobs = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 text-end">
-                <button type="button" className="btn btn-secondary me-2" onClick={resetForm}>Cancel</button>
-                <button type="submit" className="btn btn-success">{editingId ? 'Update Job' : 'Save Job'}</button>
+              <div className="mt-4 d-flex flex-column flex-md-row justify-content-md-end gap-2">
+                <button type="button" className="btn btn-secondary px-4" onClick={resetForm}>Cancel</button>
+                <button type="submit" className="btn btn-success px-4">{editingId ? 'Update Job' : 'Save Job'}</button>
               </div>
             </form>
           </div>
@@ -174,8 +174,8 @@ const AdminJobs = () => {
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Location</th>
-                <th>Type</th>
+                <th className="d-none d-md-table-cell">Location</th>
+                <th className="d-none d-lg-table-cell">Type</th>
                 <th>Status</th>
                 <th className="text-end">Actions</th>
               </tr>
@@ -187,8 +187,8 @@ const AdminJobs = () => {
                     <div className="fw-bold">{job.title}</div>
                     <small className="text-secondary">{job.department}</small>
                   </td>
-                  <td>{job.location}</td>
-                  <td>{job.type}</td>
+                  <td className="d-none d-md-table-cell">{job.location}</td>
+                  <td className="d-none d-lg-table-cell">{job.type}</td>
                   <td>
                     <button 
                       className={`badge border-0 ${job.isActive ? 'bg-success' : 'bg-secondary'}`}

@@ -38,8 +38,8 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="admin-login-container d-flex align-items-center justify-content-center" style={{ minHeight: '100vh', backgroundColor: '#050505' }}>
-      <div className="card bg-dark border-secondary shadow-lg p-4" style={{ width: '100%', maxWidth: '400px' }}>
+    <div className="admin-login-container">
+      <div className="admin-login-card card bg-dark border-secondary shadow-lg">
         <div className="text-center mb-4">
           <div className="d-inline-flex align-items-center justify-content-center bg-primary p-3 rounded-circle mb-3">
             <Lock size={32} className="text-white" />

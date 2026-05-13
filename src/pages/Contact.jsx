@@ -293,23 +293,33 @@ const Contact = () => {
 
         @media (max-width: 991px) {
           .contact-hero-section {
-            min-height: 400px;
+            min-height: auto;
+            padding-top: 100px !important;
+            padding-bottom: 60px !important;
           }
           .huge-contact-title {
-            font-size: clamp(3rem, 10vw, 5rem);
+            font-size: clamp(3.5rem, 12vw, 5rem);
+            line-height: 1.1;
+          }
+          .contact-content-section {
+            padding-top: 0 !important;
           }
           .contact-form-wrapper {
-            padding: 24px !important;
+            padding: 2rem 1.5rem !important;
+            margin-top: 2rem;
           }
           .contact-info-card {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
           }
-          .mt-5.contact-info-card-wrapper {
-            margin-top: 1rem !important;
+          .contact-info-card-wrapper {
+            margin-top: 1.5rem !important;
           }
         }
         @media (max-width: 576px) {
-          .display-4 { font-size: 2rem !important; }
+          .display-4 { font-size: 2.25rem !important; }
+          .form-input-contact {
+            padding: 14px 16px;
+          }
         }
       `}</style>
     </div>
