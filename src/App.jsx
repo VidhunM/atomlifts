@@ -27,6 +27,7 @@ import EscalatorsHub from './pages/EscalatorsHub';
 import IndustrialLifts from './pages/IndustrialLifts';
 import ParkingSolutions from './pages/ParkingSolutions';
 import Careers from './pages/Careers';
+import JobDetails from './pages/JobDetails';
 import ScrollToTop from './components/ScrollToTop';
 import { Outlet } from 'react-router-dom';
 
@@ -36,6 +37,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminBlogs from './pages/AdminBlogs';
 import AdminJobs from './pages/AdminJobs';
 import AdminInquiries from './pages/AdminInquiries';
+import AdminApplications from './pages/AdminApplications';
 import AdminLogin from './pages/AdminLogin';
 
 const MainLayout = () => (
@@ -74,6 +76,7 @@ function App() {
             <Route index element={<AdminDashboard />} />
             <Route path="blogs" element={<AdminBlogs />} />
             <Route path="jobs" element={<AdminJobs />} />
+            <Route path="applications" element={<AdminApplications />} />
             <Route path="inquiries" element={<AdminInquiries />} />
           </Route>
 
@@ -82,6 +85,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/careers/details/:id" element={<JobDetails />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogDetails />} />

@@ -99,7 +99,7 @@ const Careers = () => {
 
           <div className="row g-4">
             {jobs.map((job, i) => (
-              <div className="col-12 col-md-6 col-xl-3" key={job.id} data-aos="fade-up" data-aos-delay={i * 100}>
+              <div className="col-12 col-md-6 col-xl-3" key={job._id} data-aos="fade-up" data-aos-delay={i * 100}>
                 <div className="job-card-elite p-4 h-100 d-flex flex-column">
                   <div className="mb-4">
                     <h4 className="text-white fw-900 mb-0 job-title">{job.title}</h4>
@@ -114,7 +114,7 @@ const Careers = () => {
                     </div>
                   </div>
                   
-                  <Link to={`/careers/details/${job.id}`} className="apply-btn-elite text-decoration-none">
+                  <Link to={`/careers/details/${job._id}`} className="apply-btn-elite text-decoration-none">
                     <span>View Details</span>
                     <div className="icon-wrapper"><ChevronRight size={18} /></div>
                   </Link>

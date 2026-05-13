@@ -23,6 +23,7 @@ const AdminLayout = () => {
     { name: 'Dashboard', path: '/admin', icon: <LayoutDashboard size={20} /> },
     { name: 'Manage Blogs', path: '/admin/blogs', icon: <FileText size={20} /> },
     { name: 'Manage Jobs', path: '/admin/jobs', icon: <Briefcase size={20} /> },
+    { name: 'Job Applications', path: '/admin/applications', icon: <FileText size={20} /> },
     { name: 'Form Inquiries', path: '/admin/inquiries', icon: <Mail size={20} /> },
   ];
 
