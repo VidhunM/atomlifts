@@ -39,14 +39,14 @@ const AdminInquiries = () => {
 
   return (
     <div className="admin-inquiries">
-      <div className="d-flex justify-content-between align-items-center mb-5">
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-4 mb-5">
         <div>
           <h2 className="display-6 fw-bold text-white mb-2">Form Inquiries</h2>
           <p className="text-secondary mb-0">Manage and respond to customer inquiries from contact forms and quote requests.</p>
         </div>
         <button 
           onClick={fetchInquiries} 
-          className="btn btn-outline-primary d-flex align-items-center gap-2"
+          className="btn btn-outline-primary d-flex align-items-center justify-content-center gap-2 px-4 py-2"
           disabled={loading}
         >
           <RefreshCw size={18} className={loading ? 'spin' : ''} /> Refresh
@@ -55,31 +55,33 @@ const AdminInquiries = () => {
 
       <div className="card bg-dark border-secondary mb-4 shadow-sm">
         <div className="card-body p-3">
-          <div className="d-flex align-items-center gap-3">
-            <Filter size={18} className="text-primary" />
-            <span className="text-white small fw-bold text-uppercase">Filter By:</span>
-            <div className="btn-group">
+          <div className="d-flex flex-wrap align-items-center gap-3">
+            <div className="d-flex align-items-center gap-2">
+              <Filter size={18} className="text-primary" />
+              <span className="text-white small fw-bold text-uppercase whitespace-nowrap">Filter By:</span>
+            </div>
+            <div className="btn-group flex-wrap">
               <button 
                 className={`btn btn-sm ${filter === 'all' ? 'btn-primary' : 'btn-outline-secondary text-white'}`}
                 onClick={() => setFilter('all')}
               >
-                All Submissions
+                All
               </button>
               <button 
                 className={`btn btn-sm ${filter === 'contact' ? 'btn-primary' : 'btn-outline-secondary text-white'}`}
                 onClick={() => setFilter('contact')}
               >
-                Contact Forms
+                Contact
               </button>
               <button 
                 className={`btn btn-sm ${filter === 'quote' ? 'btn-primary' : 'btn-outline-secondary text-white'}`}
                 onClick={() => setFilter('quote')}
               >
-                Quote Requests
+                Quote
               </button>
             </div>
-            <div className="ms-auto">
-              <span className="badge bg-secondary">{filteredInquiries.length} Total</span>
+            <div className="ms-md-auto w-100 w-md-auto text-end">
+              <span className="badge bg-secondary">{filteredInquiries.length} Total Submissions</span>
             </div>
           </div>
         </div>

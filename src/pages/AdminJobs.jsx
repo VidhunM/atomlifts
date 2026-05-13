@@ -104,10 +104,10 @@ const AdminJobs = () => {
 
   return (
     <div className="admin-jobs text-white">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Manage Jobs</h2>
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <h2 className="mb-0">Manage Jobs</h2>
         {!isFormOpen && (
-          <button className="btn btn-success d-flex align-items-center gap-2" onClick={() => setIsFormOpen(true)}>
+          <button className="btn btn-success d-flex align-items-center justify-content-center gap-2 px-4" onClick={() => setIsFormOpen(true)}>
             <Plus size={18} /> Add New Job
           </button>
         )}

@@ -46,8 +46,8 @@ const AdminApplications = () => {
 
   return (
     <div className="admin-applications text-white">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Job Applications</h2>
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-4">
+        <h2 className="mb-0">Job Applications</h2>
         <p className="text-secondary mb-0">{applications.length} Total Submissions</p>
       </div>
 

@@ -333,7 +333,20 @@ const HomeLifts = () => {
         @media (max-width: 991px) {
           .about-hero-section { min-height: 400px; }
           .zen-img-wrapper { width: 100%; height: auto; aspect-ratio: 4/5; }
-          .zen-modal-content { height: 95vh; overflow-y: auto; }
+          .zen-modal-content { 
+            height: auto; 
+            max-height: 95vh; 
+            overflow-y: auto; 
+          }
+          .zen-modal-content .row {
+            height: auto !important;
+          }
+          .modal-close-btn {
+            top: 15px;
+            right: 15px;
+            width: 35px;
+            height: 35px;
+          }
         }
       `}</style>
     </div>

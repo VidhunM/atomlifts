@@ -117,13 +117,13 @@ const AdminBlogs = () => {
 
   return (
     <div className="admin-blogs text-white p-4">
-      <div className="d-flex justify-content-between align-items-center mb-4">
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
         <div>
            <h2 className="fw-bold text-white mb-1">Manage Blogs</h2>
-           <p className="text-secondary small">Create and edit blog posts for AtomLifts</p>
+           <p className="text-secondary small mb-0">Create and edit blog posts for AtomLifts</p>
         </div>
         {!isFormOpen && (
-          <button className="btn btn-primary d-flex align-items-center gap-2 px-4 py-2 fw-bold" onClick={() => setIsFormOpen(true)}>
+          <button className="btn btn-primary d-flex align-items-center justify-content-center gap-2 px-4 py-2 fw-bold" onClick={() => setIsFormOpen(true)}>
             <Plus size={18} /> Add New Blog
           </button>
         )}
@@ -214,8 +214,8 @@ const AdminBlogs = () => {
             <thead>
               <tr className="bg-dark-lighter">
                 <th className="px-4 py-3 border-0">Blog Title</th>
-                <th className="px-4 py-3 border-0">Category</th>
-                <th className="px-4 py-3 border-0 text-center">Date</th>
+                <th className="px-4 py-3 border-0 d-none d-md-table-cell">Category</th>
+                <th className="px-4 py-3 border-0 text-center d-none d-lg-table-cell">Date</th>
                 <th className="px-4 py-3 border-0 text-end">Actions</th>
               </tr>
             </thead>
@@ -231,12 +231,12 @@ const AdminBlogs = () => {
                        </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-3 d-none d-md-table-cell">
                      <span className="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 px-3 py-2">
                         {blog.category}
                      </span>
                   </td>
-                  <td className="px-4 py-3 text-center text-secondary small">
+                  <td className="px-4 py-3 text-center text-secondary small d-none d-lg-table-cell">
                      {new Date(blog.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-3 text-end">
