@@ -134,7 +134,7 @@ const TestimonialsStats = () => {
       <div className="container py-5">
         
         {/* Testimonial Slider */}
-        <div className="row justify-content-center text-center mb-5 pb-5">
+        <div className="row justify-content-center text-center mb-4 mb-md-5 pb-3 pb-md-5">
           <div className="col-lg-9" data-aos="fade-up">
             <div className="d-flex justify-content-center gap-1 mb-4 text-primary">
               {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
@@ -148,7 +148,7 @@ const TestimonialsStats = () => {
                  </div>
                  
                  <div className="fade-in-up" key={activeIndex}>
-                   <h2 className="display-5 fw-bold text-white mb-4 leading-tight italic">
+                   <h2 className="testimonial-quote display-5 fw-bold text-white mb-4 leading-tight italic">
                      "{testimonials[activeIndex]?.text}"
                    </h2>
                    <h5 className="text-primary fw-bold mb-1">{testimonials[activeIndex]?.author}</h5>
@@ -170,7 +170,7 @@ const TestimonialsStats = () => {
         </div>
 
         {/* Stats Counter Grid */}
-        <div className="row g-4 pt-5 mobile-slider-row" ref={sliderRef}>
+        <div className="row g-4 pt-4 pt-md-5 mobile-slider-row" ref={sliderRef}>
           {stats.map((stat, index) => (
             <div className="col-lg-3 col-md-6" key={stat._id || index} data-aos="fade-up" data-aos-delay={index * 100}>
               <div className="stat-card-new shadow-xl bg-glass border-glass rounded-4 p-4 text-center h-100">

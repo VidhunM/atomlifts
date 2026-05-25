@@ -2044,7 +2044,9 @@ a {
 }
 
 .admin-sidebar {
-  width: 250px;
+  width: 280px;
+  min-width: 280px;
+  flex-shrink: 0;
   background-color: #111;
   padding: 2rem 1rem;
   border-right: 1px solid #333;
@@ -2063,6 +2065,7 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
+  white-space: nowrap;
 }
 
 .admin-sidebar-footer {
@@ -2071,10 +2074,16 @@ a {
 
 .admin-content {
   flex-grow: 1;
-  padding: 3rem;
+  padding: 2rem 3rem 3rem;
   background-color: #050505;
   overflow-x: hidden;
   min-width: 0; /* Fix for overflow issues in flex items */
+}
+
+@media (max-width: 1200px) {
+  .admin-content {
+    padding: 2rem 1.5rem 3rem;
+  }
 }
 
 .admin-mobile-toggle {
@@ -2116,6 +2125,7 @@ a {
 
 .admin-sidebar .nav-link {
   opacity: 0.8;
+  white-space: nowrap;
 }
 
 .admin-sidebar .nav-link:hover,
@@ -2143,9 +2153,10 @@ a {
 @media (max-width: 991px) {
   .admin-sidebar {
     position: fixed;
-    left: -250px;
+    left: -280px;
     top: 0;
     bottom: 0;
+    width: 280px;
   }
 
   .admin-sidebar.open {
@@ -2203,5 +2214,41 @@ a {
   /* Specific table column hiding for mobile */
   .d-mobile-none {
     display: none !important;
+  }
+}
+
+.testimonial-slider-content {
+  min-height: 260px;
+  padding: 0.5rem 0;
+}
+
+.testi-stats-section .testimonial-quote {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 576px) {
+  .testimonial-slider-content {
+    min-height: 220px;
+    padding: 0;
+  }
+
+  .testi-stats-section .testimonial-quote {
+    font-size: 1.4rem;
+    line-height: 1.25;
+    margin-bottom: 1.25rem !important;
+  }
+
+  .testimonial-bg-number {
+    font-size: clamp(5rem, 30vw, 9rem);
+  }
+
+  .testi-dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .testi-dot.active {
+    width: 32px;
   }
 }

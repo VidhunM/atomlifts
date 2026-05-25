@@ -215,29 +215,31 @@ const AdminTestimonialsStats = () => {
   };
 
   return (
-    <div className="admin-testimonials-stats text-white p-4">
+    <div className="admin-testimonials-stats text-white p-3 p-md-4">
       {/* Page Header */}
-      <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-start align-items-md-center gap-3 mb-4">
         <div>
-          <h2 className="fw-bold text-white mb-1">Manage Testimonials & Stats</h2>
+          <h2 className="fw-bold text-white mb-1 fs-3 fs-md-2">Manage Testimonials & Stats</h2>
           <p className="text-secondary small mb-0">Customize and manage client reviews and key performance stats dynamically</p>
         </div>
       </div>
 
       {/* Tabs Switcher */}
-      <div className="d-flex gap-3 mb-4 bg-dark-lighter p-2 rounded-3 border border-secondary border-opacity-25" style={{ width: 'fit-content' }}>
-        <button 
-          className={`btn d-flex align-items-center gap-2 px-4 py-2 rounded-2 fw-bold transition-all ${activeTab === 'testimonials' ? 'btn-primary' : 'btn-link text-white text-decoration-none'}`}
-          onClick={() => { setActiveTab('testimonials'); resetTestimonialForm(); resetStatForm(); }}
-        >
-          <MessageSquare size={18} /> Testimonials
-        </button>
-        <button 
-          className={`btn d-flex align-items-center gap-2 px-4 py-2 rounded-2 fw-bold transition-all ${activeTab === 'stats' ? 'btn-primary' : 'btn-link text-white text-decoration-none'}`}
-          onClick={() => { setActiveTab('stats'); resetTestimonialForm(); resetStatForm(); }}
-        >
-          <BarChart3 size={18} /> Statistics Counters
-        </button>
+      <div className="tabs-container mb-4 overflow-x-auto">
+        <div className="d-flex gap-2 gap-md-3 bg-dark-lighter p-1 p-md-2 rounded-3 border border-secondary border-opacity-25" style={{ width: 'fit-content', minWidth: '100%' }}>
+          <button 
+            className={`btn d-flex align-items-center justify-content-center gap-2 px-3 px-md-4 py-2 rounded-2 fw-bold transition-all flex-grow-1 flex-md-grow-0 ${activeTab === 'testimonials' ? 'btn-primary' : 'btn-link text-white text-decoration-none'}`}
+            onClick={() => { setActiveTab('testimonials'); resetTestimonialForm(); resetStatForm(); }}
+          >
+            <MessageSquare size={18} /> <span className="d-none d-sm-inline">Testimonials</span><span className="d-inline d-sm-none">Reviews</span>
+          </button>
+          <button 
+            className={`btn d-flex align-items-center justify-content-center gap-2 px-3 px-md-4 py-2 rounded-2 fw-bold transition-all flex-grow-1 flex-md-grow-0 ${activeTab === 'stats' ? 'btn-primary' : 'btn-link text-white text-decoration-none'}`}
+            onClick={() => { setActiveTab('stats'); resetTestimonialForm(); resetStatForm(); }}
+          >
+            <BarChart3 size={18} /> <span className="d-none d-sm-inline">Statistics Counters</span><span className="d-inline d-sm-none">Stats</span>
+          </button>
+        </div>
       </div>
 
       {loading ? (
@@ -251,11 +253,11 @@ const AdminTestimonialsStats = () => {
           {activeTab === 'testimonials' && (
             <div>
               {/* Form & Actions */}
-              <div className="d-flex justify-content-between align-items-center mb-4">
-                <h4 className="mb-0 fw-bold">Testimonial Quotes ({testimonials.length})</h4>
+              <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+                <h4 className="mb-0 fw-bold fs-5 fs-md-4">Testimonial Quotes ({testimonials.length})</h4>
                 {!isTestimonialFormOpen && (
-                  <button className="btn btn-primary d-flex align-items-center gap-2 px-4 py-2 fw-bold" onClick={() => setIsTestimonialFormOpen(true)}>
-                    <Plus size={18} /> Add Testimonial
+                  <button className="btn btn-primary d-flex align-items-center justify-content-center gap-2 px-4 py-2 fw-bold" onClick={() => setIsTestimonialFormOpen(true)}>
+                    <Plus size={18} /> Add New
                   </button>
                 )}
               </div>
@@ -263,12 +265,12 @@ const AdminTestimonialsStats = () => {
               {isTestimonialFormOpen && (
                 <div className="card bg-dark border-secondary mb-5 shadow-lg animate-fade-in glass-card">
                   <div className="card-header bg-dark-lighter border-secondary d-flex justify-content-between align-items-center py-3">
-                    <h5 className="mb-0 fw-bold">{editingTestimonialId ? 'Edit Testimonial' : 'Create Testimonial'}</h5>
+                    <h5 className="mb-0 fw-bold fs-6 fs-md-5">{editingTestimonialId ? 'Edit Testimonial' : 'Create Testimonial'}</h5>
                     <button className="btn btn-sm btn-outline-secondary rounded-circle" onClick={resetTestimonialForm}><X size={18} /></button>
                   </div>
-                  <div className="card-body p-4">
+                  <div className="card-body p-3 p-md-4">
                     <form onSubmit={handleTestimonialSubmit}>
-                      <div className="row g-4">
+                      <div className="row g-3 g-md-4">
                         <div className="col-md-6">
                           <label className="form-label text-secondary small fw-bold text-uppercase">Author Name</label>
                           <input type="text" className="form-control bg-dark-lighter text-white border-secondary py-2" name="author" value={testimonialData.author} onChange={handleTestimonialChange} required placeholder="e.g. Richard V." />
@@ -282,9 +284,9 @@ const AdminTestimonialsStats = () => {
                           <textarea className="form-control bg-dark-lighter text-white border-secondary" name="text" rows="4" value={testimonialData.text} onChange={handleTestimonialChange} required placeholder="Enter the customer review or quote here..."></textarea>
                         </div>
                       </div>
-                      <div className="mt-5 d-flex justify-content-end gap-3">
-                        <button type="button" className="btn btn-outline-secondary px-4" onClick={resetTestimonialForm}>Cancel</button>
-                        <button type="submit" className="btn btn-primary px-5 fw-bold">
+                      <div className="mt-4 mt-md-5 d-flex flex-column-reverse flex-sm-row justify-content-end gap-2 gap-md-3">
+                        <button type="button" className="btn btn-outline-secondary px-4 py-2" onClick={resetTestimonialForm}>Cancel</button>
+                        <button type="submit" className="btn btn-primary px-5 py-2 fw-bold">
                           {editingTestimonialId ? 'Update Testimonial' : 'Save Testimonial'}
                         </button>
                       </div>
@@ -294,27 +296,27 @@ const AdminTestimonialsStats = () => {
               )}
 
               {/* Grid representation */}
-              <div className="row g-4">
+              <div className="row g-3 g-md-4">
                 {testimonials.map((t) => (
-                  <div className="col-md-6 col-lg-4" key={t._id}>
-                    <div className="card bg-dark border-secondary border-opacity-50 h-100 p-4 shadow-sm hover-shadow-lg glass-card d-flex flex-column justify-content-between" style={{ transition: 'all 0.3s' }}>
+                  <div className="col-12 col-md-6 col-lg-4" key={t._id}>
+                    <div className="card bg-dark border-secondary border-opacity-50 h-100 p-3 p-md-4 shadow-sm hover-shadow-lg glass-card d-flex flex-column justify-content-between" style={{ transition: 'all 0.3s' }}>
                       <div>
                         <div className="d-flex justify-content-start gap-1 mb-3 text-warning">
-                          {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                          {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
                         </div>
-                        <p className="italic text-white-50 fs-6 mb-4">"{t.text}"</p>
+                        <p className="italic text-white-50 small fs-md-6 mb-4">"{t.text}"</p>
                       </div>
                       <div className="d-flex justify-content-between align-items-center pt-3 border-top border-secondary border-opacity-25 mt-auto">
-                        <div>
-                          <h6 className="text-primary fw-bold mb-0">{t.author}</h6>
-                          <small className="text-secondary">{t.location}</small>
+                        <div className="overflow-hidden me-2">
+                          <h6 className="text-primary fw-bold mb-0 text-truncate">{t.author}</h6>
+                          <small className="text-secondary text-truncate d-block">{t.location}</small>
                         </div>
-                        <div className="d-flex gap-2">
+                        <div className="d-flex gap-1 gap-md-2 flex-shrink-0">
                           <button className="btn btn-sm btn-icon-edit" onClick={() => handleEditTestimonial(t)}>
-                            <Edit2 size={15} />
+                            <Edit2 size={14} />
                           </button>
                           <button className="btn btn-sm btn-icon-delete" onClick={() => handleDeleteTestimonial(t._id)}>
-                            <Trash2 size={15} />
+                            <Trash2 size={14} />
                           </button>
                         </div>
                       </div>
@@ -335,11 +337,11 @@ const AdminTestimonialsStats = () => {
           {activeTab === 'stats' && (
             <div>
               {/* Form & Actions */}
-              <div className="d-flex justify-content-between align-items-center mb-4">
-                <h4 className="mb-0 fw-bold">Statistics Counters ({stats.length})</h4>
+              <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+                <h4 className="mb-0 fw-bold fs-5 fs-md-4">Statistics Counters ({stats.length})</h4>
                 {!isStatFormOpen && (
-                  <button className="btn btn-primary d-flex align-items-center gap-2 px-4 py-2 fw-bold" onClick={() => setIsStatFormOpen(true)}>
-                    <Plus size={18} /> Add Statistic
+                  <button className="btn btn-primary d-flex align-items-center justify-content-center gap-2 px-4 py-2 fw-bold" onClick={() => setIsStatFormOpen(true)}>
+                    <Plus size={18} /> Add New
                   </button>
                 )}
               </div>
@@ -347,12 +349,12 @@ const AdminTestimonialsStats = () => {
               {isStatFormOpen && (
                 <div className="card bg-dark border-secondary mb-5 shadow-lg animate-fade-in glass-card">
                   <div className="card-header bg-dark-lighter border-secondary d-flex justify-content-between align-items-center py-3">
-                    <h5 className="mb-0 fw-bold">{editingStatId ? 'Edit Statistic' : 'Create Statistic'}</h5>
+                    <h5 className="mb-0 fw-bold fs-6 fs-md-5">{editingStatId ? 'Edit Statistic' : 'Create Statistic'}</h5>
                     <button className="btn btn-sm btn-outline-secondary rounded-circle" onClick={resetStatForm}><X size={18} /></button>
                   </div>
-                  <div className="card-body p-4">
+                  <div className="card-body p-3 p-md-4">
                     <form onSubmit={handleStatSubmit}>
-                      <div className="row g-4">
+                      <div className="row g-3 g-md-4">
                         <div className="col-md-6">
                           <label className="form-label text-secondary small fw-bold text-uppercase">Stat Label</label>
                           <input type="text" className="form-control bg-dark-lighter text-white border-secondary py-2" name="label" value={statData.label} onChange={handleStatChange} required placeholder="e.g. Project" />
@@ -382,23 +384,23 @@ const AdminTestimonialsStats = () => {
                         {statData.type === 'image' && (
                           <div className="col-12">
                             <label className="form-label text-secondary small fw-bold text-uppercase">Custom Strength Image</label>
-                            <div className="upload-container glass-card p-3 border border-secondary border-dashed rounded d-flex align-items-center gap-4 bg-dark-lighter">
-                              <div className="image-preview-box bg-dark rounded overflow-hidden d-flex align-items-center justify-content-center" style={{ width: '100px', height: '100px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                            <div className="upload-container glass-card p-3 border border-secondary border-dashed rounded d-flex flex-column flex-sm-row align-items-center gap-3 gap-md-4 bg-dark-lighter">
+                              <div className="image-preview-box bg-dark rounded overflow-hidden d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '80px', height: '80px', border: '1px solid rgba(255,255,255,0.1)' }}>
                                 {statData.image ? (
                                   <img src={statData.image} alt="Preview" className="w-100 h-100 object-fit-contain p-2" style={{ filter: 'brightness(0) saturate(100%) invert(80%) sepia(61%) saturate(1131%) hue-rotate(345deg) brightness(101%) contrast(96%)' }} />
                                 ) : (
-                                  <ImageIcon size={32} className="text-secondary opacity-50" />
+                                  <ImageIcon size={28} className="text-secondary opacity-50" />
                                 )}
                               </div>
-                              <div className="flex-grow-1">
-                                <div className="d-flex align-items-center gap-2 mb-2">
+                              <div className="flex-grow-1 text-center text-sm-start">
+                                <div className="d-flex flex-column flex-sm-row align-items-center gap-2 mb-2">
                                   <label className="btn btn-outline-primary btn-sm d-flex align-items-center gap-2 cursor-pointer">
                                     <Upload size={14} /> {uploading ? 'Uploading...' : 'Upload Image'}
                                     <input type="file" className="d-none" onChange={handleFileUpload} accept="image/*" disabled={uploading} />
                                   </label>
                                   {statData.image && <span className="text-success small"><ImageIcon size={12} /> Image Ready</span>}
                                 </div>
-                                <p className="text-secondary small mb-0">PNG or SVG format is highly recommended for best look. Sourced to strength.png style.</p>
+                                <p className="text-secondary small mb-0">PNG/SVG recommended. Sourced to strength.png style.</p>
                               </div>
                             </div>
                             <input type="hidden" name="image" value={statData.image} required />
@@ -410,9 +412,9 @@ const AdminTestimonialsStats = () => {
                           <input type="number" className="form-control bg-dark-lighter text-white border-secondary py-2" name="displayOrder" value={statData.displayOrder} onChange={handleStatChange} placeholder="e.g. 0" />
                         </div>
                       </div>
-                      <div className="mt-5 d-flex justify-content-end gap-3">
-                        <button type="button" className="btn btn-outline-secondary px-4" onClick={resetStatForm}>Cancel</button>
-                        <button type="submit" className="btn btn-primary px-5 fw-bold" disabled={uploading}>
+                      <div className="mt-4 mt-md-5 d-flex flex-column-reverse flex-sm-row justify-content-end gap-2 gap-md-3">
+                        <button type="button" className="btn btn-outline-secondary px-4 py-2" onClick={resetStatForm}>Cancel</button>
+                        <button type="submit" className="btn btn-primary px-5 py-2 fw-bold" disabled={uploading}>
                           {editingStatId ? 'Update Statistic' : 'Save Statistic'}
                         </button>
                       </div>
@@ -422,18 +424,18 @@ const AdminTestimonialsStats = () => {
               )}
 
               {/* Grid representation */}
-              <div className="row g-4">
+              <div className="row g-3 g-md-4">
                 {stats.map((s, index) => (
-                  <div className="col-md-6 col-lg-3" key={s._id}>
-                    <div className="card bg-dark border-secondary border-opacity-50 h-100 p-4 shadow-sm hover-shadow-lg glass-card text-center d-flex flex-column justify-content-between" style={{ transition: 'all 0.3s' }}>
-                      <div className="stat-number-new display-5 fw-800 text-primary mb-3">
+                  <div className="col-6 col-md-4 col-lg-3" key={s._id}>
+                    <div className="card bg-dark border-secondary border-opacity-50 h-100 p-3 p-md-4 shadow-sm hover-shadow-lg glass-card text-center d-flex flex-column justify-content-between" style={{ transition: 'all 0.3s' }}>
+                      <div className="stat-number-new fs-2 fs-md-1 fw-800 text-primary mb-2 mb-md-3">
                         {s.type === 'image' ? (
-                          <div className="py-2 d-flex justify-content-center align-items-center">
+                          <div className="py-1 py-md-2 d-flex justify-content-center align-items-center">
                             <img 
                               src={s.image} 
                               alt={s.label} 
                               style={{ 
-                                height: '50px', 
+                                height: '40px', 
                                 width: 'auto', 
                                 objectFit: 'contain',
                                 filter: 'brightness(0) saturate(100%) invert(80%) sepia(61%) saturate(1131%) hue-rotate(345deg) brightness(101%) contrast(96%)'
@@ -441,8 +443,8 @@ const AdminTestimonialsStats = () => {
                             />
                           </div>
                         ) : s.type === 'icon' ? (
-                          <div className="text-primary py-2 d-flex justify-content-center align-items-center">
-                            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <div className="text-primary py-1 py-md-2 d-flex justify-content-center align-items-center">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                               <path d="m15 11-1-1q-1-1-2-1t-2 1l-1 1" />
                               <path d="M15 11c1 0 2 .5 3 1.5s1 2.5 1 3.5-1 2-2 3-2 1-3 1h-4c-1 0-2-.5-3-1.5S6 16.5 6 15.5s1-2 2-3 2-1 3-1" />
                               <path d="M12 9V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2" />
@@ -451,19 +453,19 @@ const AdminTestimonialsStats = () => {
                             </svg>
                           </div>
                         ) : (
-                          <span>{s.value}{s.suffix}</span>
+                          <span className="fs-3 fs-md-1">{s.value}{s.suffix}</span>
                         )}
                       </div>
                       <div>
-                        <h6 className="text-uppercase tracking-wider small fw-bold text-white-50 mb-4">{s.label}</h6>
-                        <div className="d-flex justify-content-between align-items-center pt-3 border-top border-secondary border-opacity-25 mt-2">
-                          <small className="text-secondary">Order: {s.displayOrder}</small>
-                          <div className="d-flex gap-2">
+                        <h6 className="text-uppercase tracking-wider extra-small fw-bold text-white-50 mb-3 mb-md-4 text-truncate">{s.label}</h6>
+                        <div className="d-flex justify-content-between align-items-center pt-2 pt-md-3 border-top border-secondary border-opacity-25 mt-2">
+                          <small className="text-secondary extra-small">Ord: {s.displayOrder}</small>
+                          <div className="d-flex gap-1 gap-md-2">
                             <button className="btn btn-sm btn-icon-edit" onClick={() => handleEditStat(s)}>
-                              <Edit2 size={14} />
+                              <Edit2 size={12} />
                             </button>
                             <button className="btn btn-sm btn-icon-delete" onClick={() => handleDeleteStat(s._id)}>
-                              <Trash2 size={14} />
+                              <Trash2 size={12} />
                             </button>
                           </div>
                         </div>
@@ -493,6 +495,9 @@ const AdminTestimonialsStats = () => {
         .btn-icon-delete:hover { background: #ef4444; color: white; }
         .border-dashed { border-style: dashed !important; }
         .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+        .extra-small { font-size: 0.7rem; }
+        .tabs-container::-webkit-scrollbar { display: none; }
+        .tabs-container { -ms-overflow-style: none; scrollbar-width: none; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
     </div>
