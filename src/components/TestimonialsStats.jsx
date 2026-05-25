@@ -31,7 +31,8 @@ const Counter = ({ end, duration = 2000, suffix = "" }) => {
   return <span ref={countRef}>{count}{suffix}</span>;
 };
 
-const testimonials = [
+// Fallback high-quality static defaults
+const defaultTestimonials = [
   {
     text: "The precision of Atomlifts engineering is unmatched. Every floor transition is seamless, safe, and whisper-quiet. A true vertical breakthrough.",
     author: "Richard V.",
@@ -49,16 +50,57 @@ const testimonials = [
   }
 ];
 
+const defaultStats = [
+  { label: 'Project', value: 500, suffix: '+', type: 'counter' },
+  { label: 'Satisfied Customer', value: 1000, suffix: '+', type: 'counter' },
+  { label: 'On Going', value: 200, suffix: '+', type: 'counter' },
+  { label: 'Own R&D Unit', image: '/strength.png', type: 'image' }
+];
+
 const TestimonialsStats = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [testimonials, setTestimonials] = useState(defaultTestimonials);
+  const [stats, setStats] = useState(defaultStats);
   const sliderRef = useRef(null);
+  
+  const backendUrl = 'http://localhost:5000';
 
   useEffect(() => {
+    const fetchDynamicData = async () => {
+      try {
+        const [testRes, statsRes] = await Promise.all([
+          fetch(`${backendUrl}/api/testimonials`),
+          fetch(`${backendUrl}/api/stats`)
+        ]);
+        
+        if (testRes.ok) {
+          const testData = await testRes.json();
+          if (testData && testData.length > 0) {
+            setTestimonials(testData);
+          }
+        }
+        
+        if (statsRes.ok) {
+          const statsData = await statsRes.json();
+          if (statsData && statsData.length > 0) {
+            setStats(statsData);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch dynamic testimonials or stats, using defaults:', error);
+      }
+    };
+    
+    fetchDynamicData();
+  }, []);
+
+  useEffect(() => {
+    if (testimonials.length === 0) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials]);
 
   // Auto-slide for mobile stats grid
   useEffect(() => {
@@ -87,13 +129,6 @@ const TestimonialsStats = () => {
     };
   }, []);
 
-  const stats = [
-    { label: 'Project', value: 500, suffix: '+' },
-    { label: 'Satisfied Customer', value: 1000, suffix: '+' },
-    { label: 'On Going', value: 200, suffix: '+' },
-    { label: 'Own R&D Unit', image: '/strength.png' }
-  ];
-
   return (
     <section className="testi-stats-section bg-dark py-5 position-relative overflow-hidden">
       <div className="container py-5">
@@ -105,20 +140,22 @@ const TestimonialsStats = () => {
               {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
             </div>
 
-            <div className="testimonial-slider-content min-h-200 position-relative overflow-hidden">
-               {/* Background Number Animation */}
-               <div className="testimonial-bg-number" key={`bg-${activeIndex}`}>
-                 {(activeIndex + 1).toString().padStart(2, '0')}
-               </div>
-               
-               <div className="fade-in-up" key={activeIndex}>
-                 <h2 className="display-5 fw-bold text-white mb-4 leading-tight italic">
-                   "{testimonials[activeIndex].text}"
-                 </h2>
-                 <h5 className="text-primary fw-bold mb-1">{testimonials[activeIndex].author}</h5>
-                 <p className="text-white-50 small tracking-widest text-uppercase">{testimonials[activeIndex].location}</p>
-               </div>
-            </div>
+            {testimonials.length > 0 && (
+              <div className="testimonial-slider-content min-h-200 position-relative overflow-hidden">
+                 {/* Background Number Animation */}
+                 <div className="testimonial-bg-number" key={`bg-${activeIndex}`}>
+                   {(activeIndex + 1).toString().padStart(2, '0')}
+                 </div>
+                 
+                 <div className="fade-in-up" key={activeIndex}>
+                   <h2 className="display-5 fw-bold text-white mb-4 leading-tight italic">
+                     "{testimonials[activeIndex]?.text}"
+                   </h2>
+                   <h5 className="text-primary fw-bold mb-1">{testimonials[activeIndex]?.author}</h5>
+                   <p className="text-white-50 small tracking-widest text-uppercase">{testimonials[activeIndex]?.location}</p>
+                 </div>
+              </div>
+            )}
 
             <div className="d-flex justify-content-center mt-5">
                {testimonials.map((_, i) => (
@@ -132,13 +169,13 @@ const TestimonialsStats = () => {
           </div>
         </div>
 
-        {/* Stats Counter Grid - REVERTED TO OLD 4-COLUMN DESIGN */}
+        {/* Stats Counter Grid */}
         <div className="row g-4 pt-5 mobile-slider-row" ref={sliderRef}>
           {stats.map((stat, index) => (
-            <div className="col-lg-3 col-md-6" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
+            <div className="col-lg-3 col-md-6" key={stat._id || index} data-aos="fade-up" data-aos-delay={index * 100}>
               <div className="stat-card-new shadow-xl bg-glass border-glass rounded-4 p-4 text-center h-100">
                 <div className="stat-number-new display-4 fw-800 mb-2">
-                  {stat.image ? (
+                  {stat.type === 'image' || stat.image ? (
                     <div className="py-2 d-flex justify-content-center align-items-center">
                       <img 
                         src={stat.image} 
@@ -152,8 +189,8 @@ const TestimonialsStats = () => {
                         className="img-fluid"
                       />
                     </div>
-                  ) : stat.isIcon ? (
-                    <div className="text-primary py-2">
+                  ) : stat.type === 'icon' || stat.isIcon ? (
+                    <div className="text-primary py-2 d-flex justify-content-center align-items-center">
                       <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="m15 11-1-1q-1-1-2-1t-2 1l-1 1" />
                         <path d="M15 11c1 0 2 .5 3 1.5s1 2.5 1 3.5-1 2-2 3-2 1-3 1h-4c-1 0-2-.5-3-1.5S6 16.5 6 15.5s1-2 2-3 2-1 3-1" />

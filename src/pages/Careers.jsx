@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 import { Search, MapPin, Briefcase, Clock, ChevronRight, CheckCircle2, Users, Rocket, ZapIcon, Globe, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import trustedImg from '../assets/images/trusted-grid.png';
@@ -9,7 +10,7 @@ const Careers = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/jobs')
+    fetch(`${API_BASE_URL}/api/jobs`)
       .then((res) => res.json())
       .then((data) => {
         setJobs(data);

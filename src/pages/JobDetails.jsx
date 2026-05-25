@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MapPin, Briefcase, Clock, ChevronLeft, Send, CheckCircle2, AlertCircle, Upload, FileText } from 'lucide-react';
 
@@ -19,7 +20,7 @@ const JobDetails = () => {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/jobs/${id}`)
+    fetch(`${API_BASE_URL}/api/jobs/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error('Job not found');
         return res.json();
@@ -66,7 +67,7 @@ const JobDetails = () => {
     data.append('resume', formData.resume);
 
     try {
-      const response = await fetch('http://localhost:5000/api/applications', {
+      const response = await fetch(`${API_BASE_URL}/api/applications`, {
         method: 'POST',
         body: data,
       });
