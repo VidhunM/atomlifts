@@ -50,13 +50,6 @@ const Hero = () => {
               <div className="mb-0 mb-md-4 position-relative d-flex flex-column align-items-center">
                 <h1 className="huge-heading m-0 text-white" style={{ lineHeight: '0.8', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>ELEVATOR</h1>
                 <h1 className="huge-heading m-0 text-white" style={{ lineHeight: '0.8', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>ENGINEERING</h1>
-                
-                <div className="hero-btn-container" style={{ zIndex: 100 }}>
-                  <button onClick={() => setIsQuoteOpen(true)} className="btn-premium btn-animate-up shadow-2xl border-0">
-                    <span className="btn-text-wrapper small fw-900">GET STARTED</span>
-                    <span className="btn-text-new small fw-900">GET STARTED</span>
-                  </button>
-                </div>
               </div>
 
 
