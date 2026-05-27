@@ -1,8 +1,48 @@
+import React, { useState, useEffect } from 'react';
 import { Play } from 'lucide-react';
-import { useState } from 'react';
 
 const VisualPrecision = () => {
   const [showVideo, setShowVideo] = useState(false);
+  const [videoUrl, setVideoUrl] = useState('https://www.youtube.com/embed/5m3O5PzO4c4?autoplay=1');
+  const [isVideoFile, setIsVideoFile] = useState(false);
+  
+  const backendUrl = 'http://localhost:5000';
+
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const response = await fetch(`${backendUrl}/api/settings/visualPrecisionVideo`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            const val = data.value;
+            // Check if it is a direct uploaded file path
+            if (val.includes('/uploads/')) {
+              setVideoUrl(val.startsWith('http') ? val : `${backendUrl}${val}`);
+              setIsVideoFile(true);
+            } else {
+              // It's a YouTube URL. Let's convert to embed standard if needed.
+              let embedUrl = val;
+              if (val.includes('watch?v=')) {
+                const vidId = val.split('v=')[1]?.split('&')[0];
+                embedUrl = `https://www.youtube.com/embed/${vidId}?autoplay=1`;
+              } else if (val.includes('youtu.be/')) {
+                const vidId = val.split('youtu.be/')[1]?.split('?')[0];
+                embedUrl = `https://www.youtube.com/embed/${vidId}?autoplay=1`;
+              } else if (!val.includes('embed') && !val.includes('?autoplay=1')) {
+                embedUrl = `${val}?autoplay=1`;
+              }
+              setVideoUrl(embedUrl);
+              setIsVideoFile(false);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching visual precision video:', error);
+      }
+    };
+    fetchVideo();
+  }, []);
 
   return (
     <section className="visual-precision-section position-relative">
@@ -35,16 +75,27 @@ const VisualPrecision = () => {
           <div className="position-absolute top-0 end-0 p-4 cursor-pointer text-white" onClick={() => setShowVideo(false)}>
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
           </div>
-          <div className="w-100 px-3" style={{ maxWidth: '1000px', aspectRatio: '16/9' }}>
-            <iframe 
-               width="100%" 
-               height="100%" 
-               src="https://www.youtube.com/embed/5m3O5PzO4c4?autoplay=1" 
-               title="Cinematic Lift Engineering" 
-               frameBorder="0" 
-               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-               allowFullScreen
-            ></iframe>
+          <div className="w-100 px-3 d-flex align-items-center justify-content-center" style={{ maxWidth: '1000px', aspectRatio: '16/9' }}>
+            {isVideoFile ? (
+              <video 
+                src={videoUrl} 
+                controls 
+                autoPlay 
+                className="w-100 h-100 rounded shadow-2xl" 
+                style={{ objectFit: 'contain', background: '#000' }}
+              />
+            ) : (
+              <iframe 
+                 width="100%" 
+                 height="100%" 
+                 src={videoUrl} 
+                 title="Cinematic Lift Engineering" 
+                 frameBorder="0" 
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                 allowFullScreen
+                 className="rounded shadow-2xl"
+              ></iframe>
+            )}
           </div>
         </div>
       )}

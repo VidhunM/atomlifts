@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Briefcase, Mail, MessageSquare, Upload, Trash2, Image as ImageIcon, Plus } from 'lucide-react';
+import { FileText, Briefcase, Mail, MessageSquare, Upload, Trash2, Image as ImageIcon, Plus, Video } from 'lucide-react';
 
 const AdminDashboard = () => {
+  // Hero Rotator States
   const [heroImages, setHeroImages] = useState([null, null, null, null, null]);
   const [uploadingIndex, setUploadingIndex] = useState(null);
+  
+  // Visual Precision Video States
+  const [videoInput, setVideoInput] = useState('');
+  const [activeVideo, setActiveVideo] = useState('');
+  const [uploadingVideo, setUploadingVideo] = useState(false);
+
+  // Common UI feedback
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   
@@ -12,6 +20,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchHeroImages();
+    fetchVideoSetting();
   }, []);
 
   const fetchHeroImages = async () => {
@@ -47,6 +56,23 @@ const AdminDashboard = () => {
       }
     } catch (error) {
       console.error('Error fetching hero images:', error);
+    }
+  };
+
+  const fetchVideoSetting = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/settings/visualPrecisionVideo`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.value) {
+          setActiveVideo(data.value);
+          if (!data.value.includes('/uploads/')) {
+            setVideoInput(data.value);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching video setting:', error);
     }
   };
 
@@ -124,12 +150,118 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleSaveVideoUrl = async () => {
+    if (!videoInput.trim()) {
+      alert('Please enter a valid YouTube URL');
+      return;
+    }
+    
+    setSuccessMsg('');
+    setErrorMsg('');
+    
+    try {
+      const saveResponse = await fetch(`${backendUrl}/api/settings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'visualPrecisionVideo', value: videoInput.trim() })
+      });
+
+      if (saveResponse.ok) {
+        setActiveVideo(videoInput.trim());
+        setSuccessMsg('Visual Precision Video showcase updated successfully!');
+        setTimeout(() => setSuccessMsg(''), 5000);
+      } else {
+        setErrorMsg('Failed to save settings to the database.');
+      }
+    } catch (error) {
+      console.error('Error saving video settings:', error);
+      setErrorMsg('An error occurred while saving.');
+    }
+  };
+
+  const handleVideoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 35 * 1024 * 1024) {
+      alert('Video file size exceeds 35MB. For larger videos, hosting on YouTube is highly recommended.');
+      return;
+    }
+
+    const formDataUpload = new FormData();
+    formDataUpload.append('image', file); // Multer upload middleware expects field 'image'
+    setUploadingVideo(true);
+    setSuccessMsg('');
+    setErrorMsg('');
+
+    try {
+      const response = await fetch(`${backendUrl}/api/upload`, {
+        method: 'POST',
+        body: formDataUpload,
+      });
+
+      if (response.ok) {
+        const videoPath = await response.text(); // e.g. "/uploads/image-123.mp4"
+        
+        const saveResponse = await fetch(`${backendUrl}/api/settings`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: 'visualPrecisionVideo', value: videoPath })
+        });
+
+        if (saveResponse.ok) {
+          setActiveVideo(videoPath);
+          setVideoInput(''); // Clear the text input as we're using file upload
+          setSuccessMsg('Visual Precision MP4 Showcase Video uploaded and saved successfully!');
+          setTimeout(() => setSuccessMsg(''), 5000);
+        } else {
+          setErrorMsg('Failed to save video path to database.');
+        }
+      } else {
+        setErrorMsg('Failed to upload video to the server.');
+      }
+    } catch (error) {
+      console.error('Error uploading video:', error);
+      setErrorMsg('An error occurred during video upload.');
+    } finally {
+      setUploadingVideo(false);
+    }
+  };
+
+  const handleClearVideo = async () => {
+    if (!window.confirm('Are you sure you want to reset to the default YouTube video showcase?')) return;
+
+    setSuccessMsg('');
+    setErrorMsg('');
+    const defaultValue = 'https://www.youtube.com/embed/5m3O5PzO4c4?autoplay=1';
+
+    try {
+      const saveResponse = await fetch(`${backendUrl}/api/settings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'visualPrecisionVideo', value: defaultValue })
+      });
+
+      if (saveResponse.ok) {
+        setActiveVideo(defaultValue);
+        setVideoInput(defaultValue);
+        setSuccessMsg('Showcase Video reset to default YouTube link.');
+        setTimeout(() => setSuccessMsg(''), 5000);
+      } else {
+        setErrorMsg('Failed to reset video settings.');
+      }
+    } catch (error) {
+      console.error('Error clearing video:', error);
+      setErrorMsg('Error resetting video settings.');
+    }
+  };
+
   return (
     <div className="admin-dashboard text-white">
       <h2 className="mb-4 font-bold text-white">Dashboard Overview</h2>
       
       {/* Hero Section Customization */}
-      <div className="card bg-dark text-white border-secondary mb-5 shadow-lg">
+      <div className="card bg-dark text-white border-secondary mb-4 shadow-lg">
         <div className="card-header bg-dark-lighter border-secondary py-3 d-flex align-items-center justify-content-between">
           <h4 className="mb-0 fw-bold d-flex align-items-center gap-2">
             <ImageIcon className="text-primary" size={22} />
@@ -195,20 +327,129 @@ const AdminDashboard = () => {
               );
             })}
           </div>
-
-          {successMsg && (
-            <div className="alert alert-success bg-success bg-opacity-10 border-success border-opacity-25 text-success rounded-3 mb-0 py-2.5 px-3 small animate-fade-in">
-              {successMsg}
-            </div>
-          )}
-
-          {errorMsg && (
-            <div className="alert alert-danger bg-danger bg-opacity-10 border-danger border-opacity-25 text-danger rounded-3 mb-0 py-2.5 px-3 small animate-fade-in">
-              {errorMsg}
-            </div>
-          )}
         </div>
       </div>
+
+      {/* Visual Precision Video Customization */}
+      <div className="card bg-dark text-white border-secondary mb-5 shadow-lg">
+        <div className="card-header bg-dark-lighter border-secondary py-3 d-flex align-items-center justify-content-between">
+          <h4 className="mb-0 fw-bold d-flex align-items-center gap-2">
+            <Video className="text-warning" size={22} />
+            Visual Precision Showcase Video
+          </h4>
+          <span className="badge bg-warning text-dark px-3 py-2 small fw-bold">Video Showcase</span>
+        </div>
+        <div className="card-body p-4">
+          <p className="text-secondary small mb-4">
+            Manage the cinematic video that opens when users click the play button in the <strong>Visual Precision</strong> section of the homepage.
+            You can either paste a <strong>YouTube URL</strong> or upload a <strong>Custom MP4/WebM Video File</strong> directly.
+          </p>
+
+          <div className="row g-4 align-items-center">
+            {/* Left: Active Showcase Indicator / Preview */}
+            <div className="col-md-4">
+              <label className="form-label text-secondary small fw-bold text-uppercase d-block mb-2">Showcase Video Source</label>
+              <div 
+                className="image-preview-box bg-dark-lighter rounded-4 overflow-hidden d-flex flex-column align-items-center justify-content-center border border-secondary border-opacity-50 p-3" 
+                style={{ height: '220px', background: 'rgba(0,0,0,0.3)', position: 'relative' }}
+              >
+                {activeVideo ? (
+                  activeVideo.includes('/uploads/') ? (
+                    <div className="text-center">
+                      <Video size={48} className="text-warning mb-2 animate-pulse" />
+                      <span className="badge bg-success mb-2 px-3 py-1.5 small">Custom Video (MP4)</span>
+                      <p className="small text-secondary text-truncate max-width-200 mt-1 mb-0">{activeVideo.split('/').pop()}</p>
+                    </div>
+                  ) : (
+                    <div className="text-center">
+                      <ImageIcon size={48} className="text-primary mb-2" />
+                      <span className="badge bg-primary mb-2 px-3 py-1.5 small">YouTube Video</span>
+                      <p className="small text-secondary text-truncate max-width-200 mt-1 mb-0">{activeVideo}</p>
+                    </div>
+                  )
+                ) : (
+                  <div className="text-center text-secondary opacity-50">
+                    <Video size={48} className="mb-2" />
+                    <p className="small mb-0">Default YouTube Video Active</p>
+                  </div>
+                )}
+                {activeVideo && (
+                  <button 
+                    className="btn btn-outline-danger btn-sm mt-3 px-3 py-1 fw-bold rounded-3" 
+                    onClick={handleClearVideo}
+                  >
+                    Reset to Default
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Right: Upload and Inputs */}
+            <div className="col-md-8">
+              <div className="glass-card p-4 border border-secondary border-dashed rounded-4 h-100">
+                <div className="mb-4">
+                  <h5 className="fw-bold mb-2">Pasted Link (YouTube Showcase)</h5>
+                  <div className="input-group">
+                    <input 
+                      type="text" 
+                      className="form-control bg-dark text-white border-secondary py-2 px-3" 
+                      placeholder="e.g. https://www.youtube.com/watch?v=5m3O5PzO4c4" 
+                      value={videoInput}
+                      onChange={(e) => setVideoInput(e.target.value)}
+                    />
+                    <button 
+                      className="btn btn-warning text-dark fw-bold px-4" 
+                      onClick={handleSaveVideoUrl}
+                    >
+                      Save Link
+                    </button>
+                  </div>
+                  <small className="text-secondary mt-1 d-block">Supports short links (youtu.be), regular watch links, and embed codes.</small>
+                </div>
+
+                <hr className="border-secondary border-opacity-25 my-4" />
+
+                <div>
+                  <h5 className="fw-bold mb-2">OR Upload Direct Video File</h5>
+                  <p className="text-secondary small mb-3">Upload an MP4 or WebM file directly (Max 35MB). Transparent/looping animations or full cinematic videos are supported.</p>
+                  
+                  <div className="d-flex align-items-center gap-3 flex-wrap">
+                    <label className="btn btn-primary d-flex align-items-center gap-2 px-4 py-2.5 fw-bold rounded-3 cursor-pointer">
+                      <Upload size={18} /> 
+                      {uploadingVideo ? 'Uploading video...' : 'Select & Upload MP4'}
+                      <input 
+                        type="file" 
+                        className="d-none" 
+                        accept="video/mp4,video/webm" 
+                        onChange={handleVideoUpload} 
+                        disabled={uploadingVideo}
+                      />
+                    </label>
+
+                    {uploadingVideo && (
+                      <div className="spinner-border spinner-border-sm text-primary" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {successMsg && (
+        <div className="alert alert-success bg-success bg-opacity-10 border-success border-opacity-25 text-success rounded-3 mb-4 py-2.5 px-3 small animate-fade-in">
+          {successMsg}
+        </div>
+      )}
+
+      {errorMsg && (
+        <div className="alert alert-danger bg-danger bg-opacity-10 border-danger border-opacity-25 text-danger rounded-3 mb-4 py-2.5 px-3 small animate-fade-in">
+          {errorMsg}
+        </div>
+      )}
 
       <div className="row g-4">
         <div className="col-md-6">
@@ -305,6 +546,13 @@ const AdminDashboard = () => {
         }
         .hover-text-primary:hover {
           color: #f8c02d !important;
+        }
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: .7; transform: scale(0.95); }
         }
       `}</style>
     </div>
