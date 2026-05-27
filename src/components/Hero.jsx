@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import liftObject from '../assets/lift-object.png';
 import liftBg from '../assets/lift-bg.png';
 import QuoteModal from './QuoteModal';
 
 const Hero = () => {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const [heroFrontImage, setHeroFrontImage] = useState(liftObject);
+  const backendUrl = 'http://localhost:5000';
+
+  useEffect(() => {
+    const fetchHeroImage = async () => {
+      try {
+        const response = await fetch(`${backendUrl}/api/settings/heroFrontImage`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            setHeroFrontImage(data.value.startsWith('http') ? data.value : `${backendUrl}${data.value}`);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching hero dynamic front image:', error);
+      }
+    };
+    fetchHeroImage();
+  }, []);
 
   return (
     <section className="hero-section position-relative overflow-hidden" style={{ minHeight: '180vh' }}>
@@ -76,7 +95,7 @@ const Hero = () => {
           <div className="col-lg-12 text-center pt-0 pt-lg-5 pb-5 position-relative" style={{ zIndex: 10 }} data-aos="zoom-in">
             <div className="lift-object-container d-inline-block">
               <img
-                src={liftObject}
+                src={heroFrontImage}
                 alt="Futuristic Elevator Cabin"
                 className="lift-main-image"
                 style={{ maxHeight: '90vh', width: 'auto', filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.9))' }}
