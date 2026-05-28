@@ -3,6 +3,11 @@ import React from 'react';
 import { ArrowRight, Hospital, Crown, Package, Zap, Truck, Shield, Clock, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/commercial-hero.png';
+import hospitalHero from '../assets/images/hospital-hero.png';
+import premiumHero from '../assets/images/premium-hero.png';
+import goodsHero from '../assets/images/goods-hero.png';
+import expressHero from '../assets/images/express-hero.png';
+import vehicleHero from '../assets/images/vehicle-hero.png';
 
 const CommercialLifts = () => {
   const categories = [
@@ -11,7 +16,7 @@ const CommercialLifts = () => {
       path: "/lifts/commercial/hospital",
       desc: "Bed and stretcher elevators designed for healthcare precision and patient comfort.",
       icon: <Hospital size={40} />,
-      img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800",
+      img: hospitalHero,
       tag: "NABH Compliant"
     },
     {
@@ -19,7 +24,7 @@ const CommercialLifts = () => {
       path: "/lifts/commercial/premium",
       desc: "High-end aesthetic solutions for luxury hotels, corporate offices, and premium malls.",
       icon: <Crown size={40} />,
-      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
+      img: premiumHero,
       tag: "Luxury Collection"
     },
     {
@@ -27,7 +32,7 @@ const CommercialLifts = () => {
       path: "/lifts/commercial/goods",
       desc: "Heavy-duty vertical transportation for warehouses and industrial commercial spaces.",
       icon: <Package size={40} />,
-      img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
+      img: goodsHero,
       tag: "Heavy Duty"
     },
     {
@@ -35,7 +40,7 @@ const CommercialLifts = () => {
       path: "/lifts/commercial/express",
       desc: "High-speed elevators optimized for skyscrapers and high-traffic commercial hubs.",
       icon: <Zap size={40} />,
-      img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
+      img: expressHero,
       tag: "High Speed"
     },
     {
@@ -43,7 +48,7 @@ const CommercialLifts = () => {
       path: "/lifts/commercial/vehicle",
       desc: "Automotive vertical mobility for showrooms, parking complexes, and service centers.",
       icon: <Truck size={40} />,
-      img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800",
+      img: vehicleHero,
       tag: "Car Mobility"
     }
   ];

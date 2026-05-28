@@ -3,6 +3,7 @@ import React from 'react';
 import { CheckCircle2, Shield, Zap, Gauge, ArrowRight, Activity, Users, Settings, Car, Bike, ShieldAlert } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/vehicle-hero.png';
+import parkingHero from '../assets/images/parking-hero.png';
 
 const VehicleLifts = () => {
   const liftModels = [
@@ -29,7 +30,7 @@ const VehicleLifts = () => {
         { label: "Drive", value: "Hydraulic / Traction" },
         { label: "Compliance", value: "IS & EN Norms" }
       ],
-      img: heroImg,
+      img: "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&q=80&w=800",
       tag: "Space Saver",
       featured: true
     }

@@ -3,6 +3,8 @@ import React from 'react';
 import { ArrowRight, Layout, MoveRight, Shield, Zap, Activity, Gauge } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/escalators-main-hero.png';
+import escalatorHero from '../assets/escalator-hero.png';
+import walkwayHero from '../assets/moving-walkway-hero.png';
 
 const EscalatorsHub = () => {
   const categories = [
@@ -11,7 +13,7 @@ const EscalatorsHub = () => {
       path: "/escalators/standard",
       desc: "Premium vertical transportation for malls, airports, and commercial centers.",
       icon: <Layout size={40} />,
-      img: "https://images.unsplash.com/photo-1541336032412-2048a678540d?auto=format&fit=crop&q=80&w=800",
+      img: escalatorHero,
       tag: "Standard Series"
     },
     {
@@ -19,7 +21,7 @@ const EscalatorsHub = () => {
       path: "/escalators/moving-walkways",
       desc: "Efficient horizontal mobility for large transit hubs and airport terminals.",
       icon: <MoveRight size={40} />,
-      img: "https://images.unsplash.com/photo-1563212891-236166440263?auto=format&fit=crop&q=80&w=800",
+      img: walkwayHero,
       tag: "Transit Series"
     }
   ];

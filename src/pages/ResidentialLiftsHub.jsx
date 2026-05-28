@@ -3,6 +3,8 @@ import React from 'react';
 import { ArrowRight, Home, Users, Shield, Clock, Heart, Zap, Layout } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/residential-hero.png';
+import homeLiftImg from '../assets/images/home_lift.png';
+import passengerImg from '../assets/images/passenger_elevator.png';
 
 const ResidentialLiftsHub = () => {
   const categories = [
@@ -11,7 +13,7 @@ const ResidentialLiftsHub = () => {
       path: "/lifts/residential/home",
       desc: "Compact, elegant, and space-saving elevators designed specifically for private residences and villas.",
       icon: <Home size={40} />,
-      img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+      img: homeLiftImg,
       tag: "Zen Series"
     },
     {
@@ -19,7 +21,7 @@ const ResidentialLiftsHub = () => {
       path: "/lifts/residential/passenger",
       desc: "High-performance passenger elevators for residential apartments and housing complexes.",
       icon: <Users size={40} />,
-      img: "https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?auto=format&fit=crop&q=80&w=800",
+      img: passengerImg,
       tag: "Community Ready"
     }
   ];

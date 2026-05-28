@@ -3,6 +3,7 @@ import React from 'react';
 import { CheckCircle2, Shield, Zap, Gauge, ArrowRight, Activity, Users, Settings, HeartPulse, Microscope } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/hospital-hero.png';
+import passengerImg from '../assets/images/passenger_elevator.png';
 
 const HospitalLifts = () => {
   const liftModels = [
@@ -16,7 +17,7 @@ const HospitalLifts = () => {
         { label: "Capacity", value: "1000 – 1600 kg" },
         { label: "Compliance", value: "IS, EN & NABH" }
       ],
-      img: heroImg, // Reusing hero for simplicity or can use specific
+      img: heroImg, 
       tag: "Hospital Standard"
     },
     {
@@ -29,7 +30,7 @@ const HospitalLifts = () => {
         { label: "Capacity", value: "13 – 21 Passengers" },
         { label: "Drive", value: "Gearless Traction" }
       ],
-      img: heroImg,
+      img: passengerImg,
       tag: "NABH Compliant",
       featured: true
     }

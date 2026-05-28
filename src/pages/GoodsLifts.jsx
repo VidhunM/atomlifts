@@ -3,6 +3,7 @@ import React from 'react';
 import { CheckCircle2, Shield, Zap, Gauge, ArrowRight, Activity, Users, Settings, Package, Truck, Hammer } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/goods-hero.png';
+import homeLiftImg from '../assets/images/home_lift.png';
 
 const GoodsLifts = () => {
   const liftModels = [
@@ -16,7 +17,7 @@ const GoodsLifts = () => {
         { label: "Speed", value: "0.3 – 1.0 m/s" },
         { label: "Door Type", value: "Manual / Auto" }
       ],
-      img: heroImg,
+      img: homeLiftImg,
       tag: "Hospitality Standard"
     },
     {

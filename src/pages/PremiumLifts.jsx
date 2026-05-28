@@ -3,6 +3,8 @@ import React from 'react';
 import { CheckCircle2, Shield, Zap, Gauge, ArrowRight, Activity, Users, Settings, Building2, Hotel, Laptop } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/premium-hero.png';
+import commercialHero from '../assets/images/commercial-hero.png';
+import expressHero from '../assets/images/express-hero.png';
 
 const PremiumLifts = () => {
   const liftModels = [
@@ -16,7 +18,7 @@ const PremiumLifts = () => {
         { label: "Capacity", value: "680 – 1600 kg" },
         { label: "Drive", value: "Gearless VVVF" }
       ],
-      img: heroImg,
+      img: commercialHero,
       tag: "Business Ready"
     },
     {
@@ -43,7 +45,7 @@ const PremiumLifts = () => {
         { label: "Capacity", value: "680 – 1600 kg" },
         { label: "Compliance", value: "IS & EN Certified" }
       ],
-      img: heroImg,
+      img: expressHero,
       tag: "Corporate Tech"
     }
   ];

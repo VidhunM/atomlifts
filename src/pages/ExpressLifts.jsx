@@ -3,6 +3,7 @@ import React from 'react';
 import { CheckCircle2, Shield, Zap, Gauge, ArrowRight, Activity, Users, Settings, FastForward, Cpu, Layout } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/express-hero.png';
+import commercialHero from '../assets/images/commercial-hero.png';
 
 const ExpressLifts = () => {
   const liftModels = [
@@ -29,7 +30,7 @@ const ExpressLifts = () => {
         { label: "Speed", value: "1.0 – 2.5 m/s" },
         { label: "Door Type", value: "Auto Center Opening" }
       ],
-      img: heroImg,
+      img: commercialHero,
       tag: "Space Optimizer",
       featured: true
     }

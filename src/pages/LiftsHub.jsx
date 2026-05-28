@@ -3,6 +3,10 @@ import React from 'react';
 import { ArrowRight, Home, Building2, Factory, Car, Shield, Clock, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/lifts-main-hero.png';
+import residentialHero from '../assets/images/residential-hero.png';
+import commercialHero from '../assets/images/commercial-hero.png';
+import industrialHero from '../assets/images/industrial-hero.png';
+import parkingHero from '../assets/images/parking-hero.png';
 
 const LiftsHub = () => {
   const categories = [
@@ -11,7 +15,7 @@ const LiftsHub = () => {
       path: "/lifts/residential",
       desc: "Silent and sophisticated elevators for villas, bungalows, and premium housing.",
       icon: <Home size={40} />,
-      img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+      img: residentialHero,
       tag: "Domestic Range"
     },
     {
@@ -19,7 +23,7 @@ const LiftsHub = () => {
       path: "/lifts/commercial",
       desc: "High-performance solutions for offices, malls, hotels, and healthcare.",
       icon: <Building2 size={40} />,
-      img: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
+      img: commercialHero,
       tag: "Business Range"
     },
     {
@@ -27,7 +31,7 @@ const LiftsHub = () => {
       path: "/lifts/industrial",
       desc: "Rugged and heavy-duty elevators for factories and logistical hubs.",
       icon: <Factory size={40} />,
-      img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
+      img: industrialHero,
       tag: "Heavy Duty"
     },
     {
@@ -35,7 +39,7 @@ const LiftsHub = () => {
       path: "/lifts/parking",
       desc: "Smart vertical car parking systems to maximize urban space.",
       icon: <Car size={40} />,
-      img: "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&q=80&w=800",
+      img: parkingHero,
       tag: "Smart Storage"
     }
   ];
