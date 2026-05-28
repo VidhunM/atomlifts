@@ -1,8 +1,42 @@
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MessageSquare, Send, Camera, Mail, Globe, MapPin, Phone, Clock } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 import logoImg from '../assets/images/ATOM-Logo02.png';
 
 const Footer = () => {
+  const [contactDetails, setContactDetails] = useState({
+    hours: 'Mon - Sat 08:00 - 18:00',
+    address: 'No. 87B, Pillayar Koil Street,\nAmbattur Industrial Estate,\nMannurpet, Tamil Nadu 600050, IN',
+    email1: 'info@atomlifts.com',
+    email2: 'admin@atomlifts.com',
+    phoneMain: '+91 85508 55001',
+    phoneSales: '+91 96000 87456',
+    phoneService: '+91 95008 37737'
+  });
+
+  useEffect(() => {
+    const fetchContactDetails = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/settings/contactDetails`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            try {
+              const parsed = JSON.parse(data.value);
+              setContactDetails(prev => ({ ...prev, ...parsed }));
+            } catch (e) {
+              console.error('Error parsing contact details JSON:', e);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching contact details settings:', error);
+      }
+    };
+    fetchContactDetails();
+  }, []);
+
   return (
     <footer className="footer pt-5 overflow-hidden">
       <div className="container pt-5">
@@ -49,37 +83,38 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 4: Contact Info (Content from Image 1) */}
+          {/* Column 4: Contact Info */}
           <div className="col-lg-3">
             <h5 className="fw-bold mb-4">Contact Us</h5>
             
             <div className="footer-contact-item">
               <Clock size={20} />
-              <div>Mon - Sat 08.00 - 18.00</div>
+              <div>{contactDetails.hours}</div>
             </div>
 
             <div className="footer-contact-item">
               <MapPin size={20} />
-              <div>73 Pillayar Koil Street, Ambattur Indus Estate, Ambattur, Tamil Nadu 600050, IN</div>
+              <div style={{ whiteSpace: 'pre-line' }}>
+                {contactDetails.address}
+              </div>
             </div>
 
             <div className="footer-contact-item">
               <Mail size={20} />
               <div className="d-flex flex-column">
-                <span>saravanan@atomlifts.com</span>
-                <span>admin@atomlifts.com</span>
+                <span>{contactDetails.email1}</span>
+                <span>{contactDetails.email2}</span>
               </div>
             </div>
 
             <div className="footer-contact-item">
                <Phone size={20} />
                <div className="d-flex flex-column">
-                  <span>Sales: 96000 87456</span>
-                  <span>Service: 95008 37737</span>
+                  <span>Main: {contactDetails.phoneMain}</span>
+                  <span>Sales: {contactDetails.phoneSales}</span>
+                  <span>Service: {contactDetails.phoneService}</span>
                </div>
             </div>
-
-
           </div>
 
         </div>

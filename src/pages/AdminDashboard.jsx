@@ -12,6 +12,17 @@ const AdminDashboard = () => {
   const [activeVideo, setActiveVideo] = useState('');
   const [uploadingVideo, setUploadingVideo] = useState(false);
 
+  // Contact Us Details States
+  const [contactDetails, setContactDetails] = useState({
+    hours: 'Mon - Sat 08:00 - 18:00',
+    address: 'No. 87B, Pillayar Koil Street, Ambattur Industrial Estate, Mannurpet, Tamil Nadu 600050, IN',
+    email1: 'info@atomlifts.com',
+    email2: 'admin@atomlifts.com',
+    phoneMain: '+91 85508 55001',
+    phoneSales: '+91 96000 87456',
+    phoneService: '+91 95008 37737'
+  });
+
   // Common UI feedback
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -21,6 +32,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     fetchHeroImages();
     fetchVideoSetting();
+    fetchContactDetails();
   }, []);
 
   const fetchHeroImages = async () => {
@@ -73,6 +85,46 @@ const AdminDashboard = () => {
       }
     } catch (error) {
       console.error('Error fetching video setting:', error);
+    }
+  };
+
+  const fetchContactDetails = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/api/settings/contactDetails`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.value) {
+          try {
+            const parsed = JSON.parse(data.value);
+            setContactDetails(prev => ({ ...prev, ...parsed }));
+          } catch (e) {
+            console.error('Error parsing contact details settings JSON:', e);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching contact details settings:', error);
+    }
+  };
+
+  const handleSaveContactDetails = async () => {
+    setSuccessMsg('');
+    setErrorMsg('');
+    try {
+      const saveResponse = await fetch(`${backendUrl}/api/settings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key: 'contactDetails', value: JSON.stringify(contactDetails) })
+      });
+      if (saveResponse.ok) {
+        setSuccessMsg('Contact Us details updated successfully!');
+        setTimeout(() => setSuccessMsg(''), 5000);
+      } else {
+        setErrorMsg('Failed to save contact details to the database.');
+      }
+    } catch (error) {
+      console.error('Error saving contact details:', error);
+      setErrorMsg('An error occurred while saving.');
     }
   };
 
@@ -435,6 +487,107 @@ const AdminDashboard = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Details Customization */}
+      <div className="card bg-dark text-white border-secondary mb-5 shadow-lg">
+        <div className="card-header bg-dark-lighter border-secondary py-3 d-flex align-items-center justify-content-between">
+          <h4 className="mb-0 fw-bold d-flex align-items-center gap-2">
+            <Mail className="text-info" size={22} />
+            Contact & Footer Customization
+          </h4>
+          <span className="badge bg-info text-dark px-3 py-2 small fw-bold">Site Info</span>
+        </div>
+        <div className="card-body p-4">
+          <p className="text-secondary small mb-4">
+            Manage the contact details, emails, phone numbers, and office addresses that display in the <strong>Contact Us</strong> sections on both the contact page and the footer globally.
+          </p>
+
+          <div className="row g-4">
+            <div className="col-md-6">
+              <div className="mb-3">
+                <label className="form-label text-secondary small fw-bold text-uppercase">Working Hours</label>
+                <input 
+                  type="text" 
+                  className="form-control bg-dark text-white border-secondary py-2.5 px-3" 
+                  value={contactDetails.hours}
+                  onChange={(e) => setContactDetails({ ...contactDetails, hours: e.target.value })}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-secondary small fw-bold text-uppercase">Main/General Phone</label>
+                <input 
+                  type="text" 
+                  className="form-control bg-dark text-white border-secondary py-2.5 px-3" 
+                  value={contactDetails.phoneMain}
+                  onChange={(e) => setContactDetails({ ...contactDetails, phoneMain: e.target.value })}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-secondary small fw-bold text-uppercase">Sales Phone</label>
+                <input 
+                  type="text" 
+                  className="form-control bg-dark text-white border-secondary py-2.5 px-3" 
+                  value={contactDetails.phoneSales}
+                  onChange={(e) => setContactDetails({ ...contactDetails, phoneSales: e.target.value })}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-secondary small fw-bold text-uppercase">Service Phone</label>
+                <input 
+                  type="text" 
+                  className="form-control bg-dark text-white border-secondary py-2.5 px-3" 
+                  value={contactDetails.phoneService}
+                  onChange={(e) => setContactDetails({ ...contactDetails, phoneService: e.target.value })}
+                />
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="mb-3">
+                <label className="form-label text-secondary small fw-bold text-uppercase">Primary Email Address</label>
+                <input 
+                  type="email" 
+                  className="form-control bg-dark text-white border-secondary py-2.5 px-3" 
+                  value={contactDetails.email1}
+                  onChange={(e) => setContactDetails({ ...contactDetails, email1: e.target.value })}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-secondary small fw-bold text-uppercase">Secondary Email Address</label>
+                <input 
+                  type="email" 
+                  className="form-control bg-dark text-white border-secondary py-2.5 px-3" 
+                  value={contactDetails.email2}
+                  onChange={(e) => setContactDetails({ ...contactDetails, email2: e.target.value })}
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-secondary small fw-bold text-uppercase">Office Address</label>
+                <textarea 
+                  className="form-control bg-dark text-white border-secondary py-2.5 px-3" 
+                  rows="4"
+                  value={contactDetails.address}
+                  onChange={(e) => setContactDetails({ ...contactDetails, address: e.target.value })}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 text-end">
+            <button 
+              className="btn btn-info text-dark fw-bold px-5 py-2.5" 
+              onClick={handleSaveContactDetails}
+            >
+              Save Contact Details
+            </button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 
 import { Mail, Phone, MapPin, Send, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { API_BASE_URL } from '../config';
 import heroImg from '../assets/contact-hero.png';
 
@@ -13,6 +13,37 @@ const Contact = () => {
     message: ''
   });
   const [status, setStatus] = useState({ type: '', message: '' });
+  const [contactDetails, setContactDetails] = useState({
+    hours: 'Mon - Sat 08:00 - 18:00',
+    address: 'No. 87B, Pillayar Koil Street, Ambattur Industrial Estate,\nMannurpet, Tamil Nadu 600 050, IN.',
+    email1: 'info@atomlifts.com',
+    email2: 'admin@atomlifts.com',
+    phoneMain: '+91 85508 55001',
+    phoneSales: '+91 96000 87456',
+    phoneService: '+91 95008 37737'
+  });
+
+  useEffect(() => {
+    const fetchContactDetails = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/settings/contactDetails`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            try {
+              const parsed = JSON.parse(data.value);
+              setContactDetails(prev => ({ ...prev, ...parsed }));
+            } catch (e) {
+              console.error('Error parsing contact details JSON:', e);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching contact details settings:', error);
+      }
+    };
+    fetchContactDetails();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -103,7 +134,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <h6 className="text-white fw-bold mb-1">Phone</h6>
-                        <p className="text-white-50 mb-0">+91 85508 55001</p>
+                        <p className="text-white-50 mb-0">{contactDetails.phoneMain}</p>
                       </div>
                     </div>
                   </div>
@@ -114,7 +145,7 @@ const Contact = () => {
                       </div>
                       <div>
                         <h6 className="text-white fw-bold mb-1">Email</h6>
-                        <p className="text-white-50 mb-0">info@atomlifts.com</p>
+                        <p className="text-white-50 mb-0">{contactDetails.email1}</p>
                       </div>
                     </div>
                   </div>
@@ -125,9 +156,8 @@ const Contact = () => {
                       </div>
                       <div>
                         <h6 className="text-white fw-bold mb-1">Address</h6>
-                        <p className="text-white-50 mb-0 leading-relaxed">
-                          No. 87B, Pillayar Koil Street, Ambattur Industrial Estate,<br />
-                          Mannurpet, Tamil Nadu 600 050, IN.
+                        <p className="text-white-50 mb-0 leading-relaxed" style={{ whiteSpace: 'pre-line' }}>
+                          {contactDetails.address}
                         </p>
                       </div>
                     </div>
