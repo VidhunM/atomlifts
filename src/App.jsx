@@ -40,6 +40,7 @@ import AdminInquiries from './pages/AdminInquiries';
 import AdminApplications from './pages/AdminApplications';
 import AdminLogin from './pages/AdminLogin';
 import AdminTestimonialsStats from './pages/AdminTestimonialsStats';
+import AdminClients from './pages/AdminClients';
 
 const MainLayout = () => (
   <>
@@ -80,6 +81,7 @@ function App() {
             <Route path="applications" element={<AdminApplications />} />
             <Route path="inquiries" element={<AdminInquiries />} />
             <Route path="testimonials-stats" element={<AdminTestimonialsStats />} />
+            <Route path="clients" element={<AdminClients />} />
           </Route>
 
           {/* Public Routes */}

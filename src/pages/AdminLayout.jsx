@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation, Navigate, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FileText, Briefcase, Mail, LogOut, Menu, X, MessageSquare } from 'lucide-react';
+import { LayoutDashboard, FileText, Briefcase, Mail, LogOut, Menu, X, MessageSquare, Users } from 'lucide-react';
 import '../index.css';
 
 const AdminLayout = () => {
@@ -30,6 +30,7 @@ const AdminLayout = () => {
     { name: 'Job Applications', path: '/admin/applications', icon: <FileText size={20} /> },
     { name: 'Form Inquiries', path: '/admin/inquiries', icon: <Mail size={20} /> },
     { name: 'Testimonials & Stats', path: '/admin/testimonials-stats', icon: <MessageSquare size={20} /> },
+    { name: 'Manage Clients', path: '/admin/clients', icon: <Users size={20} /> },
   ];
 
   return (

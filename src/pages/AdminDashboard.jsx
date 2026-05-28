@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Briefcase, Mail, MessageSquare, Upload, Trash2, Image as ImageIcon, Plus, Video } from 'lucide-react';
+import { FileText, Briefcase, Mail, MessageSquare, Upload, Trash2, Image as ImageIcon, Plus, Video, Users } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const AdminDashboard = () => {
   // Hero Rotator States
@@ -27,7 +28,7 @@ const AdminDashboard = () => {
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = API_BASE_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchHeroImages();
@@ -669,6 +670,23 @@ const AdminDashboard = () => {
                 Add, edit, or delete customer testimonials and highlight dynamic performance statistics.
               </p>
               <Link to="/admin/testimonials-stats" className="btn btn-info w-100 text-white fw-bold">Manage Testimonials & Stats</Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6">
+          <div className="card bg-dark text-white border-secondary h-100 shadow-sm hover-shadow-lg" style={{ transition: 'all 0.3s' }}>
+            <div className="card-body p-4">
+              <div className="d-flex align-items-center mb-3">
+                <div className="bg-primary p-3 rounded-circle me-3" style={{ backgroundColor: '#f8c02d' }}>
+                  <Users size={24} className="text-dark" />
+                </div>
+                <h4 className="card-title mb-0">Clients Management</h4>
+              </div>
+              <p className="card-text text-secondary mb-4">
+                Upload and manage scrolling brand logos and customer graphics showcased in the Our Clients slider.
+              </p>
+              <Link to="/admin/clients" className="btn btn-warning w-100 text-dark fw-bold">Manage Client Logos</Link>
             </div>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 import i1 from '../assets/icons/i1 (1).jpg';
 import i2 from '../assets/icons/i1 (2).jpg';
 import i3 from '../assets/icons/i1 (3).jpg';
@@ -14,8 +16,47 @@ import i13 from '../assets/icons/i1 (13).jpg';
 import i14 from '../assets/icons/i1 (14).jpg';
 
 const Partners = () => {
-  const row1 = [i1, i2, i3, i4, i5, i6, i7];
-  const row2 = [i8, i9, i10, i11, i12, i13, i14];
+  const backendUrl = API_BASE_URL || 'http://localhost:5000';
+  const defaultRow1 = [i1, i2, i3, i4, i5, i6, i7];
+  const defaultRow2 = [i8, i9, i10, i11, i12, i13, i14];
+
+  const [row1, setRow1] = useState(defaultRow1);
+  const [row2, setRow2] = useState(defaultRow2);
+
+  useEffect(() => {
+    const fetchLogos = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/settings/clientLogos`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            const parsed = JSON.parse(data.value);
+            if (parsed && typeof parsed === 'object') {
+              if (Array.isArray(parsed.row1)) {
+                const valid1 = parsed.row1
+                  .filter(img => img !== null && img !== '')
+                  .map(img => img.startsWith('http') ? img : `${backendUrl}${img}`);
+                if (valid1.length > 0) {
+                  setRow1(valid1);
+                }
+              }
+              if (Array.isArray(parsed.row2)) {
+                const valid2 = parsed.row2
+                  .filter(img => img !== null && img !== '')
+                  .map(img => img.startsWith('http') ? img : `${backendUrl}${img}`);
+                if (valid2.length > 0) {
+                  setRow2(valid2);
+                }
+              }
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching dynamic client logos:', error);
+      }
+    };
+    fetchLogos();
+  }, []);
 
   return (
     <section className="partner-slider bg-dark py-5">
@@ -40,7 +81,10 @@ const Partners = () => {
 
       <div className="container-fluid px-0 overflow-hidden">
         {/* Row 1: Sliding Left */}
-        <div className="d-flex align-items-center logo-scroll-container mb-4">
+        <div 
+          className="d-flex align-items-center logo-scroll-container mb-4"
+          style={{ '--items-count': row1.length }}
+        >
           {[...row1, ...row1, ...row1].map((img, idx) => (
             <div className="partner-logo-item" key={`row1-${idx}`}>
                <img src={img} alt={`Partner ${idx}`} className="partner-img-fluid" />
@@ -49,7 +93,10 @@ const Partners = () => {
         </div>
 
         {/* Row 2: Sliding Right */}
-        <div className="d-flex align-items-center logo-scroll-container-reverse">
+        <div 
+          className="d-flex align-items-center logo-scroll-container-reverse"
+          style={{ '--items-count': row2.length }}
+        >
           {[...row2, ...row2, ...row2].map((img, idx) => (
             <div className="partner-logo-item" key={`row2-${idx}`}>
                <img src={img} alt={`Partner ${idx}`} className="partner-img-fluid" />
@@ -76,7 +123,7 @@ const Partners = () => {
           animation: tickerScrollReverse 40s linear infinite;
         }
         @keyframes tickerScrollReverse {
-          0% { transform: translateX(calc(-250px * 7)); }
+          0% { transform: translateX(calc(-250px * var(--items-count, 7))); }
           100% { transform: translateX(0); }
         }
         /* Override existing tickerScroll if needed to match 7 items */
@@ -85,7 +132,7 @@ const Partners = () => {
         }
         @keyframes tickerScroll {
           0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-250px * 7)); }
+          100% { transform: translateX(calc(-250px * var(--items-count, 7))); }
         }
         
         @media (max-width: 768px) {
@@ -93,10 +140,10 @@ const Partners = () => {
           .partner-logo-item { width: 180px; }
           @keyframes tickerScroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-180px * 7)); }
+            100% { transform: translateX(calc(-180px * var(--items-count, 7))); }
           }
           @keyframes tickerScrollReverse {
-            0% { transform: translateX(calc(-180px * 7)); }
+            0% { transform: translateX(calc(-180px * var(--items-count, 7))); }
             100% { transform: translateX(0); }
           }
         }
