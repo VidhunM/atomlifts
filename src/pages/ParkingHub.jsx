@@ -1,8 +1,8 @@
-
 import React from 'react';
-import { ArrowRight, Car, Shield, Clock, Zap, Settings, Layout, Smartphone } from 'lucide-react';
+import { ArrowRight, Car, Bike, Shield, Clock, Zap, Settings, Layout, Smartphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/parking-hero-hub.png';
+import bikeLiftImg from '../assets/images/bike lift.jpeg';
 
 const ParkingHub = () => {
   const categories = [
@@ -13,6 +13,14 @@ const ParkingHub = () => {
       icon: <Car size={40} />,
       img: "https://images.unsplash.com/photo-1506521781263-d8422e82f27a?auto=format&fit=crop&q=80&w=800",
       tag: "Space Maximizer"
+    },
+    {
+      title: "Bike Parking Lifts",
+      path: "/lifts/vehicle",
+      desc: "Compact vertical parking systems designed specifically for two-wheelers and motorcycles.",
+      icon: <Bike size={40} />,
+      img: bikeLiftImg,
+      tag: "Urban Solution"
     }
   ];
 
