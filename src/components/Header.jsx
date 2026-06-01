@@ -82,6 +82,17 @@ const Header = () => {
         },
       ]
     },
+    {
+      name: 'Overseas',
+      path: '#',
+      dropdown: [
+        { name: 'Maldives', path: '/overseas/maldives' },
+        { name: 'Oman', path: '/overseas/oman' },
+        { name: 'Saudi Arabia', path: '/overseas/saudi-arabia' },
+        { name: 'Sri Lanka', path: '/overseas/srilanka' },
+        { name: 'UAE', path: '/overseas/uae' },
+      ]
+    },
     { name: 'About', path: '/about' },
     { name: 'Careers', path: '/careers' },
     { name: 'Contact', path: '/contact' },
