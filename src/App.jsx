@@ -31,6 +31,7 @@ import JobDetails from './pages/JobDetails';
 import ScrollToTop from './components/ScrollToTop';
 import WhatsAppButton from './components/WhatsAppButton';
 import { Outlet } from 'react-router-dom';
+import OverseasBranch from './pages/OverseasBranch';
 
 // Admin Pages
 import AdminLayout from './pages/AdminLayout';
@@ -108,6 +109,7 @@ function App() {
             <Route path="/lifts/industrial/material" element={<IndustrialLifts />} />
             <Route path="/lifts/parking" element={<ParkingHub />} />
             <Route path="/lifts/parking/car" element={<ParkingSolutions />} />
+            <Route path="/overseas/:country" element={<OverseasBranch />} />
           </Route>
         </Routes>
       </div>
