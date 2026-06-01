@@ -228,28 +228,36 @@ const Header = () => {
       </nav>
       <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
       <style>{`
+          .nav-link-custom {
+            color: #475569 !important;
+            transition: all 0.3s ease;
+          }
+          .nav-link-custom:hover, .nav-link-custom.text-white {
+            color: #1A365D !important;
+          }
           .glass-nav-dropdown {
-            background: rgba(10, 10, 10, 0.95) !important;
+            background: rgba(255, 255, 255, 0.98) !important;
             backdrop-filter: blur(25px) saturate(200%);
             -webkit-backdrop-filter: blur(25px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border: 1px solid rgba(15, 23, 42, 0.08) !important;
             border-radius: 4px !important;
             margin-top: 5px !important;
             min-width: 240px;
             padding: 15px 0;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1) !important;
           }
   
           .mega-menu-box {
-            background: rgba(10, 10, 10, 0.98) !important;
+            background: rgba(255, 255, 255, 0.98) !important;
             backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(15, 23, 42, 0.1) !important;
             left: 50% !important;
             transform: translateX(-50%) translateY(20px) !important;
             border-radius: 8px !important;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) !important;
             width: 90vw !important;
             max-width: 800px !important;
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15) !important;
           }
   
           .custom-dropdown:hover .mega-menu-box {
@@ -272,7 +280,7 @@ const Header = () => {
           .mega-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent);
             opacity: 0.6;
             transition: opacity 0.3s ease;
           }
@@ -286,7 +294,7 @@ const Header = () => {
           }
   
           .mega-menu-item:hover .mega-title {
-            color: var(--primary) !important;
+            color: #1A365D !important;
           }
           
           .dropdown-item {
@@ -295,12 +303,13 @@ const Header = () => {
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            color: #475569 !important;
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
           }
           
           .dropdown-item:hover {
-            background: rgba(248, 192, 45, 0.08) !important;
-            color: var(--primary) !important;
+            background: rgba(26, 54, 93, 0.06) !important;
+            color: #1A365D !important;
             padding-left: 32px !important;
           }
           
@@ -366,12 +375,12 @@ const Header = () => {
           
           @media (max-width: 991px) {
             .navbar-collapse {
-              background: rgba(10, 10, 10, 0.98);
+              background: rgba(255, 255, 255, 0.98);
               margin: 0 -1rem;
               padding: 20px;
               max-height: 85vh;
               overflow-y: auto;
-              border-bottom: 1px solid rgba(255,255,255,0.1);
+              border-bottom: 1px solid rgba(15, 23, 42, 0.1);
             }
             
             .nav-item {
@@ -382,7 +391,7 @@ const Header = () => {
             
             .glass-nav-dropdown, .mega-menu-box, .custom-dropdown:hover .mega-menu-box {
               position: static !important;
-              background: rgba(255, 255, 255, 0.02) !important;
+              background: rgba(15, 23, 42, 0.02) !important;
               box-shadow: none !important;
               border: none !important;
               width: 100% !important;
@@ -412,7 +421,7 @@ const Header = () => {
             .dropdown-submenu .dropdown-menu {
               position: static !important;
               display: block !important;
-              background: rgba(255, 255, 255, 0.04) !important;
+              background: rgba(15, 23, 42, 0.03) !important;
               margin-left: 0 !important;
               max-height: 0;
               overflow: hidden;
@@ -438,7 +447,6 @@ const Header = () => {
               display: none;
             }
           }
-
       `}</style>
     </>
   );

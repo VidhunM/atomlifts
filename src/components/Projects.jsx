@@ -25,7 +25,7 @@ const Projects = () => {
   ];
 
   return (
-    <section className="projects-section bg-dark py-4 position-relative">
+    <section id="projects" className="projects-section bg-dark py-4 position-relative">
       <div className="container py-2">
         
         {/* Section Header */}

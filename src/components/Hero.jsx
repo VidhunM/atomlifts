@@ -56,6 +56,10 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [heroFrontImages]);
 
+  const handleScrollToProjects = () => {
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className="hero-section position-relative overflow-hidden" style={{ minHeight: '180vh' }}>
       {/* FULL-SCREEN LIFT BACKGROUND */}
@@ -89,32 +93,83 @@ const Hero = () => {
       {/* HERO CONTENT WRAPPER */}
       <div className="container-fluid px-0 position-relative" style={{ zIndex: 10 }}>
 
-        {/* TOP SECTION: Typography */}
+        {/* TOP SECTION: Typography & Premium Content */}
         <div className="row g-0 align-items-center hero-top-section">
           <div className="col-lg-12 d-flex flex-column justify-content-center align-items-center py-5 text-center hero-top-inner">
-            <div data-aos="fade-up">
+            <div data-aos="fade-up" className="container">
+              
               <h5 className="text-uppercase tracking-widest fw-bold mb-4" style={{ marginTop: '50px', letterSpacing: '0.2rem', textShadow: '0 2px 10px rgba(0,0,0,0.3)', color: '#FFD700', opacity: 1 }}>
                 "Lift Your Expectations!"
               </h5>
 
-              <div className="mb-0 mb-md-4 position-relative d-flex flex-column align-items-center">
-                <h1 className="huge-heading m-0 text-white" style={{ lineHeight: '0.8', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>ELEVATOR</h1>
-                <h1 className="huge-heading m-0 text-white" style={{ lineHeight: '0.8', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>ENGINEERING</h1>
-              </div>
+              {/* Large Headline */}
+              <h1 className="display-4 fw-800 text-white mb-4 text-uppercase" style={{ 
+                lineHeight: '1.2',
+                letterSpacing: '-0.01em',
+                textShadow: '0 10px 30px rgba(0,0,0,0.5)',
+                fontSize: 'clamp(2.2rem, 5vw, 4.5rem)'
+              }}>
+                Premium Elevator <span className="text-primary text-gradient">Solutions</span> <br className="d-none d-md-block" /> for Modern Buildings
+              </h1>
 
-
-              <div className="row justify-content-center">
-                <div className="col-md-7 mt-0 mt-md-5">
-                  <p className="text-white hero-sub-text mb-0 fs-5" style={{ 
+              {/* Subheading */}
+              <div className="row justify-content-center mb-5">
+                <div className="col-md-8">
+                  <p className="text-white-50 hero-sub-text mb-0 fs-5" style={{ 
                     fontWeight: '400', 
                     letterSpacing: '0.02em',
-                    lineHeight: '1.6',
-                    opacity: 0.9
+                    lineHeight: '1.6'
                   }}>
-                    We specialize in the repair, modernization, and installation of all types of commercial and residential elevators. 
+                    Manufacturing, Installation & Maintenance Across Tamil Nadu
                   </p>
                 </div>
               </div>
+
+              {/* Two Call-to-Action Buttons */}
+              <div className="d-flex justify-content-center flex-wrap gap-3 mb-5">
+                <button 
+                  onClick={() => setIsQuoteOpen(true)}
+                  className="btn-premium d-inline-flex align-items-center gap-2"
+                  style={{ borderRadius: '4px' }}
+                >
+                  Get Free Consultation
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                
+                <button 
+                  onClick={handleScrollToProjects}
+                  className="btn-outline-premium d-inline-flex align-items-center gap-2"
+                  style={{ borderRadius: '4px' }}
+                >
+                  View Projects
+                </button>
+              </div>
+
+              {/* 3 Quick Trust Badges in a Row */}
+              <div className="row justify-content-center g-4 pt-4 border-top border-secondary-subtle mx-auto" style={{ borderColor: 'rgba(255, 255, 255, 0.08)', maxWidth: '800px' }}>
+                {/* Badge 1 */}
+                <div className="col-4">
+                  <div className="d-flex flex-column align-items-center">
+                    <span className="fs-2 fw-800 text-white mb-1" style={{ color: 'var(--primary)', textShadow: '0 2px 10px rgba(248, 192, 45, 0.2)' }}>15+</span>
+                    <span className="text-uppercase tracking-wider fw-bold text-white-50" style={{ fontSize: '0.7rem', letterSpacing: '0.05em' }}>Years Experience</span>
+                  </div>
+                </div>
+                {/* Badge 2 */}
+                <div className="col-4">
+                  <div className="d-flex flex-column align-items-center">
+                    <span className="fs-2 fw-800 text-white mb-1" style={{ color: 'var(--primary)', textShadow: '0 2px 10px rgba(248, 192, 45, 0.2)' }}>24/7</span>
+                    <span className="text-uppercase tracking-wider fw-bold text-white-50" style={{ fontSize: '0.7rem', letterSpacing: '0.05em' }}>Service Support</span>
+                  </div>
+                </div>
+                {/* Badge 3 */}
+                <div className="col-4">
+                  <div className="d-flex flex-column align-items-center">
+                    <span className="fs-2 fw-800 text-white mb-1" style={{ color: 'var(--primary)', textShadow: '0 2px 10px rgba(248, 192, 45, 0.2)' }}>1000+</span>
+                    <span className="text-uppercase tracking-wider fw-bold text-white-50" style={{ fontSize: '0.7rem', letterSpacing: '0.05em' }}>Installations</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
