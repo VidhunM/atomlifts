@@ -1,6 +1,7 @@
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Partners from '../components/Partners';
+import WhyChoose from '../components/WhyChoose';
 import AboutEngineering from '../components/AboutEngineering';
 import CoreServices from '../components/CoreServices';
 import Projects from '../components/Projects';
@@ -16,6 +17,7 @@ const Home = () => {
       <Hero />
       <Services />
       <Partners />
+      <WhyChoose />
       <AboutEngineering />
       <CoreServices />
       <Projects />
