@@ -331,11 +331,11 @@ a {
 .line-item {
   width: 6px;
   height: 200px;
-  background: var(--primary);
+  background: #d4af37;
   opacity: 1;
   /* Full yellow visibility */
   border-radius: 3px;
-  box-shadow: 0 0 10px rgba(248, 192, 45, 0.4);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
   /* Added glow for "density view" */
 }
 
@@ -384,6 +384,13 @@ a {
   z-index: 10;
   position: relative;
   animation: floatLift 4s ease-in-out infinite;
+}
+
+.lift-spacer-image,
+.lift-rotating-image {
+  max-width: 100%;
+  height: auto;
+  z-index: 10;
 }
 
 @keyframes floatLift {
@@ -1481,7 +1488,9 @@ a {
     min-height: 50vh !important;
   }
   
-  .lift-main-image {
+  .lift-main-image,
+  .lift-spacer-image,
+  .lift-rotating-image {
     max-height: 50vh !important;
   }
   
@@ -1748,7 +1757,7 @@ a {
 .ticker-bar-yellow {
   width: 5px;
   height: 25px;
-  background: var(--primary);
+  background: #d4af37;
   flex-shrink: 0;
 }
 

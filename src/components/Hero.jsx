@@ -151,21 +151,21 @@ const Hero = () => {
                 {/* Badge 1 */}
                 <div className="col-4">
                   <div className="d-flex flex-column align-items-center">
-                    <span className="fs-2 fw-800 text-white mb-1" style={{ color: 'var(--primary)', textShadow: '0 2px 10px rgba(248, 192, 45, 0.2)' }}>15+</span>
+                    <span className="fs-2 fw-800 mb-1" style={{ color: '#d4af37', textShadow: '0 2px 10px rgba(212, 175, 55, 0.3)' }}>15+</span>
                     <span className="text-uppercase tracking-wider fw-bold text-white-50" style={{ fontSize: '0.7rem', letterSpacing: '0.05em' }}>Years Experience</span>
                   </div>
                 </div>
                 {/* Badge 2 */}
                 <div className="col-4">
                   <div className="d-flex flex-column align-items-center">
-                    <span className="fs-2 fw-800 text-white mb-1" style={{ color: 'var(--primary)', textShadow: '0 2px 10px rgba(248, 192, 45, 0.2)' }}>24/7</span>
+                    <span className="fs-2 fw-800 mb-1" style={{ color: '#d4af37', textShadow: '0 2px 10px rgba(212, 175, 55, 0.3)' }}>24/7</span>
                     <span className="text-uppercase tracking-wider fw-bold text-white-50" style={{ fontSize: '0.7rem', letterSpacing: '0.05em' }}>Service Support</span>
                   </div>
                 </div>
                 {/* Badge 3 */}
                 <div className="col-4">
                   <div className="d-flex flex-column align-items-center">
-                    <span className="fs-2 fw-800 text-white mb-1" style={{ color: 'var(--primary)', textShadow: '0 2px 10px rgba(248, 192, 45, 0.2)' }}>1000+</span>
+                    <span className="fs-2 fw-800 mb-1" style={{ color: '#d4af37', textShadow: '0 2px 10px rgba(212, 175, 55, 0.3)' }}>1000+</span>
                     <span className="text-uppercase tracking-wider fw-bold text-white-50" style={{ fontSize: '0.7rem', letterSpacing: '0.05em' }}>Installations</span>
                   </div>
                 </div>
@@ -177,15 +177,15 @@ const Hero = () => {
 
         {/* BOTTOM SECTION: Floating Model with Dynamic Rotator Animation */}
         <div className="row justify-content-center pt-0 pt-lg-5 pb-5 position-relative overflow-hidden hero-bottom-section">
-          <div className="col-lg-12 text-center pt-0 pt-lg-5 pb-5 position-relative" style={{ zIndex: 10 }} data-aos="zoom-in">
-            <div className="lift-object-container d-inline-block position-relative">
+          <div className="col-lg-12 text-center pt-0 pt-lg-5 pb-5 position-relative" style={{ zIndex: 10 }}>
+            <div className="lift-object-container d-inline-block position-relative" style={{ animation: 'floatLift 4s ease-in-out infinite' }}>
               
               {/* Spacer image to control natural layout constraints (invisible) */}
               <img
                 src={heroFrontImages[0]}
                 alt="Layout spacer"
-                className="lift-main-image opacity-0"
-                style={{ maxHeight: '90vh', width: 'auto', pointerEvents: 'none' }}
+                className="lift-spacer-image opacity-0"
+                style={{ maxHeight: '80vh', width: 'auto', pointerEvents: 'none', display: 'block', margin: '0 auto' }}
               />
 
               {/* Dynamic Overlaying Rotating Images */}
@@ -194,9 +194,9 @@ const Hero = () => {
                   key={imgUrl + index}
                   src={imgUrl}
                   alt={`Futuristic Elevator Cabin ${index + 1}`}
-                  className="lift-main-image position-absolute top-0 start-50 translate-middle-x"
+                  className="lift-rotating-image position-absolute top-0 start-50"
                   style={{
-                    maxHeight: '90vh',
+                    maxHeight: '80vh',
                     width: 'auto',
                     filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.95))',
                     transition: 'all 1.6s cubic-bezier(0.25, 1, 0.3, 1)',
