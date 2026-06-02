@@ -6,26 +6,36 @@ const Counter = ({ end, duration = 2000, suffix = "" }) => {
   const countRef = useRef(null);
 
   useEffect(() => {
+    let timer = null;
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
+        if (timer) clearInterval(timer);
         let start = 0;
         const increment = end / (duration / 16);
-        const timer = setInterval(() => {
+        timer = setInterval(() => {
           start += increment;
           if (start >= end) {
             setCount(end);
             clearInterval(timer);
+            timer = null;
           } else {
             setCount(Math.floor(start));
           }
         }, 16);
       } else {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
         setCount(0);
       }
     }, { threshold: 0.1 });
 
     if (countRef.current) observer.observe(countRef.current);
-    return () => observer.disconnect();
+    return () => {
+      if (timer) clearInterval(timer);
+      observer.disconnect();
+    };
   }, [end, duration]);
 
   return <span ref={countRef}>{count}{suffix}</span>;

@@ -30,6 +30,7 @@ import Careers from './pages/Careers';
 import JobDetails from './pages/JobDetails';
 import ScrollToTop from './components/ScrollToTop';
 import WhatsAppButton from './components/WhatsAppButton';
+import InquiryModal from './components/InquiryModal';
 import { Outlet } from 'react-router-dom';
 import OverseasBranch from './pages/OverseasBranch';
 
@@ -53,6 +54,7 @@ const MainLayout = () => (
     </main>
     <Footer />
     <WhatsAppButton />
+    <InquiryModal />
   </>
 );
 

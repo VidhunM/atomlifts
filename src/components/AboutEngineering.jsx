@@ -60,6 +60,26 @@ const AboutEngineering = () => {
         </div>
       </div>
       <style>{`
+        /* Make all primary blue texts highly visible on dark bg */
+        .about-eng-section .text-primary {
+          color: #3b82f6 !important; /* Beautiful vibrant electric blue */
+          text-shadow: 0 0 10px rgba(59, 130, 246, 0.35);
+        }
+        
+        /* Stylings for the running (scrolling) tags */
+        .about-eng-section .tag-item {
+          color: #3b82f6 !important;
+          font-weight: 700;
+          opacity: 0.95;
+          text-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+        }
+        
+        .about-eng-section .tag-item span {
+          color: #60a5fa !important; /* Brilliant bright sky blue */
+          opacity: 0.95;
+          font-weight: 600;
+        }
+
         @media (max-width: 991px) {
           .about-eng-section { padding: 60px 0 !important; overflow: hidden; }
           .about-eng-section .container { padding-left: 20px !important; padding-right: 20px !important; }

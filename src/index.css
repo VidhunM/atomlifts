@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
 :root {
   --primary: #1A365D;
@@ -21,7 +21,9 @@
 
 body {
   margin: 0;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
   background-color: var(--dark);
   color: var(--text-light);
   overflow-x: hidden;
@@ -47,10 +49,20 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #0F172A;
+  line-height: 1.25;
+  margin-bottom: 1.25rem;
 }
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+h4 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
+h5 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); }
+h6 { font-size: 1rem; }
 
 a {
   text-decoration: none;
@@ -448,7 +460,7 @@ a {
   background: var(--primary);
   color: var(--dark);
   padding: 15px 25px;
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 800;
   font-size: 1.8rem;
   z-index: 5;
@@ -1340,8 +1352,8 @@ a {
   transform: translate(-50%, -50%);
   font-size: clamp(8rem, 20vw, 15rem);
   font-weight: 900;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+  color: rgba(59, 130, 246, 0.04); /* Subtle electric blue background fill */
+  -webkit-text-stroke: 2px rgba(59, 130, 246, 0.2); /* Defined electric blue outline */
   z-index: -1;
   pointer-events: none;
   animation: numberPop 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -2221,4 +2233,56 @@ a {
   .testi-dot.active {
     width: 32px;
   }
+}
+
+/* HIGH-VISIBILITY GLOWING ELECTRIC BLUE OVERRIDES FOR DARK BACKGROUND SECTIONS */
+.bg-dark .text-primary,
+.bg-dark .text-info,
+.projects-section .text-primary,
+.projects-section .text-info,
+.about-eng-section .text-primary,
+.about-eng-section .text-info,
+.testi-stats-section .text-primary,
+.testi-stats-section .text-info {
+  color: #3b82f6 !important; /* Beautiful vibrant electric blue */
+  text-shadow: 0 0 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+.bg-dark .btn-primary,
+.bg-dark .btn-info,
+.projects-section .btn-info,
+.about-eng-section .btn-primary,
+.testi-stats-section .btn-primary {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+.bg-dark .btn-primary:hover,
+.bg-dark .btn-info:hover,
+.projects-section .btn-info:hover,
+.about-eng-section .btn-primary:hover,
+.testi-stats-section .btn-primary:hover {
+  background-color: #1d4ed8 !important; /* Elegant sapphire blue */
+  border-color: #1d4ed8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 15px rgba(29, 78, 216, 0.45) !important;
+}
+
+/* Also apply high-contrast colors to active badges or tab selectors */
+.bg-info {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+.btn-info {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+.btn-info:hover {
+  background-color: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+  color: #ffffff !important;
 }

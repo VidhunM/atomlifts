@@ -165,8 +165,32 @@ const Projects = () => {
           transform: scale(1.03);
         }
         .spec-item-box:hover {
-          border-color: rgba(13, 202, 240, 0.4) !important;
-          background: rgba(13, 202, 240, 0.02) !important;
+          border-color: rgba(59, 130, 246, 0.4) !important;
+          background: rgba(59, 130, 246, 0.02) !important;
+        }
+        
+        /* Brighten all text-info and btn-info elements inside this section */
+        .projects-section .text-info {
+          color: #3b82f6 !important; /* Beautiful vibrant electric blue */
+          text-shadow: 0 0 10px rgba(59, 130, 246, 0.25);
+        }
+        
+        .projects-section .btn-info {
+          background-color: #3b82f6 !important;
+          border-color: #3b82f6 !important;
+          color: #ffffff !important;
+        }
+        
+        .projects-section .btn-info:hover {
+          background-color: #1d4ed8 !important;
+          border-color: #1d4ed8 !important;
+          color: #ffffff !important;
+          box-shadow: 0 0 15px rgba(29, 78, 216, 0.45) !important;
+        }
+        
+        .projects-section .bg-info {
+          background-color: #3b82f6 !important;
+          color: #ffffff !important;
         }
       `}</style>
     </section>

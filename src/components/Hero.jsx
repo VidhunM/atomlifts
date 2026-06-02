@@ -67,7 +67,7 @@ const Hero = () => {
       <div
         className="position-absolute top-0 start-0 w-100 h-100 hero-bg-parallax"
         style={{
-          background: `url(${liftBg}) no-repeat center center`,
+          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.9)), url(${liftBg}) no-repeat center center`,
           backgroundSize: 'cover',
           zIndex: 1
         }}
