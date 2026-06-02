@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import QuoteModal from '../components/QuoteModal';
 import aboutHero from '../assets/about-hero.png';
+import { API_BASE_URL } from '../config';
 
-const branchData = {
+const defaultBranchData = {
   maldives: {
     name: 'Maldives',
     partner: 'Atomlifts Maldives Pvt Ltd',
@@ -44,8 +45,32 @@ const branchData = {
 const OverseasBranch = () => {
   const { country } = useParams();
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
+  const [branches, setBranches] = useState(defaultBranchData);
+  
   const countryKey = country ? country.toLowerCase() : '';
-  const branch = branchData[countryKey] || branchData['oman'];
+  const branch = branches[countryKey] || branches['oman'];
+
+  useEffect(() => {
+    const fetchBranchData = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/settings/overseasBranches`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            try {
+              const parsed = JSON.parse(data.value);
+              setBranches(prev => ({ ...prev, ...parsed }));
+            } catch (e) {
+              console.error('Error parsing branches settings JSON:', e);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching overseas branch settings:', error);
+      }
+    };
+    fetchBranchData();
+  }, []);
 
   return (
     <div className="overseas-branch-page bg-light min-vh-100 pb-5">

@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { MessageSquare, Send, Camera, Mail, Globe, MapPin, Phone, Clock } from 'lucide-react';
+import { 
+  Mail, 
+  MapPin, 
+  Phone, 
+  Clock, 
+  Landmark, 
+  ShieldCheck, 
+  Facebook, 
+  Twitter, 
+  Linkedin, 
+  Instagram, 
+  Youtube,
+  ArrowRight,
+  Globe
+} from 'lucide-react';
 import { API_BASE_URL } from '../config';
 import logoImg from '../assets/images/ATOM-Logo02.png';
 
@@ -14,6 +28,14 @@ const Footer = () => {
     phoneSales: '+91 96000 87456',
     phoneService: '+91 95008 37737'
   });
+
+  const [branches, setBranches] = useState([
+    { key: 'maldives', name: 'Maldives', partner: 'Atomlifts Maldives Pvt Ltd' },
+    { key: 'oman', name: 'Oman', partner: 'Airmech Oman LLC' },
+    { key: 'saudi-arabia', name: 'Saudi Arabia', partner: 'Al-Qahtani Lift Systems' },
+    { key: 'srilanka', name: 'Sri Lanka', partner: 'Lanka Mobility Solutions Pvt Ltd' },
+    { key: 'uae', name: 'UAE', partner: 'Atomlifts Gulf LLC' }
+  ]);
 
   useEffect(() => {
     const fetchContactDetails = async () => {
@@ -34,86 +56,161 @@ const Footer = () => {
         console.error('Error fetching contact details settings:', error);
       }
     };
+
+    const fetchBranches = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/settings/overseasBranches`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            try {
+              const parsed = JSON.parse(data.value);
+              const items = Object.keys(parsed).map(key => ({
+                key,
+                name: parsed[key].name,
+                partner: parsed[key].partner
+              }));
+              if (items.length > 0) {
+                setBranches(items);
+              }
+            } catch (e) {
+              console.error('Error parsing overseas branches JSON:', e);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching overseas branches settings:', error);
+      }
+    };
+
     fetchContactDetails();
+    fetchBranches();
   }, []);
 
   return (
-    <footer className="footer pt-5 overflow-hidden">
+    <footer className="footer pt-5 overflow-hidden" style={{ background: '#0a0f1d', color: '#94a3b8' }}>
       <div className="container pt-5">
         <div className="row g-5 mb-5 pb-4">
           
-          {/* Column 1: Brand & Social */}
+          {/* Column 1: Brand, Social & Corporate Registration info */}
           <div className="col-lg-4">
-            <img src={logoImg} alt="AtomLifts Logo" style={{ height: '60px', marginBottom: '30px' }} />
-            <p className="mb-4 leading-relaxed" style={{ maxWidth: '350px', fontSize: '1.05rem' }}>
-              Our service is mainly focused on maintenance, repair, and installation of elevators and 
-              escalators to ensure safe and efficient travel for passengers.
+            <img src={logoImg} alt="AtomLifts Logo" style={{ height: '55px', marginBottom: '25px', objectFit: 'contain' }} />
+            <p className="mb-4 leading-relaxed small-text" style={{ fontSize: '0.95rem', lineHeight: '1.6' }}>
+              We are a premier global vertical transportation enterprise, dedicated to the engineering, installation, and smart modernization of high-performance elevators and escalators to ensure absolute safety.
             </p>
-            <div className="d-flex gap-2">
-              {[MessageSquare, Send, Camera, Mail, Globe].map((Icon, i) => (
-                <a key={i} href="#" className="footer-social-btn">
-                  <Icon size={18} />
+            
+            {/* Corporate Registration Details */}
+            <div className="corporate-info d-flex flex-column gap-2 mb-4 p-3 rounded bg-dark-lighter border border-secondary border-opacity-15">
+              <div className="d-flex align-items-center gap-2 text-white-50" style={{ fontSize: '0.8rem' }}>
+                <Landmark size={15} className="text-primary" style={{ color: '#d4af37' }} />
+                <span><strong>CIN:</strong> U31908TN2022PTC152345</span>
+              </div>
+              <div className="d-flex align-items-center gap-2 text-white-50" style={{ fontSize: '0.8rem' }}>
+                <ShieldCheck size={15} className="text-primary" style={{ color: '#d4af37' }} />
+                <span><strong>GSTIN:</strong> 33AAFCA4512A1Z9</span>
+              </div>
+            </div>
+
+            <div className="d-flex gap-2 mt-3">
+              {[
+                { Icon: Facebook, url: 'https://facebook.com', label: 'Facebook', color: '#1877f2' },
+                { Icon: Twitter, url: 'https://twitter.com', label: 'Twitter / X', color: '#1da1f2' },
+                { Icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn', color: '#0a66c2' },
+                { Icon: Instagram, url: 'https://instagram.com', label: 'Instagram', color: '#e1306c' },
+                { Icon: Youtube, url: 'https://youtube.com', label: 'YouTube', color: '#ff0000' }
+              ].map(({ Icon, url, label, color }, i) => (
+                <a 
+                  key={i} 
+                  href={url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="footer-social-btn transition-all" 
+                  aria-label={label}
+                  style={{ '--hover-color': color }}
+                >
+                  <Icon size={16} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Column 2: Company */}
+          {/* Column 2: Quick Links */}
           <div className="col-6 col-lg-2">
-            <h5 className="fw-bold mb-4">Company</h5>
-            <div className="footer-links">
-              <Link to="/" className="footer-link-new">Home</Link>
-              <Link to="/services" className="footer-link-new">Our Services</Link>
-              <Link to="/projects" className="footer-link-new">Projects</Link>
-              <Link to="/blog" className="footer-link-new">Blog</Link>
-              <Link to="/contact" className="footer-link-new">Contact</Link>
+            <h5 className="fw-bold mb-4 text-white text-uppercase tracking-wider" style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}>Quick Links</h5>
+            <div className="footer-links d-flex flex-column gap-2">
+              <Link to="/" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> Home
+              </Link>
+              <Link to="/about" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> About Us
+              </Link>
+              <Link to="/careers" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> Careers
+              </Link>
+              <Link to="/blog" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> Our Blog
+              </Link>
+              <Link to="/contact" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> Contact Us
+              </Link>
+              <Link to="/admin" className="footer-link-new text-decoration-none d-flex align-items-center gap-1 text-info">
+                <ArrowRight size={12} className="link-arrow text-info" /> Admin Portal
+              </Link>
             </div>
           </div>
 
-          {/* Column 3: Services */}
+          {/* Column 3: Overseas Locations (Dynamic) */}
           <div className="col-6 col-lg-3">
-            <h5 className="fw-bold mb-4">Services</h5>
-            <div className="footer-links">
-              <a href="#" className="footer-link-new">Precision Lift Installation</a>
-              <a href="#" className="footer-link-new">Smart Control Modernization</a>
-              <a href="#" className="footer-link-new">24/7 Safety Monitoring</a>
-              <a href="#" className="footer-link-new">Commercial Escalators</a>
-              <a href="#" className="footer-link-new">High-Speed Mobility</a>
-              <a href="#" className="footer-link-new">Custom Architecture</a>
+            <h5 className="fw-bold mb-4 text-white text-uppercase tracking-wider" style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}>Branch Locations</h5>
+            <div className="footer-links d-flex flex-column gap-3">
+              {branches.map(branch => (
+                <Link 
+                  key={branch.key} 
+                  to={`/overseas/${branch.key}`} 
+                  className="footer-link-new text-decoration-none d-flex flex-column group"
+                >
+                  <span className="fw-bold text-white-50 d-flex align-items-center gap-1">
+                    <Globe size={12} className="text-primary-dim" style={{ color: '#d4af37' }} /> {branch.name} Office
+                  </span>
+                  <span className="small text-secondary ps-3" style={{ fontSize: '0.75rem' }}>{branch.partner}</span>
+                </Link>
+              ))}
             </div>
           </div>
 
-          {/* Column 4: Contact Info */}
+          {/* Column 4: Head Office Contact Info */}
           <div className="col-lg-3">
-            <h5 className="fw-bold mb-4">Contact Us</h5>
+            <h5 className="fw-bold mb-4 text-white text-uppercase tracking-wider" style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}>Head Office</h5>
             
-            <div className="footer-contact-item">
-              <Clock size={20} />
-              <div>{contactDetails.hours}</div>
-            </div>
-
-            <div className="footer-contact-item">
-              <MapPin size={20} />
-              <div style={{ whiteSpace: 'pre-line' }}>
-                {contactDetails.address}
+            <div className="d-flex flex-column gap-3">
+              <div className="footer-contact-item d-flex gap-3 align-items-start">
+                <Clock size={18} className="mt-1 flex-shrink-0" style={{ color: '#d4af37' }} />
+                <span className="small" style={{ fontSize: '0.85rem' }}>{contactDetails.hours}</span>
               </div>
-            </div>
 
-            <div className="footer-contact-item">
-              <Mail size={20} />
-              <div className="d-flex flex-column">
-                <span>{contactDetails.email1}</span>
-                <span>{contactDetails.email2}</span>
+              <div className="footer-contact-item d-flex gap-3 align-items-start">
+                <MapPin size={18} className="mt-1 flex-shrink-0" style={{ color: '#d4af37' }} />
+                <span className="small" style={{ whiteSpace: 'pre-line', fontSize: '0.85rem', lineHeight: '1.5' }}>
+                  {contactDetails.address}
+                </span>
               </div>
-            </div>
 
-            <div className="footer-contact-item">
-               <Phone size={20} />
-               <div className="d-flex flex-column">
-                  <span>Main: {contactDetails.phoneMain}</span>
-                  <span>Sales: {contactDetails.phoneSales}</span>
-                  <span>Service: {contactDetails.phoneService}</span>
-               </div>
+              <div className="footer-contact-item d-flex gap-3 align-items-start">
+                <Mail size={18} className="mt-1 flex-shrink-0" style={{ color: '#d4af37' }} />
+                <div className="d-flex flex-column small" style={{ fontSize: '0.85rem' }}>
+                  <a href={`mailto:${contactDetails.email1}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.email1}</a>
+                  <a href={`mailto:${contactDetails.email2}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.email2}</a>
+                </div>
+              </div>
+
+              <div className="footer-contact-item d-flex gap-3 align-items-start">
+                 <Phone size={18} className="mt-1 flex-shrink-0" style={{ color: '#d4af37' }} />
+                 <div className="d-flex flex-column small" style={{ fontSize: '0.85rem' }}>
+                    <span><strong>Main:</strong> <a href={`tel:${contactDetails.phoneMain.replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneMain}</a></span>
+                    <span><strong>Sales:</strong> <a href={`tel:${contactDetails.phoneSales.replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneSales}</a></span>
+                    <span><strong>Service:</strong> <a href={`tel:${contactDetails.phoneService.replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneService}</a></span>
+                 </div>
+              </div>
             </div>
           </div>
 
@@ -121,12 +218,12 @@ const Footer = () => {
       </div>
 
       {/* Bottom Copyright Bar */}
-      <div className="copyright-bar">
+      <div className="copyright-bar py-4" style={{ background: '#070b14', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-6 text-center text-md-start">
               <p className="mb-0 small opacity-50">
-                Copyright {new Date().getFullYear()} - Atom Lifts India Pvt Ltd by Designesia
+                Copyright © {new Date().getFullYear()} - Atom Lifts India Pvt Ltd. All Rights Reserved.
               </p>
             </div>
             <div className="col-md-6 text-center text-md-end mt-3 mt-md-0">
@@ -138,9 +235,53 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      <style>{`
+        .bg-dark-lighter { background: rgba(255,255,255,0.02); }
+        .footer-social-btn {
+          width: 38px;
+          height: 38px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.06);
+          color: #94a3b8;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .footer-social-btn:hover {
+          background: var(--hover-color, #d4af37) !important;
+          border-color: var(--hover-color, #d4af37) !important;
+          color: #fff !important;
+          transform: translateY(-3px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+        .footer-link-new {
+          color: #94a3b8;
+          font-size: 0.85rem;
+          transition: all 0.3s ease;
+        }
+        .footer-link-new .link-arrow {
+          opacity: 0;
+          transform: translateX(-5px);
+          transition: all 0.3s ease;
+          color: #d4af37;
+        }
+        .footer-link-new:hover {
+          color: #ffffff !important;
+          padding-left: 2px;
+        }
+        .footer-link-new:hover .link-arrow {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        .hover-primary:hover {
+          color: #d4af37 !important;
+        }
+      `}</style>
     </footer>
   );
 };
-
 
 export default Footer;

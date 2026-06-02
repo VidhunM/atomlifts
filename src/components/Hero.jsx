@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import liftObject from '../assets/lift-object.png';
 import liftBg from '../assets/lift-bg.png';
 import QuoteModal from './QuoteModal';
+import { API_BASE_URL } from '../config';
 
 const Hero = () => {
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [heroFrontImages, setHeroFrontImages] = useState([liftObject]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = API_BASE_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const fetchHeroImages = async () => {

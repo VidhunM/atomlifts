@@ -42,6 +42,7 @@ import AdminApplications from './pages/AdminApplications';
 import AdminLogin from './pages/AdminLogin';
 import AdminTestimonialsStats from './pages/AdminTestimonialsStats';
 import AdminClients from './pages/AdminClients';
+import AdminBranches from './pages/AdminBranches';
 
 const MainLayout = () => (
   <>
@@ -77,6 +78,7 @@ function App() {
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
+            <Route path="branches" element={<AdminBranches />} />
             <Route path="blogs" element={<AdminBlogs />} />
             <Route path="jobs" element={<AdminJobs />} />
             <Route path="applications" element={<AdminApplications />} />

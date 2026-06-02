@@ -5,6 +5,7 @@ import logoImg from '../assets/images/ATOM-Logo02.png';
 import escalatorThumb from '../assets/escalator-hero.png';
 import walkwayThumb from '../assets/moving-walkway-hero.png';
 import QuoteModal from './QuoteModal';
+import { API_BASE_URL } from '../config';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,14 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  const [overseasDropdown, setOverseasDropdown] = useState([
+    { name: 'Maldives', path: '/overseas/maldives' },
+    { name: 'Oman', path: '/overseas/oman' },
+    { name: 'Saudi Arabia', path: '/overseas/saudi-arabia' },
+    { name: 'Sri Lanka', path: '/overseas/srilanka' },
+    { name: 'UAE', path: '/overseas/uae' },
+  ]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,6 +40,34 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  useEffect(() => {
+    const fetchOverseasBranches = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/settings/overseasBranches`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            try {
+              const parsed = JSON.parse(data.value);
+              const items = Object.keys(parsed).map(key => ({
+                name: parsed[key].name,
+                path: `/overseas/${key}`
+              }));
+              if (items.length > 0) {
+                setOverseasDropdown(items);
+              }
+            } catch (e) {
+              console.error('Error parsing overseas branches JSON:', e);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching overseas branches settings:', error);
+      }
+    };
+    fetchOverseasBranches();
+  }, []);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -85,13 +122,7 @@ const Header = () => {
     {
       name: 'Overseas',
       path: '#',
-      dropdown: [
-        { name: 'Maldives', path: '/overseas/maldives' },
-        { name: 'Oman', path: '/overseas/oman' },
-        { name: 'Saudi Arabia', path: '/overseas/saudi-arabia' },
-        { name: 'Sri Lanka', path: '/overseas/srilanka' },
-        { name: 'UAE', path: '/overseas/uae' },
-      ]
+      dropdown: overseasDropdown
     },
     { name: 'About', path: '/about' },
     { name: 'Careers', path: '/careers' },

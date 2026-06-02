@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Briefcase, Mail, MessageSquare, Upload, Trash2, Image as ImageIcon, Plus, Video, Users } from 'lucide-react';
+import { FileText, Briefcase, Mail, MessageSquare, Upload, Trash2, Image as ImageIcon, Plus, Video, Users, Globe } from 'lucide-react';
 import { API_BASE_URL } from '../config';
 
 const AdminDashboard = () => {
@@ -128,6 +128,8 @@ const AdminDashboard = () => {
       setErrorMsg('An error occurred while saving.');
     }
   };
+
+
 
   const handleHeroImageUpload = async (index, e) => {
     const file = e.target.files[0];
@@ -592,6 +594,8 @@ const AdminDashboard = () => {
           </div>
         </div>
       </div>
+
+
 
       {successMsg && (
         <div className="alert alert-success bg-success bg-opacity-10 border-success border-opacity-25 text-success rounded-3 mb-4 py-2.5 px-3 small animate-fade-in">

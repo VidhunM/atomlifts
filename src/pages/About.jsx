@@ -1,7 +1,7 @@
 
 import { 
   CheckCircle2, Trophy, Clock, Users, Lightbulb, Eye, Target, Goal, Heart,
-  User, Zap, Box, Home, Hospital, Info, HardHat, Car, Accessibility, Wind, Utensils, Compass
+  User, Zap, Box, Home, Hospital, Info, HardHat, Car, Accessibility, Wind, Utensils, Compass, Gem, ArrowRight
 } from 'lucide-react';
 import { useState } from 'react';
 import aboutHero from '../assets/about-hero.png';
@@ -18,9 +18,9 @@ const About = () => {
   const [activeTab, setActiveTab] = useState('Mission');
 
   const teamMembers = [
-    { name: "Mr. Rajendran", title: "Chairman", img: team1 },
+    { name: "Mr. Saravanan", title: "Chairman and Managing Director", img: team3 },
     { name: "Mr. Balagurusamy", title: "Director", img: team2 },
-    { name: "Mr. Saravanan", title: "Director", img: team3 }
+    { name: "Mr. Rajendran", title: "", img: team1 }
   ];
 
   const liftRange = [
@@ -127,43 +127,96 @@ const About = () => {
       {/* 3rd Section: Values / Grid Layout */}
       <section className="values-section py-5 my-lg-5">
         <div className="container">
-          <div className="row g-5 align-items-center">
-            <div className="col-lg-6" data-aos="fade-right">
-              <div className="about-grid-layout position-relative">
-                <div className="row g-3">
-                  <div className="col-6"><img src={val1} className="w-100 rounded mb-1" style={{ height: '220px', objectFit: 'cover' }} alt="Detail 1" /></div>
-                  <div className="col-6"><img src={val2} className="w-100 rounded mb-1" style={{ height: '220px', objectFit: 'cover' }} alt="Detail 2" /></div>
-                  <div className="col-6"><img src={val3} className="w-100 rounded" style={{ height: '220px', objectFit: 'cover' }} alt="Detail 3" /></div>
-                  <div className="col-6"><img src={val4} className="w-100 rounded" style={{ height: '220px', objectFit: 'cover' }} alt="Detail 4" /></div>
-                </div>
-                <div className="established-box">
-                  <div className="box-content">
-                    <h2 className="fw-900 mb-0">2008</h2>
-                    <p className="small mb-0 text-uppercase tracking-wider">Established</p>
+          
+          {/* Section Header */}
+          <div className="text-center mb-5" data-aos="fade-up">
+            <h6 className="text-primary text-uppercase tracking-widest fw-800 mb-3 small" style={{ letterSpacing: '0.15em' }}>OUR FOUNDATION</h6>
+            <h2 className="display-4 fw-900 text-white mb-5 text-uppercase">Precision Driven by <span className="text-primary">Innovation</span></h2>
+          </div>
+
+          <div className="row g-4 justify-content-center">
+            
+            {/* Card 1: Our Vision */}
+            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div className="foundation-card position-relative overflow-hidden rounded-4 shadow-2xl transition-all" style={{
+                height: '420px',
+                background: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url(${val1}) no-repeat center center`,
+                backgroundSize: 'cover'
+              }}>
+                <div className="card-inner-content d-flex flex-column align-items-center justify-content-center h-100 text-center p-4">
+                  <div className="icon-badge mb-4">
+                    <Eye size={48} className="text-white opacity-90" />
+                  </div>
+                  <h3 className="text-white fw-800 display-6 mb-3">Our Vision</h3>
+                  <div className="arrow-box transition-all">
+                    <ArrowRight size={28} className="text-white opacity-80" />
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-lg-6" data-aos="fade-left">
-              <div className="ps-lg-5">
-                <h6 className="text-primary text-uppercase tracking-widest fw-800 mb-3 small">OUR FOUNDATION</h6>
-                <h2 className="display-6 fw-800 text-white mb-5 text-uppercase">Precision Driven by <span className="text-primary">Innovation</span></h2>
-                <div className="values-tabs">
-                  <div className="tabs-header d-flex flex-wrap gap-2 mb-4">
-                    {Object.keys(valuesData).map((tab) => (
-                      <button key={tab} onClick={() => setActiveTab(tab)} className={`tab-btn ${activeTab === tab ? 'active' : ''}`}>{tab}</button>
-                    ))}
-                  </div>
-                  <div className="tab-content-box p-4 glass-card-dark fade-in-up" key={activeTab}>
-                    <div className="d-flex align-items-center gap-3 mb-4">
-                      <div className="icon-circle">{valuesData[activeTab].icon}</div>
-                      <h4 className="text-white fw-bold mb-0">{activeTab}</h4>
-                    </div>
-                    <p className="text-white-50 leading-relaxed">{valuesData[activeTab].content}</p>
-                  </div>
+
+                {/* Sliding Info Overlay on Hover */}
+                <div className="hover-sliding-panel position-absolute w-100 h-100 top-0 left-0 p-4 d-flex flex-column align-items-center justify-content-center text-center transition-all">
+                  <h4 className="text-primary fw-bold mb-3 text-uppercase small tracking-widest">Our Vision</h4>
+                  <p className="text-white opacity-90 small leading-relaxed mb-0">
+                    To be the global leader in vertical transportation by revolutionizing urban mobility through intelligent engineering and sustainable design. We envision a future where elevators and escalators are perfectly integrated into the smart city fabric, providing seamless and eco-friendly transit for generations to come.
+                  </p>
                 </div>
               </div>
             </div>
+
+            {/* Card 2: Our Mission */}
+            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div className="foundation-card position-relative overflow-hidden rounded-4 shadow-2xl transition-all" style={{
+                height: '420px',
+                background: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url(${val2}) no-repeat center center`,
+                backgroundSize: 'cover'
+              }}>
+                <div className="card-inner-content d-flex flex-column align-items-center justify-content-center h-100 text-center p-4">
+                  <div className="icon-badge mb-4">
+                    <Target size={48} className="text-white opacity-90" />
+                  </div>
+                  <h3 className="text-white fw-800 display-6 mb-3">Our Mission</h3>
+                  <div className="arrow-box transition-all">
+                    <ArrowRight size={28} className="text-white opacity-80" />
+                  </div>
+                </div>
+
+                {/* Sliding Info Overlay on Hover */}
+                <div className="hover-sliding-panel position-absolute w-100 h-100 top-0 left-0 p-4 d-flex flex-column align-items-center justify-content-center text-center transition-all">
+                  <h4 className="text-primary fw-bold mb-3 text-uppercase small tracking-widest">Our Mission</h4>
+                  <p className="text-white opacity-90 small leading-relaxed mb-0">
+                    To design, manufacture, and maintain high-quality elevators and escalators with cutting-edge technology, uncompromising safety, and exceptional service — powered by innovation, integrity, and excellence. We strive to build long-term partnerships through transparent sustainable engineering practices.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3: Our Values */}
+            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div className="foundation-card position-relative overflow-hidden rounded-4 shadow-2xl transition-all" style={{
+                height: '420px',
+                background: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.75)), url(${val4}) no-repeat center center`,
+                backgroundSize: 'cover'
+              }}>
+                <div className="card-inner-content d-flex flex-column align-items-center justify-content-center h-100 text-center p-4">
+                  <div className="icon-badge mb-4">
+                    <Gem size={48} className="text-white opacity-90" />
+                  </div>
+                  <h3 className="text-white fw-800 display-6 mb-3">Our Values</h3>
+                  <div className="arrow-box transition-all">
+                    <ArrowRight size={28} className="text-white opacity-80" />
+                  </div>
+                </div>
+
+                {/* Sliding Info Overlay on Hover */}
+                <div className="hover-sliding-panel position-absolute w-100 h-100 top-0 left-0 p-4 d-flex flex-column align-items-center justify-content-center text-center transition-all">
+                  <h4 className="text-primary fw-bold mb-3 text-uppercase small tracking-widest">Our Values</h4>
+                  <p className="text-white opacity-90 small leading-relaxed mb-0">
+                    We promise uncompromising reliability and absolute safety in every lift we manufacture. At AtomLifts, we stand by our installations for their entire lifecycle, offering transparent communication and a commitment to excellence that makes us more than just a vendor—we are your dedicated mobility partner.
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -200,20 +253,30 @@ const About = () => {
           </div>
           
           <div className="row g-5 justify-content-center">
-            {teamMembers.map((member, i) => (
-              <div className="col-lg-4 col-md-6" key={i} data-aos="fade-up" data-aos-delay={i * 100}>
-                <div className="team-card-new position-relative overflow-hidden">
-                  <div className="team-img-container">
-                    <img src={member.img} alt={member.name} className="w-100 team-img-professional" />
-                    <div className="team-overlay-gradient"></div>
-                  </div>
-                  <div className="team-info-overlay text-center pb-4">
-                    <h4 className="text-white fw-900 mb-1">{member.name}</h4>
-                    <p className="text-primary fw-bold text-uppercase small tracking-widest mb-0">{member.title}</p>
+            {teamMembers.map((member, i) => {
+              const isRajendran = member.name === "Mr. Rajendran";
+              return (
+                <div className="col-lg-4 col-md-6" key={i} data-aos="fade-up" data-aos-delay={i * 100}>
+                  <div className="team-card-new position-relative overflow-hidden" style={{ height: '450px' }}>
+                    <div className="team-img-container h-100 d-flex align-items-center justify-content-center" style={{ background: '#141b2b' }}>
+                      {!isRajendran ? (
+                        <img src={member.img} alt={member.name} className="w-100 team-img-professional" />
+                      ) : (
+                        <div className="text-center p-4">
+                          <Users size={64} className="text-primary mb-3 opacity-25" />
+                          <p className="text-secondary small tracking-widest mb-0 text-uppercase fw-bold" style={{ fontSize: '0.65rem', opacity: 0.5 }}>Executive Advisor</p>
+                        </div>
+                      )}
+                      <div className="team-overlay-gradient"></div>
+                    </div>
+                    <div className="team-info-overlay text-center pb-4">
+                      <h4 className="text-white fw-900 mb-1">{member.name}</h4>
+                      {member.title && <p className="text-primary fw-bold text-uppercase small tracking-widest mb-0">{member.title}</p>}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -242,24 +305,68 @@ const About = () => {
       <style>{`
         .icon-box-stat { background:rgba(248,192,45,0.1); border:1px solid rgba(248,192,45,0.2); border-radius:4px; }
         .about-grid-layout { padding: 15px; }
-        .established-box {
-          position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-          background: var(--primary); width: 140px; height: 140px;
-          display: flex; align-items: center; justify-content: center;
-          text-align: center; color: var(--dark); border-radius: 4px;
-          box-shadow: 0 0 40px rgba(0,0,0,0.5); z-index: 5;
+
+        /* Premium MNC-style Foundation Cards */
+        .foundation-card {
+          border: 1px solid rgba(255, 255, 255, 0.08) !important;
+          transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+          cursor: pointer;
         }
-        .established-box h2 { font-size: 2rem; font-weight: 900; }
-        .tab-btn {
-          background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-          color: white; padding: 10px 20px; font-weight: 700; font-size: 0.8rem;
-          text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+        .foundation-card:hover {
+          transform: translateY(-8px) scale(1.02);
+          border-color: var(--primary) !important;
+          box-shadow: 0 30px 60px rgba(0,0,0,0.5) !important;
         }
-        .tab-btn.active { background: var(--primary); color: var(--dark); border-color: var(--primary); }
-        .icon-circle {
-          width: 50px; height: 50px; background: rgba(248,192,45,0.15);
-          color: var(--primary); display: flex; align-items: center; justify-content: center;
+        .card-inner-content {
+          transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .foundation-card:hover .card-inner-content {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        .hover-sliding-panel {
+          background: rgba(10, 15, 29, 0.96);
+          backdrop-filter: blur(15px);
+          -webkit-backdrop-filter: blur(15px);
+          transform: translateY(100%);
+          transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+          border-top: 3px solid var(--primary);
+          z-index: 5;
+        }
+        .foundation-card:hover .hover-sliding-panel {
+          transform: translateY(0);
+        }
+        .arrow-box {
+          border: 2px solid rgba(255, 255, 255, 0.25);
           border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .foundation-card:hover .arrow-box {
+          background: var(--primary);
+          border-color: var(--primary);
+          color: var(--dark) !important;
+          transform: rotate(-45deg);
+        }
+        .icon-badge {
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          width: 90px;
+          height: 90px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+          transition: all 0.5s ease;
+        }
+        .foundation-card:hover .icon-badge {
+          transform: scale(1.08);
+          border-color: var(--primary);
         }
         .lift-range-card {
           background: #141b2b; border: 1px solid rgba(255,255,255,0.05);
@@ -273,7 +380,7 @@ const About = () => {
         }
         .lift-range-card:hover .lift-icon-box { background: var(--primary); color: var(--dark); }
         .small-title { font-size: 0.95rem; }
-
+ 
         .team-card-new { border-radius: 4px; transition: 0.5s; }
         .team-img-container { position: relative; overflow: hidden; background: #1a2436; }
         .team-img-professional { 
@@ -295,15 +402,14 @@ const About = () => {
           transform: translateY(5px);
         }
         .team-card-new:hover .team-info-overlay { transform: translateY(0); }
-
+ 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in-up { animation: fadeInUp 0.5s ease forwards; }
         
         @media (max-width: 991px) { 
           .team-img-professional { height: 350px; }
-          .established-box { width: 100px; height: 100px; }
-          .established-box h2 { font-size: 1.5rem; }
-        }
+          .established-box-premium { width: 100px; height: 100px; }
+          .established-box-premium h2 { font-size: 1.5rem; }
       `}</style>
     </div>
   );
