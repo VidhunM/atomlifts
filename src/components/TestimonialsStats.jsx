@@ -1,5 +1,9 @@
 import { Star } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import user1 from '../assets/testimonial_user1.png';
+import user2 from '../assets/testimonial_user2.png';
+import user3 from '../assets/testimonial_user3.png';
+import { API_BASE_URL } from '../config';
 
 const Counter = ({ end, duration = 2000, suffix = "" }) => {
   const [count, setCount] = useState(0);
@@ -44,19 +48,22 @@ const Counter = ({ end, duration = 2000, suffix = "" }) => {
 // Fallback high-quality static defaults
 const defaultTestimonials = [
   {
-    text: "The precision of Atomlifts engineering is unmatched. Every floor transition is seamless, safe, and whisper-quiet. A true vertical breakthrough.",
-    author: "Richard V.",
-    location: "Mumbai, India"
+    text: "Atomlifts installed our commercial lifts with sub-millimeter precision. The quality is outstanding, and their 24/7 service support gives us total peace of mind.",
+    author: "Rajesh Kumar",
+    location: "Chennai, India",
+    image: user1
   },
   {
-    text: "Innovating the core of our building was easy with their smart systems. The real-time monitoring gives our facility managers total peace of mind.",
-    author: "Elena M.",
-    location: "Dubai, UAE"
+    text: "As an architect, I demand absolute visual precision and aesthetic integration. The custom panoramic glass elevator designed by Atom is a masterpiece.",
+    author: "Priya Sharma",
+    location: "Mumbai, India",
+    image: user2
   },
   {
-    text: "From logistics to luxury, their vertical mobility solutions are high-speed, high-tech, and high-impact. The best in the business.",
-    author: "Marcus K.",
-    location: "Berlin, Germany"
+    text: "We chose Atomlifts for our luxury villa project. Their gearless MRL technology is incredibly quiet, smooth, and fits perfectly in a compact shaft space.",
+    author: "Vikram Malhotra",
+    location: "Bangalore, India",
+    image: user3
   }
 ];
 
@@ -73,7 +80,15 @@ const TestimonialsStats = () => {
   const [stats, setStats] = useState(defaultStats);
   const sliderRef = useRef(null);
   
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = API_BASE_URL || 'http://localhost:5000';
+  
+  const resolveImageUrl = (img) => {
+    if (!img) return '';
+    if (img.startsWith('/uploads') || img.startsWith('uploads')) {
+      return `${backendUrl}${img.startsWith('/') ? '' : '/'}${img}`;
+    }
+    return img;
+  };
 
   useEffect(() => {
     const fetchDynamicData = async () => {
@@ -157,13 +172,25 @@ const TestimonialsStats = () => {
                    {(activeIndex + 1).toString().padStart(2, '0')}
                  </div>
                  
-                 <div className="fade-in-up" key={activeIndex}>
-                   <h2 className="testimonial-quote display-5 fw-bold text-white mb-4 leading-tight italic">
-                     "{testimonials[activeIndex]?.text}"
-                   </h2>
-                   <h5 className="text-primary fw-bold mb-1">{testimonials[activeIndex]?.author}</h5>
-                   <p className="text-white-50 small tracking-widest text-uppercase">{testimonials[activeIndex]?.location}</p>
-                 </div>
+                  <div className="fade-in-up" key={activeIndex}>
+                    <h2 className="testimonial-quote display-5 fw-bold text-white mb-4 leading-tight italic">
+                      "{testimonials[activeIndex]?.text}"
+                    </h2>
+                    <div className="d-flex align-items-center justify-content-center gap-3">
+                      {testimonials[activeIndex]?.image && (
+                        <img 
+                          src={resolveImageUrl(testimonials[activeIndex]?.image)} 
+                          alt={testimonials[activeIndex]?.author} 
+                          className="rounded-circle border border-primary p-0.5" 
+                          style={{ width: '55px', height: '55px', objectFit: 'cover' }}
+                        />
+                      )}
+                      <div className="text-start">
+                        <h5 className="text-primary fw-bold mb-0">{testimonials[activeIndex]?.author}</h5>
+                        <p className="text-white-50 small tracking-widest text-uppercase mb-0">{testimonials[activeIndex]?.location}</p>
+                      </div>
+                    </div>
+                  </div>
               </div>
             )}
 
@@ -188,7 +215,7 @@ const TestimonialsStats = () => {
                   {stat.type === 'image' || stat.image ? (
                     <div className="py-2 d-flex justify-content-center align-items-center">
                       <img 
-                        src={stat.image} 
+                        src={resolveImageUrl(stat.image)} 
                         alt={stat.label} 
                         style={{ 
                           height: '60px', 

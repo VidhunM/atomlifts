@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Star, Trash2, Edit2, Plus, X, Upload, Image as ImageIcon, MessageSquare, BarChart3, ArrowUp, ArrowDown } from 'lucide-react';
 
+import { API_BASE_URL } from '../config';
+
 const AdminTestimonialsStats = () => {
   const [activeTab, setActiveTab] = useState('testimonials');
   const [testimonials, setTestimonials] = useState([]);
@@ -11,7 +13,7 @@ const AdminTestimonialsStats = () => {
   const [isTestimonialFormOpen, setIsTestimonialFormOpen] = useState(false);
   const [editingTestimonialId, setEditingTestimonialId] = useState(null);
   const [testimonialData, setTestimonialData] = useState({
-    text: '', author: '', location: '', rating: 5
+    text: '', author: '', location: '', rating: 5, image: ''
   });
 
   // Stats state
@@ -22,7 +24,7 @@ const AdminTestimonialsStats = () => {
     label: '', type: 'counter', value: 0, suffix: '', image: '', isIcon: false, displayOrder: 0
   });
 
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = API_BASE_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchData();
@@ -51,12 +53,36 @@ const AdminTestimonialsStats = () => {
     setTestimonialData({ ...testimonialData, [e.target.name]: e.target.value });
   };
 
+  const handleTestimonialFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formDataUpload = new FormData();
+    formDataUpload.append('image', file);
+    setUploading(true);
+
+    try {
+      const response = await fetch(`${backendUrl}/api/upload`, {
+        method: 'POST',
+        body: formDataUpload,
+      });
+      const data = await response.text();
+      setTestimonialData({ ...testimonialData, image: data });
+      setUploading(false);
+    } catch (error) {
+      console.error('Error uploading testimonial photo:', error);
+      alert('Upload failed');
+      setUploading(false);
+    }
+  };
+
   const handleEditTestimonial = (testimonial) => {
     setTestimonialData({
       text: testimonial.text,
       author: testimonial.author,
       location: testimonial.location,
-      rating: testimonial.rating || 5
+      rating: testimonial.rating || 5,
+      image: testimonial.image || ''
     });
     setEditingTestimonialId(testimonial._id);
     setIsTestimonialFormOpen(true);
@@ -99,7 +125,7 @@ const AdminTestimonialsStats = () => {
   };
 
   const resetTestimonialForm = () => {
-    setTestimonialData({ text: '', author: '', location: '', rating: 5 });
+    setTestimonialData({ text: '', author: '', location: '', rating: 5, image: '' });
     setEditingTestimonialId(null);
     setIsTestimonialFormOpen(false);
   };
@@ -151,7 +177,7 @@ const AdminTestimonialsStats = () => {
         body: formDataUpload,
       });
       const data = await response.text();
-      setStatData({ ...statData, image: `${backendUrl}${data}` });
+      setStatData({ ...statData, image: data });
       setUploading(false);
     } catch (error) {
       console.error('Error uploading image:', error);
@@ -283,6 +309,28 @@ const AdminTestimonialsStats = () => {
                           <label className="form-label text-secondary small fw-bold text-uppercase">Testimonial Quote</label>
                           <textarea className="form-control bg-dark-lighter text-white border-secondary" name="text" rows="4" value={testimonialData.text} onChange={handleTestimonialChange} required placeholder="Enter the customer review or quote here..."></textarea>
                         </div>
+                        <div className="col-md-12">
+                          <label className="form-label text-secondary small fw-bold text-uppercase">Author Profile Picture</label>
+                          <div className="upload-container glass-card p-3 border border-secondary border-dashed rounded d-flex flex-column flex-sm-row align-items-center gap-3 bg-dark-lighter">
+                            <div className="image-preview-box bg-dark rounded-circle overflow-hidden d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '60px', height: '60px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                              {testimonialData.image ? (
+                                <img src={testimonialData.image.startsWith('/uploads') || testimonialData.image.startsWith('uploads') ? `${backendUrl}${testimonialData.image.startsWith('/') ? '' : '/'}${testimonialData.image}` : testimonialData.image} alt="Preview" className="w-100 h-100 object-fit-cover" />
+                              ) : (
+                                <ImageIcon size={20} className="text-secondary opacity-50" />
+                              )}
+                            </div>
+                            <div className="flex-grow-1 text-center text-sm-start">
+                              <div className="d-flex flex-column flex-sm-row align-items-center gap-2 mb-1">
+                                <label className="btn btn-outline-primary btn-sm d-flex align-items-center gap-2 cursor-pointer">
+                                  <Upload size={12} /> {uploading ? 'Uploading...' : 'Upload Photo'}
+                                  <input type="file" className="d-none" onChange={handleTestimonialFileUpload} accept="image/*" disabled={uploading} />
+                                </label>
+                                {testimonialData.image && <span className="text-success small" style={{ fontSize: '0.75rem' }}><ImageIcon size={12} /> Photo uploaded</span>}
+                              </div>
+                              <p className="text-secondary extra-small mb-0">Square transparent PNG or JPG work best.</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div className="mt-4 mt-md-5 d-flex flex-column-reverse flex-sm-row justify-content-end gap-2 gap-md-3">
                         <button type="button" className="btn btn-outline-secondary px-4 py-2" onClick={resetTestimonialForm}>Cancel</button>
@@ -307,9 +355,14 @@ const AdminTestimonialsStats = () => {
                         <p className="italic text-white-50 small fs-md-6 mb-4">"{t.text}"</p>
                       </div>
                       <div className="d-flex justify-content-between align-items-center pt-3 border-top border-secondary border-opacity-25 mt-auto">
-                        <div className="overflow-hidden me-2">
-                          <h6 className="text-primary fw-bold mb-0 text-truncate">{t.author}</h6>
-                          <small className="text-secondary text-truncate d-block">{t.location}</small>
+                        <div className="d-flex align-items-center gap-2 overflow-hidden me-2">
+                          {t.image && (
+                            <img src={t.image.startsWith('/uploads') || t.image.startsWith('uploads') ? `${backendUrl}${t.image.startsWith('/') ? '' : '/'}${t.image}` : t.image} alt={t.author} className="rounded-circle" style={{ width: '35px', height: '35px', objectFit: 'cover' }} />
+                          )}
+                          <div className="overflow-hidden">
+                            <h6 className="text-primary fw-bold mb-0 text-truncate">{t.author}</h6>
+                            <small className="text-secondary text-truncate d-block" style={{ fontSize: '0.75rem' }}>{t.location}</small>
+                          </div>
                         </div>
                         <div className="d-flex gap-1 gap-md-2 flex-shrink-0">
                           <button className="btn btn-sm btn-icon-edit" onClick={() => handleEditTestimonial(t)}>
@@ -387,7 +440,7 @@ const AdminTestimonialsStats = () => {
                             <div className="upload-container glass-card p-3 border border-secondary border-dashed rounded d-flex flex-column flex-sm-row align-items-center gap-3 gap-md-4 bg-dark-lighter">
                               <div className="image-preview-box bg-dark rounded overflow-hidden d-flex align-items-center justify-content-center flex-shrink-0" style={{ width: '80px', height: '80px', border: '1px solid rgba(255,255,255,0.1)' }}>
                                 {statData.image ? (
-                                  <img src={statData.image} alt="Preview" className="w-100 h-100 object-fit-contain p-2" style={{ filter: 'brightness(0) saturate(100%) invert(80%) sepia(61%) saturate(1131%) hue-rotate(345deg) brightness(101%) contrast(96%)' }} />
+                                  <img src={statData.image.startsWith('/uploads') || statData.image.startsWith('uploads') ? `${backendUrl}${statData.image.startsWith('/') ? '' : '/'}${statData.image}` : statData.image} alt="Preview" className="w-100 h-100 object-fit-contain p-2" style={{ filter: 'brightness(0) saturate(100%) invert(80%) sepia(61%) saturate(1131%) hue-rotate(345deg) brightness(101%) contrast(96%)' }} />
                                 ) : (
                                   <ImageIcon size={28} className="text-secondary opacity-50" />
                                 )}
@@ -432,7 +485,7 @@ const AdminTestimonialsStats = () => {
                         {s.type === 'image' ? (
                           <div className="py-1 py-md-2 d-flex justify-content-center align-items-center">
                             <img 
-                              src={s.image} 
+                              src={s.image.startsWith('/uploads') || s.image.startsWith('uploads') ? `${backendUrl}${s.image.startsWith('/') ? '' : '/'}${s.image}` : s.image} 
                               alt={s.label} 
                               style={{ 
                                 height: '40px', 

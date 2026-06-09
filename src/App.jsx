@@ -34,17 +34,26 @@ import InquiryModal from './components/InquiryModal';
 import { Outlet } from 'react-router-dom';
 import OverseasBranch from './pages/OverseasBranch';
 
+// SEO Pages
+import HomeLiftChennai from './pages/HomeLiftChennai';
+import PassengerLiftManufacturer from './pages/PassengerLiftManufacturer';
+import ElevatorAMC from './pages/ElevatorAMC';
+import LiftModernization from './pages/LiftModernization';
+import HospitalLiftInstallation from './pages/HospitalLiftInstallation';
+
 // Admin Pages
 import AdminLayout from './pages/AdminLayout';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminBlogs from './pages/AdminBlogs';
 import AdminJobs from './pages/AdminJobs';
 import AdminInquiries from './pages/AdminInquiries';
+import AdminCallbacks from './pages/AdminCallbacks';
 import AdminApplications from './pages/AdminApplications';
 import AdminLogin from './pages/AdminLogin';
 import AdminTestimonialsStats from './pages/AdminTestimonialsStats';
 import AdminClients from './pages/AdminClients';
 import AdminBranches from './pages/AdminBranches';
+import AdminAboutStats from './pages/AdminAboutStats';
 
 const MainLayout = () => (
   <>
@@ -83,8 +92,10 @@ function App() {
             <Route path="jobs" element={<AdminJobs />} />
             <Route path="applications" element={<AdminApplications />} />
             <Route path="inquiries" element={<AdminInquiries />} />
+            <Route path="callbacks" element={<AdminCallbacks />} />
             <Route path="testimonials-stats" element={<AdminTestimonialsStats />} />
             <Route path="clients" element={<AdminClients />} />
+            <Route path="about-stats" element={<AdminAboutStats />} />
           </Route>
 
           {/* Public Routes */}
@@ -114,6 +125,13 @@ function App() {
             <Route path="/lifts/parking" element={<ParkingHub />} />
             <Route path="/lifts/parking/car" element={<ParkingSolutions />} />
             <Route path="/overseas/:country" element={<OverseasBranch />} />
+            
+            {/* SEO Landing Pages */}
+            <Route path="/solutions/home-lift-chennai" element={<HomeLiftChennai />} />
+            <Route path="/solutions/passenger-lift-manufacturer" element={<PassengerLiftManufacturer />} />
+            <Route path="/solutions/elevator-amc-services" element={<ElevatorAMC />} />
+            <Route path="/solutions/lift-modernization" element={<LiftModernization />} />
+            <Route path="/solutions/hospital-lift-installation" element={<HospitalLiftInstallation />} />
           </Route>
         </Routes>
       </div>

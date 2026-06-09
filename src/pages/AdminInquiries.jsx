@@ -23,9 +23,26 @@ const AdminInquiries = () => {
     }
   };
 
-  const filteredInquiries = inquiries.filter(item => 
-    filter === 'all' ? true : item.type === filter
-  );
+  const handleDeleteInquiry = async (id) => {
+    if (!window.confirm('Are you sure you want to permanently delete this inquiry?')) return;
+    try {
+      const response = await fetch(`http://localhost:5000/api/inquiries/${id}`, {
+        method: 'DELETE'
+      });
+      if (response.ok) {
+        setInquiries(prev => prev.filter(item => item._id !== id));
+      } else {
+        console.error('Failed to delete inquiry');
+      }
+    } catch (error) {
+      console.error('Error deleting inquiry:', error);
+    }
+  };
+
+  const filteredInquiries = inquiries.filter(item => {
+    if (item.type === 'callback') return false;
+    return filter === 'all' ? true : item.type === filter;
+  });
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -139,6 +156,16 @@ const AdminInquiries = () => {
                           <span className="text-secondary small">Project: <span className="text-white">{inquiry.projectType}</span></span>
                         </div>
                       )}
+                    </div>
+                    
+                    <div className="mt-3">
+                      <button
+                        onClick={() => handleDeleteInquiry(inquiry._id)}
+                        className="btn btn-outline-danger btn-sm d-flex align-items-center gap-1.5"
+                        title="Delete Inquiry"
+                      >
+                        <Trash2 size={15} /> Delete
+                      </button>
                     </div>
                   </div>
                   

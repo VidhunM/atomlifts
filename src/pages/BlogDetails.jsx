@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Calendar, User, Clock, ChevronLeft, Share2, Mail, Globe, MessageSquare, ArrowRight } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const BlogDetails = () => {
   const { slug } = useParams();
@@ -12,15 +13,15 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/blogs');
-        const data = await response.json();
-        const foundPost = data.find(p => p.slug === slug);
+        const backendUrl = API_BASE_URL || 'http://localhost:5000';
+        const response = await fetch(`${backendUrl}/api/blogs/${slug}`);
         
-        if (foundPost) {
-          const createdAtDate = new Date(foundPost.createdAt);
+        if (response.ok) {
+          const foundPost = await response.json();
+          const dateToUse = new Date(foundPost.publishedDate || foundPost.createdAt);
           setPost({
             ...foundPost,
-            dateFormatted: `${createdAtDate.getDate()} ${createdAtDate.toLocaleString('default', { month: 'short' })} ${createdAtDate.getFullYear()}`
+            dateFormatted: `${dateToUse.toLocaleString('en-US', { month: 'long' })} ${dateToUse.getDate()}, ${dateToUse.getFullYear()}`
           });
         } else {
           setError('Post not found');
@@ -64,10 +65,10 @@ const BlogDetails = () => {
           <div className="detail-hero-overlay"></div>
         </div>
 
-        <div className="container position-relative z-10 pt-150">
+        <div className="container position-relative z-10 pt-5">
           <div className="row justify-content-center">
-            <div className="col-lg-10">
-              <Link to="/blog" className="back-link d-inline-flex align-items-center mb-4 text-primary text-decoration-none fw-bold">
+            <div className="col-lg-12 text-center">
+              <Link to="/blog" className="back-link d-inline-flex align-items-center mb-4 text-primary text-decoration-none fw-bold justify-content-center">
                 <ChevronLeft size={18} className="me-1" /> BACK TO INSIGHTS
               </Link>
               <div className="mb-4">
@@ -76,7 +77,7 @@ const BlogDetails = () => {
               <h1 className="display-3 fw-900 text-white mb-5 post-title-main">
                 {post.title}
               </h1>
-              <div className="d-flex flex-wrap gap-4 text-white-50 small fw-bold">
+              <div className="d-flex flex-wrap gap-4 text-white-50 small fw-bold justify-content-center">
                 <div className="d-flex align-items-center"><Calendar size={16} className="me-2 text-primary" /> {post.dateFormatted}</div>
                 <div className="d-flex align-items-center"><User size={16} className="me-2 text-primary" /> {post.author?.name}</div>
                 <div className="d-flex align-items-center"><Clock size={16} className="me-2 text-primary" /> {post.readTime}</div>
@@ -90,7 +91,7 @@ const BlogDetails = () => {
       <section className="blog-content-section py-5 mt-5">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-lg-8">
+            <div className="col-lg-12">
               <div className="blog-post-body text-white-50 fs-5 leading-relaxed" dangerouslySetInnerHTML={{ __html: post.content }}>
               </div>
 
@@ -117,13 +118,14 @@ const BlogDetails = () => {
       </section>
 
       <style>{`
-        .pt-150 { padding-top: 180px; }
-        
         .blog-detail-hero {
-          min-height: 80vh;
+          min-height: 55vh;
           display: flex;
-          align-items: flex-end;
-          padding-bottom: 80px;
+          align-items: center;
+          justify-content: center;
+          padding-top: 120px;
+          padding-bottom: 60px;
+          position: relative;
         }
 
         .detail-hero-img-wrapper {
@@ -135,13 +137,14 @@ const BlogDetails = () => {
         .detail-hero-img {
           width: 100%; height: 100%;
           object-fit: cover;
-          filter: brightness(0.4) saturate(0.8);
+          object-position: center;
+          filter: brightness(0.85) contrast(1.02);
         }
 
         .detail-hero-overlay {
           position: absolute;
-          bottom: 0; left: 0; width: 100%; height: 70%;
-          background: linear-gradient(to top, var(--dark) 0%, transparent 100%);
+          top: 0; left: 0; width: 100%; height: 100%;
+          background: linear-gradient(to bottom, rgba(5, 5, 5, 0.15) 0%, rgba(5, 5, 5, 0.8) 100%);
         }
 
         .category-badge {
@@ -161,6 +164,10 @@ const BlogDetails = () => {
           text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
+        .blog-post-body {
+          text-align: left;
+        }
+
         .blog-post-body h4 {
           color: white;
           font-weight: 800;
@@ -171,6 +178,16 @@ const BlogDetails = () => {
         .blog-post-body p {
           margin-bottom: 25px;
           line-height: 1.8;
+          text-align: left;
+        }
+
+        .blog-post-body img {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin: 30px auto;
+          border-radius: 8px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .blog-post-body blockquote {

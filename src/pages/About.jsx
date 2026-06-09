@@ -1,11 +1,13 @@
 
 import { 
   CheckCircle2, Trophy, Clock, Users, Lightbulb, Eye, Target, Goal, Heart,
-  User, Zap, Box, Home, Hospital, Info, HardHat, Car, Accessibility, Wind, Utensils, Compass, Gem, ArrowRight
+  User, Zap, Box, Home, Hospital, Info, HardHat, Car, Accessibility, Wind, Utensils, Compass, Gem, ArrowRight,
+  Award, TrendingUp, Gauge, Building2
 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { API_BASE_URL } from '../config';
 import aboutHero from '../assets/about-hero.png';
-import aboutTeam from '../assets/about-team.png';
+import aboutTeam from '../assets/about_team_new.png';
 import val1 from '../assets/val-1.png';
 import val2 from '../assets/val-2.png';
 import val3 from '../assets/val-3.png';
@@ -14,8 +16,79 @@ import team1 from '../assets/team-1.png';
 import team2 from '../assets/team-2.png';
 import team3 from '../assets/team-3.png';
 
+const Counter = ({ end, duration = 2000, suffix = "", decimals = 0 }) => {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(null);
+
+  useEffect(() => {
+    let timer = null;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        if (timer) clearInterval(timer);
+        let start = 0;
+        const increment = end / (duration / 16);
+        timer = setInterval(() => {
+          start += increment;
+          if (start >= end) {
+            setCount(end);
+            clearInterval(timer);
+            timer = null;
+          } else {
+            setCount(decimals > 0 ? parseFloat(start.toFixed(decimals)) : Math.floor(start));
+          }
+        }, 16);
+      } else {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+        setCount(0);
+      }
+    }, { threshold: 0.1 });
+
+    if (countRef.current) observer.observe(countRef.current);
+    return () => {
+      if (timer) clearInterval(timer);
+      observer.disconnect();
+    };
+  }, [end, duration, decimals]);
+
+  return <span ref={countRef}>{count}{suffix}</span>;
+};
+
 const About = () => {
   const [activeTab, setActiveTab] = useState('Mission');
+  const [stats, setStats] = useState({
+    awards: 250,
+    riders: 10,
+    uptime: 99.9,
+    lifts: 15
+  });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/settings/aboutStats`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            const parsed = JSON.parse(data.value);
+            if (parsed) {
+              setStats({
+                awards: parsed.awards ?? 250,
+                riders: parsed.riders ?? 10,
+                uptime: parsed.uptime ?? 99.9,
+                lifts: parsed.lifts ?? 15
+              });
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching stats:", error);
+      }
+    };
+    fetchStats();
+  }, []);
 
   const teamMembers = [
     { name: "Mr. Saravanan", title: "Chairman and Managing Director", img: team3 },
@@ -105,7 +178,7 @@ const About = () => {
                 with Mr. Saravanan & Mr. Balagurusamy appointed as its Directors.
               </p>
               <div className="row g-4 pt-2">
-                {["Global Standards", "Mitsubishi Heritage", "Safety First", "24/7 Response"].map((item, i) => (
+                {["Global Standards", "Atom Heritage", "Safety First", "24/7 Response"].map((item, i) => (
                   <div className="col-sm-6" key={i}>
                     <div className="d-flex align-items-center gap-3">
                       <CheckCircle2 className="text-primary" size={20} />
@@ -285,15 +358,17 @@ const About = () => {
         <div className="container py-5">
           <div className="row g-4 text-center">
             {[
-              { icon: <Trophy />, count: '250+', label: 'Industry Awards' },
-              { icon: <Users />, count: '10M+', label: 'Daily Riders' },
-              { icon: <Clock />, count: '99.9%', label: 'Uptime Rate' },
-              { icon: <CheckCircle2 />, count: '15k+', label: 'Active Lifts' }
+              { icon: <Award />, end: stats.awards, suffix: '+', label: 'Industry Awards' },
+              { icon: <TrendingUp />, end: stats.riders, suffix: 'M+', label: 'Daily Riders' },
+              { icon: <Gauge />, end: stats.uptime, suffix: '%', decimals: 1, label: 'Uptime Rate' },
+              { icon: <Building2 />, end: stats.lifts, suffix: 'k+', label: 'Active Lifts' }
             ].map((stat, i) => (
               <div className="col-md-3" key={i} data-aos="zoom-in" data-aos-delay={i * 100}>
                 <div className="p-4">
                   <div className="text-primary mb-4 d-inline-block p-4 icon-box-stat">{stat.icon}</div>
-                  <h2 className="display-6 fw-800 text-white mb-2">{stat.count}</h2>
+                  <h2 className="display-6 fw-800 text-white mb-2">
+                    <Counter end={stat.end} suffix={stat.suffix} decimals={stat.decimals || 0} />
+                  </h2>
                   <p className="text-white-50 small text-uppercase tracking-widest fw-bold">{stat.label}</p>
                 </div>
               </div>

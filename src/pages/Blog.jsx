@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import blogHero from '../assets/blog-hero.png';
 import blog1 from '../assets/blog-1.png';
+import { API_BASE_URL } from '../config';
 
 const slugify = (text) => {
   return text
@@ -18,16 +19,17 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/blogs')
+    const backendUrl = API_BASE_URL || 'http://localhost:5000';
+    fetch(`${backendUrl}/api/blogs`)
       .then((res) => res.json())
       .then((data) => {
         // Map backend fields to frontend if needed
         const mappedData = data.map(blog => {
-          const createdAtDate = new Date(blog.createdAt);
+          const dateToUse = new Date(blog.publishedDate || blog.createdAt);
           return {
             ...blog,
             id: blog._id,
-            date: `${createdAtDate.getDate()} ${createdAtDate.toLocaleString('default', { month: 'short' })}`,
+            date: `${dateToUse.getDate()} ${dateToUse.toLocaleString('default', { month: 'short' })}`,
             img: blog.imageUrl || blog1
           };
         });
@@ -88,7 +90,7 @@ const Blog = () => {
           <div className="row g-4">
             {blogPosts.map((post, idx) => (
               <div className="col-lg-4 col-md-6" key={post.id} data-aos="fade-up" data-aos-delay={idx * 100}>
-                <Link to={`/blog/${slugify(post.title)}`} className="text-decoration-none">
+                <Link to={`/blog/${post.slug}`} className="text-decoration-none">
                   <div className="blog-card-new">
                     <div className="blog-img-wrapper position-relative overflow-hidden mb-4">
                       <img src={post.img} alt={post.title} className="blog-img w-100" />

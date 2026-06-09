@@ -8,7 +8,7 @@ import AOS from 'aos'
 
 // Initialize AOS
 AOS.init({
-  duration: 1000,
+  duration: 1200,
   once: true,
   easing: 'ease-in-out',
 });

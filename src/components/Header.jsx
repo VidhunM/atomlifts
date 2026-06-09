@@ -139,7 +139,7 @@ const Header = () => {
            <img 
              src={logoImg} 
              alt="Atomlifts Logo" 
-             style={{ height: '40px', objectFit: 'contain' }} 
+             style={{ height: '55px', objectFit: 'contain' }} 
              className="me-2"
            />
         </Link>
@@ -260,7 +260,7 @@ const Header = () => {
             <div className="d-flex align-items-center justify-content-center pb-3 pb-lg-0">
                <button 
                   onClick={() => { setIsQuoteOpen(true); setIsOpen(false); }}
-                  className="btn-premium py-2 px-4 small text-decoration-none border-0"
+                  className="btn-header-quote py-2 px-4 small text-decoration-none border-0"
                >
                   Ask for Quotation
                </button>
@@ -271,11 +271,30 @@ const Header = () => {
       <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
       <style>{`
           .nav-link-custom {
-            color: #475569 !important;
+            color: #ffffff !important;
             transition: all 0.3s ease;
+            opacity: 0.85;
           }
           .nav-link-custom:hover, .nav-link-custom.text-white {
+            color: #ffffff !important;
+            opacity: 1;
+          }
+          
+          .btn-header-quote {
+            background: #D4AF37 !important;
+            color: #0F172A !important;
+            font-weight: 700;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+          }
+          .btn-header-quote:hover {
+            background: #ffffff !important;
             color: #1A365D !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
           }
           .glass-nav-dropdown {
             background: rgba(255, 255, 255, 0.98) !important;
@@ -417,12 +436,12 @@ const Header = () => {
           
           @media (max-width: 991px) {
             .navbar-collapse {
-              background: rgba(255, 255, 255, 0.98);
+              background: rgba(26, 54, 93, 0.98);
               margin: 0 -1rem;
               padding: 20px;
               max-height: 85vh;
               overflow-y: auto;
-              border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+              border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             }
             
             .nav-item {
@@ -433,7 +452,7 @@ const Header = () => {
             
             .glass-nav-dropdown, .mega-menu-box, .custom-dropdown:hover .mega-menu-box {
               position: static !important;
-              background: rgba(15, 23, 42, 0.02) !important;
+              background: rgba(255, 255, 255, 0.03) !important;
               box-shadow: none !important;
               border: none !important;
               width: 100% !important;
@@ -463,7 +482,7 @@ const Header = () => {
             .dropdown-submenu .dropdown-menu {
               position: static !important;
               display: block !important;
-              background: rgba(15, 23, 42, 0.03) !important;
+              background: rgba(255, 255, 255, 0.05) !important;
               margin-left: 0 !important;
               max-height: 0;
               overflow: hidden;
@@ -472,13 +491,16 @@ const Header = () => {
             .dropdown-item {
               padding: 12px !important;
               text-align: center;
-              opacity: 0.7;
+              opacity: 0.75;
               font-size: 0.7rem;
+              color: #ffffff !important;
             }
             
             .dropdown-item:hover {
               padding-left: 12px !important;
               opacity: 1;
+              background: rgba(255, 255, 255, 0.08) !important;
+              color: #ffffff !important;
             }
             
             .submenu-chevron {

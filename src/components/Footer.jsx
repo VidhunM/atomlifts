@@ -88,7 +88,7 @@ const Footer = () => {
         <div className="row g-5 mb-5 pb-4">
           
           {/* Column 1: Brand, Social & Corporate Registration info */}
-          <div className="col-lg-4">
+          <div className="col-lg-3">
             <img src={logoImg} alt="AtomLifts Logo" style={{ height: '55px', marginBottom: '25px', objectFit: 'contain' }} />
             <p className="mb-4 leading-relaxed small-text" style={{ fontSize: '0.95rem', lineHeight: '1.6' }}>
               We are a premier global vertical transportation enterprise, dedicated to the engineering, installation, and smart modernization of high-performance elevators and escalators to ensure absolute safety.
@@ -98,11 +98,11 @@ const Footer = () => {
             <div className="corporate-info d-flex flex-column gap-2 mb-4 p-3 rounded bg-dark-lighter border border-secondary border-opacity-15">
               <div className="d-flex align-items-center gap-2 text-white-50" style={{ fontSize: '0.8rem' }}>
                 <Landmark size={15} className="text-primary" style={{ color: '#d4af37' }} />
-                <span><strong>CIN:</strong> U31908TN2022PTC152345</span>
+                <span><strong>CIN:</strong> U29309TN2022PTC150917</span>
               </div>
               <div className="d-flex align-items-center gap-2 text-white-50" style={{ fontSize: '0.8rem' }}>
                 <ShieldCheck size={15} className="text-primary" style={{ color: '#d4af37' }} />
-                <span><strong>GSTIN:</strong> 33AAFCA4512A1Z9</span>
+                <span><strong>GSTIN:</strong> 33AAWCA7368J1ZZ</span>
               </div>
             </div>
 
@@ -179,8 +179,30 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 3: Overseas Locations (Dynamic) */}
-          <div className="col-6 col-lg-3">
+          {/* Column 3: Specialized Services (SEO Links) */}
+          <div className="col-6 col-lg-2">
+            <h5 className="fw-bold mb-4 text-white text-uppercase tracking-wider" style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}>Specialized Services</h5>
+            <div className="footer-links d-flex flex-column gap-2">
+              <Link to="/solutions/home-lift-chennai" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> Home Lift Chennai
+              </Link>
+              <Link to="/solutions/passenger-lift-manufacturer" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> Passenger Lift
+              </Link>
+              <Link to="/solutions/elevator-amc-services" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> Elevator AMC
+              </Link>
+              <Link to="/solutions/lift-modernization" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> Modernization
+              </Link>
+              <Link to="/solutions/hospital-lift-installation" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
+                <ArrowRight size={12} className="link-arrow" /> Hospital Lifts
+              </Link>
+            </div>
+          </div>
+
+          {/* Column 4: Overseas Locations (Dynamic) */}
+          <div className="col-6 col-lg-2">
             <h5 className="fw-bold mb-4 text-white text-uppercase tracking-wider" style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}>Branch Locations</h5>
             <div className="footer-links d-flex flex-column gap-3">
               {branches.map(branch => (

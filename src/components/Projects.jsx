@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import liftInstallationImg from '../assets/lift_installation.png';
+import liftInstallationImg from '../assets/lift_installation_new.png';
 import factoryProductionImg from '../assets/factory_production.png';
 import completedProjectImg from '../assets/completed_project.png';
 
@@ -51,38 +51,38 @@ const Projects = () => {
   const currentTab = tabsData[activeTab];
 
   return (
-    <section id="projects" className="projects-section py-5 position-relative overflow-hidden" style={{ background: '#0a0f1d' }}>
+    <section id="projects" className="projects-section py-4 position-relative overflow-hidden" style={{ background: '#0a0f1d' }}>
       
       {/* Smoky background glow */}
       <div className="position-absolute" style={{
-        width: '400px', height: '400px',
+        width: '300px', height: '300px',
         background: 'radial-gradient(circle, rgba(13, 202, 240, 0.08) 0%, transparent 70%)',
         top: '-10%', left: '-10%', zIndex: 1
       }}></div>
 
       <div className="position-absolute" style={{
-        width: '400px', height: '400px',
+        width: '300px', height: '300px',
         background: 'radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%)',
         bottom: '-10%', right: '-10%', zIndex: 1
       }}></div>
 
-      <div className="container py-4 position-relative" style={{ zIndex: 5 }}>
+      <div className="container py-2 position-relative" style={{ zIndex: 5 }}>
         
         {/* Section Header */}
-        <div className="row justify-content-center text-center mb-5">
+        <div className="row justify-content-center text-center mb-4">
           <div className="col-lg-9" data-aos="fade-up">
-            <h6 className="text-info text-uppercase tracking-widest fw-800 mb-3 small" style={{ letterSpacing: '0.2em' }}>PROVEN CREDIBILITY</h6>
-            <h2 className="display-4 fw-900 text-white mb-3 text-uppercase">
+            <h6 className="text-info text-uppercase tracking-widest fw-800 mb-2 small" style={{ letterSpacing: '0.2em' }}>PROVEN CREDIBILITY</h6>
+            <h2 className="display-5 fw-900 text-white mb-2 text-uppercase">
               Real Installations & <span className="text-info">Production</span>
             </h2>
-            <p className="text-secondary mx-auto lead" style={{ maxWidth: '650px', fontSize: '1rem' }}>
+            <p className="text-secondary mx-auto lead" style={{ maxWidth: '650px', fontSize: '0.95rem' }}>
               We build trust through authenticity. Explore our actual project site work, completed iconic structures, and clean high-tech manufacturing plant.
             </p>
           </div>
         </div>
 
         {/* Dynamic Tab Navigation Bar */}
-        <div className="d-flex flex-wrap justify-content-center gap-3 mb-5" data-aos="fade-up" data-aos-delay="100">
+        <div className="d-flex flex-wrap justify-content-center gap-3 mb-4" data-aos="fade-up" data-aos-delay="100">
           {[
             { key: 'installations', label: 'Recent Installations' },
             { key: 'completed', label: 'Completed Projects' },
@@ -91,12 +91,12 @@ const Projects = () => {
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`btn px-4 py-3 rounded-3 font-bold text-uppercase tracking-widest transition-all ${
+              className={`btn px-4 py-2.5 rounded-3 font-bold text-uppercase tracking-widest transition-all ${
                 activeTab === tab.key 
                   ? 'btn-info text-dark shadow-lg' 
                   : 'btn-outline-secondary text-secondary border-secondary border-opacity-50 hover-text-white'
               }`}
-              style={{ fontSize: '0.75rem', letterSpacing: '0.1em' }}
+              style={{ fontSize: '0.7rem', letterSpacing: '0.1em' }}
             >
               {tab.label}
             </button>
@@ -104,7 +104,7 @@ const Projects = () => {
         </div>
 
         {/* Tab Content Box */}
-        <div className="row g-5 align-items-center" key={activeTab}>
+        <div className="row g-4 align-items-center" key={activeTab}>
           
           {/* Left: Dynamic Real Photo with floating badges */}
           <div className="col-lg-6" data-aos="fade-right">
@@ -113,7 +113,7 @@ const Projects = () => {
                 src={currentTab.image} 
                 alt={currentTab.title} 
                 className="w-100 object-fit-cover rounded-3 transition-all"
-                style={{ height: '420px', transition: 'all 0.5s' }}
+                style={{ height: '330px', transition: 'all 0.5s' }}
               />
               <div className="position-absolute top-4 left-4 bg-info text-dark fw-bold px-3 py-1.5 rounded-pill shadow-lg small text-uppercase tracking-wider" style={{ top: '20px', left: '20px', fontSize: '0.7rem' }}>
                 {currentTab.badge}
@@ -129,29 +129,29 @@ const Projects = () => {
 
           {/* Right: Technical Specs, Story, and Custom Features */}
           <div className="col-lg-6" data-aos="fade-left">
-            <span className="text-info small fw-bold text-uppercase tracking-widest mb-2 d-block">{currentTab.subtitle}</span>
-            <h3 className="h1 text-white fw-800 mb-4">{currentTab.title}</h3>
+            <span className="text-info extra-small fw-bold text-uppercase tracking-widest mb-1 d-block" style={{ fontSize: '0.65rem' }}>{currentTab.subtitle}</span>
+            <h3 className="h3 text-white fw-800 mb-3">{currentTab.title}</h3>
             
-            <p className="text-secondary lead mb-4" style={{ fontSize: '1rem', lineHeight: '1.7' }}>
+            <p className="text-secondary mb-3" style={{ fontSize: '0.9rem', lineHeight: '1.6' }}>
               {currentTab.desc}
             </p>
 
-            <div className="row g-3">
+            <div className="row g-2">
               {currentTab.features.map((feat, i) => (
                 <div className="col-md-6" key={i}>
-                  <div className="p-3 bg-dark-lighter rounded-3 border border-secondary border-opacity-15 h-100 spec-item-box transition-all">
-                    <span className="text-secondary small d-block mb-1 text-uppercase fw-bold" style={{ fontSize: '0.65rem', letterSpacing: '0.05em' }}>{feat.label}</span>
-                    <span className="text-white fw-bold small">{feat.val}</span>
+                  <div className="p-2 px-3 bg-dark-lighter rounded-3 border border-secondary border-opacity-15 h-100 spec-item-box transition-all">
+                    <span className="text-secondary small d-block mb-1 text-uppercase fw-bold" style={{ fontSize: '0.6rem', letterSpacing: '0.05em' }}>{feat.label}</span>
+                    <span className="text-white fw-bold extra-small" style={{ fontSize: '0.75rem' }}>{feat.val}</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-5 d-flex gap-3 align-items-center">
-              <a href="#quote" className="btn btn-info text-dark fw-bold px-4 py-3 rounded-3 text-uppercase tracking-wider transition-all" style={{ fontSize: '0.75rem' }}>
+            <div className="mt-4 d-flex gap-3 align-items-center">
+              <a href="#quote" className="btn btn-info text-dark fw-bold px-4 py-2.5 rounded-3 text-uppercase tracking-wider transition-all" style={{ fontSize: '0.7rem' }}>
                 Request Consultation
               </a>
-              <span className="text-secondary small font-bold">100% Authentic Imagery</span>
+              <span className="text-secondary extra-small font-bold" style={{ fontSize: '0.65rem' }}>100% Authentic Imagery</span>
             </div>
           </div>
 

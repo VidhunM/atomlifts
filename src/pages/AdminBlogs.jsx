@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Edit2, Trash2, Plus, X, Upload, Image as ImageIcon } from 'lucide-react';
+import RichTextEditor from '../components/RichTextEditor';
+import { API_BASE_URL } from '../config';
 
 const AdminBlogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -10,10 +12,11 @@ const AdminBlogs = () => {
   const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
     title: '', excerpt: '', content: '', category: '', 
-    authorName: '', authorRole: '', readTime: '', imageUrl: '', slug: ''
+    authorName: '', authorRole: '', readTime: '', imageUrl: '', slug: '',
+    publishedDate: new Date().toISOString().split('T')[0]
   });
 
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = API_BASE_URL || 'http://localhost:5000';
 
   useEffect(() => {
     fetchBlogs();
@@ -63,7 +66,8 @@ const AdminBlogs = () => {
     setFormData({
       title: blog.title, excerpt: blog.excerpt, content: blog.content, category: blog.category,
       authorName: blog.author?.name || '', authorRole: blog.author?.role || '',
-      readTime: blog.readTime || '', imageUrl: blog.imageUrl, slug: blog.slug
+      readTime: blog.readTime || '', imageUrl: blog.imageUrl, slug: blog.slug,
+      publishedDate: blog.publishedDate ? new Date(blog.publishedDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]
     });
     setEditingId(blog._id);
     setIsFormOpen(true);
@@ -81,10 +85,15 @@ const AdminBlogs = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const textOnly = formData.content ? formData.content.replace(/<[^>]*>/g, '') : '';
+    const wordCount = textOnly.split(/\s+/).filter(Boolean).length;
+    const autoReadTime = `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
+
     const payload = {
       title: formData.title, excerpt: formData.excerpt, content: formData.content,
-      category: formData.category, readTime: formData.readTime, imageUrl: formData.imageUrl, slug: formData.slug,
-      author: { name: formData.authorName, role: formData.authorRole }
+      category: formData.category, readTime: autoReadTime, imageUrl: formData.imageUrl, slug: formData.slug,
+      author: { name: formData.authorName, role: formData.authorRole },
+      publishedDate: formData.publishedDate
     };
 
     try {
@@ -110,7 +119,7 @@ const AdminBlogs = () => {
   };
 
   const resetForm = () => {
-    setFormData({ title: '', excerpt: '', content: '', category: '', authorName: '', authorRole: '', readTime: '', imageUrl: '', slug: '' });
+    setFormData({ title: '', excerpt: '', content: '', category: '', authorName: '', authorRole: '', readTime: '', imageUrl: '', slug: '', publishedDate: new Date().toISOString().split('T')[0] });
     setEditingId(null);
     setIsFormOpen(false);
   };
@@ -150,13 +159,14 @@ const AdminBlogs = () => {
                   <label className="form-label text-secondary small fw-bold text-uppercase">Category</label>
                   <input type="text" className="form-control bg-dark-lighter text-white border-secondary py-2" name="category" value={formData.category} onChange={handleInputChange} required />
                 </div>
-                <div className="col-md-4">
-                  <label className="form-label text-secondary small fw-bold text-uppercase">Read Time</label>
-                  <input type="text" className="form-control bg-dark-lighter text-white border-secondary py-2" name="readTime" value={formData.readTime} onChange={handleInputChange} placeholder="e.g. 5 min read" />
-                </div>
+
                 <div className="col-md-4">
                   <label className="form-label text-secondary small fw-bold text-uppercase">Author Name</label>
                   <input type="text" className="form-control bg-dark-lighter text-white border-secondary py-2" name="authorName" value={formData.authorName} onChange={handleInputChange} />
+                </div>
+                <div className="col-md-4">
+                  <label className="form-label text-secondary small fw-bold text-uppercase">Publish Date</label>
+                  <input type="date" className="form-control bg-dark-lighter text-white border-secondary py-2" name="publishedDate" value={formData.publishedDate} onChange={handleInputChange} required />
                 </div>
                 
                 <div className="col-12">
@@ -188,8 +198,8 @@ const AdminBlogs = () => {
                   <textarea className="form-control bg-dark-lighter text-white border-secondary" name="excerpt" rows="2" value={formData.excerpt} onChange={handleInputChange} required></textarea>
                 </div>
                 <div className="col-12">
-                  <label className="form-label text-secondary small fw-bold text-uppercase">Blog Content (Supports HTML)</label>
-                  <textarea className="form-control bg-dark-lighter text-white border-secondary" name="content" rows="10" value={formData.content} onChange={handleInputChange} required></textarea>
+                  <label className="form-label text-secondary small fw-bold text-uppercase">Blog Content (Rich Text Editor)</label>
+                  <RichTextEditor value={formData.content} onChange={(html) => setFormData(prev => ({ ...prev, content: html }))} />
                 </div>
               </div>
               <div className="mt-5 d-flex justify-content-end gap-3">
@@ -237,7 +247,7 @@ const AdminBlogs = () => {
                      </span>
                   </td>
                   <td className="px-4 py-3 text-center text-secondary small d-none d-lg-table-cell">
-                     {new Date(blog.createdAt).toLocaleDateString()}
+                     {new Date(blog.publishedDate || blog.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
                   </td>
                   <td className="px-4 py-3 text-end">
                     <button className="btn btn-sm btn-icon-edit me-2" onClick={() => handleEdit(blog)}>
