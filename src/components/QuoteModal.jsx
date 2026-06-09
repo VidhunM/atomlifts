@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Send, Phone, Mail, User, MessageSquare, ChevronDown } from 'lucide-react';
 import escalatorImg from '../assets/escalator-hero.png';
+import { API_BASE_URL } from '../config';
 
 const QuoteModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -23,7 +24,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     setStatus({ type: 'loading', message: 'Submitting...' });
     try {
-      const response = await fetch('http://localhost:5000/api/inquiries', {
+      const response = await fetch(`${API_BASE_URL}/api/inquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, type: 'quote' })

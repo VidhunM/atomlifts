@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Play } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const VisualPrecision = () => {
   const [showVideo, setShowVideo] = useState(false);
   const [videoUrl, setVideoUrl] = useState('https://www.youtube.com/embed/5m3O5PzO4c4?autoplay=1');
   const [isVideoFile, setIsVideoFile] = useState(false);
   
-  const backendUrl = 'http://localhost:5000';
+  const backendUrl = API_BASE_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const fetchVideo = async () => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Mail, Phone, Clock, User, MessageSquare, Filter, RefreshCw, Trash2 } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const AdminInquiries = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -13,7 +14,7 @@ const AdminInquiries = () => {
   const fetchInquiries = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/inquiries');
+      const response = await fetch(`${API_BASE_URL}/api/inquiries`);
       const data = await response.json();
       setInquiries(data);
     } catch (error) {
@@ -26,7 +27,7 @@ const AdminInquiries = () => {
   const handleDeleteInquiry = async (id) => {
     if (!window.confirm('Are you sure you want to permanently delete this inquiry?')) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/inquiries/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/inquiries/${id}`, {
         method: 'DELETE'
       });
       if (response.ok) {

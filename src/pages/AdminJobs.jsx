@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Edit2, Trash2, Plus, X } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const AdminJobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -17,7 +18,7 @@ const AdminJobs = () => {
 
   const fetchJobs = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/jobs/all');
+      const response = await fetch(`${API_BASE_URL}/api/jobs/all`);
       const data = await response.json();
       setJobs(data);
     } catch (error) {
@@ -46,7 +47,7 @@ const AdminJobs = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this job?')) return;
     try {
-      await fetch(`http://localhost:5000/api/jobs/${id}`, { method: 'DELETE' });
+      await fetch(`${API_BASE_URL}/api/jobs/${id}`, { method: 'DELETE' });
       fetchJobs();
     } catch (error) {
       console.error('Error deleting job:', error);
@@ -62,7 +63,7 @@ const AdminJobs = () => {
     };
 
     try {
-      const url = editingId ? `http://localhost:5000/api/jobs/${editingId}` : 'http://localhost:5000/api/jobs';
+      const url = editingId ? `${API_BASE_URL}/api/jobs/${editingId}` : `${API_BASE_URL}/api/jobs`;
       const method = editingId ? 'PUT' : 'POST';
       
       const response = await fetch(url, {
@@ -91,7 +92,7 @@ const AdminJobs = () => {
 
   const toggleStatus = async (job) => {
     try {
-      await fetch(`http://localhost:5000/api/jobs/${job._id}`, {
+      await fetch(`${API_BASE_URL}/api/jobs/${job._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ isActive: !job.isActive })

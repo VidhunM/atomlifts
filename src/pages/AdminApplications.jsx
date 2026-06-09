@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Trash2, ExternalLink, Clock, User, Mail, Phone, FileText } from 'lucide-react';
+import { API_BASE_URL } from '../config';
 
 const AdminApplications = () => {
   const [applications, setApplications] = useState([]);
@@ -11,7 +12,7 @@ const AdminApplications = () => {
 
   const fetchApplications = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/applications');
+      const response = await fetch(`${API_BASE_URL}/api/applications`);
       const data = await response.json();
       setApplications(data);
     } catch (error) {
@@ -24,7 +25,7 @@ const AdminApplications = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this application?')) return;
     try {
-      await fetch(`http://localhost:5000/api/applications/${id}`, { method: 'DELETE' });
+      await fetch(`${API_BASE_URL}/api/applications/${id}`, { method: 'DELETE' });
       fetchApplications();
     } catch (error) {
       console.error('Error deleting application:', error);
@@ -33,7 +34,7 @@ const AdminApplications = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      await fetch(`http://localhost:5000/api/applications/${id}`, {
+      await fetch(`${API_BASE_URL}/api/applications/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status })
@@ -106,7 +107,7 @@ const AdminApplications = () => {
                     <div className="col-md-2 text-end">
                       <div className="d-flex flex-column gap-2">
                         <a 
-                          href={`http://localhost:5000${app.resume}`} 
+                          href={`${API_BASE_URL}${app.resume}`} 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="btn btn-sm btn-outline-primary d-flex align-items-center justify-content-center gap-2"
