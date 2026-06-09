@@ -110,7 +110,7 @@ const Hero = () => {
                 textShadow: '0 10px 30px rgba(0,0,0,0.5)',
                 fontSize: 'clamp(2.2rem, 5vw, 4.5rem)'
               }}>
-                Premium Elevator <span className="text-primary text-gradient">Solutions</span> <br className="d-none d-md-block" /> for Modern Buildings
+                Premium Elevator <span style={{ color: '#FFD700' }}>Solutions</span> <br className="d-none d-md-block" /> for Modern Buildings
               </h1>
 
               {/* Subheading */}
