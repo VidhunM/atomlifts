@@ -270,6 +270,9 @@ const Header = () => {
       </nav>
       <QuoteModal isOpen={isQuoteOpen} onClose={() => setIsQuoteOpen(false)} />
       <style>{`
+          .dropdown-toggle::after {
+            display: none !important;
+          }
           .nav-link-custom {
             color: #ffffff !important;
             transition: all 0.3s ease;
