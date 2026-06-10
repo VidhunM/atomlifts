@@ -56,7 +56,7 @@ const AdminBranches = () => {
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const backendUrl = API_BASE_URL || 'http://localhost:5000';
+  const backendUrl = API_BASE_URL;
 
   useEffect(() => {
     fetchBranches();

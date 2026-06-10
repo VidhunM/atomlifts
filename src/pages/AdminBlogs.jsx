@@ -16,7 +16,7 @@ const AdminBlogs = () => {
     publishedDate: new Date().toISOString().split('T')[0]
   });
 
-  const backendUrl = API_BASE_URL || 'http://localhost:5000';
+  const backendUrl = API_BASE_URL;
 
   useEffect(() => {
     fetchBlogs();

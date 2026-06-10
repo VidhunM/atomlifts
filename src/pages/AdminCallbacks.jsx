@@ -8,7 +8,7 @@ const AdminCallbacks = () => {
   const [filter, setFilter] = useState('all'); // all, pending, contacted
   const [searchQuery, setSearchQuery] = useState('');
 
-  const backendUrl = API_BASE_URL || 'http://localhost:5000';
+  const backendUrl = API_BASE_URL;
 
   useEffect(() => {
     fetchCallbacks();

@@ -24,7 +24,7 @@ const AdminTestimonialsStats = () => {
     label: '', type: 'counter', value: 0, suffix: '', image: '', isIcon: false, displayOrder: 0
   });
 
-  const backendUrl = API_BASE_URL || 'http://localhost:5000';
+  const backendUrl = API_BASE_URL;
 
   useEffect(() => {
     fetchData();

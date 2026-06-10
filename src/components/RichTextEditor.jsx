@@ -5,7 +5,7 @@ import { API_BASE_URL } from '../config';
 const RichTextEditor = ({ value, onChange }) => {
   const editorRef = useRef(null);
   const fileInputRef = useRef(null);
-  const backendUrl = API_BASE_URL || 'http://localhost:5000';
+  const backendUrl = API_BASE_URL;
 
   // Sync internal HTML state with external value when it changes externally
   useEffect(() => {

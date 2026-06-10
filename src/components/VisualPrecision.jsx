@@ -7,7 +7,7 @@ const VisualPrecision = () => {
   const [videoUrl, setVideoUrl] = useState('https://www.youtube.com/embed/5m3O5PzO4c4?autoplay=1');
   const [isVideoFile, setIsVideoFile] = useState(false);
   
-  const backendUrl = API_BASE_URL || 'http://localhost:5000';
+  const backendUrl = API_BASE_URL;
 
   useEffect(() => {
     const fetchVideo = async () => {

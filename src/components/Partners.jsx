@@ -16,7 +16,7 @@ import i13 from '../assets/icons/i1 (13).jpg';
 import i14 from '../assets/icons/i1 (14).jpg';
 
 const Partners = () => {
-  const backendUrl = API_BASE_URL || 'http://localhost:5000';
+  const backendUrl = API_BASE_URL;
   const defaultRow1 = [i1, i2, i3, i4, i5, i6, i7];
   const defaultRow2 = [i8, i9, i10, i11, i12, i13, i14];
 

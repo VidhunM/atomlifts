@@ -19,7 +19,7 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const backendUrl = API_BASE_URL || 'http://localhost:5000';
+    const backendUrl = API_BASE_URL;
     fetch(`${backendUrl}/api/blogs`)
       .then((res) => res.json())
       .then((data) => {

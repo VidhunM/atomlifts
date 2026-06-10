@@ -13,7 +13,7 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const backendUrl = API_BASE_URL || 'http://localhost:5000';
+        const backendUrl = API_BASE_URL;
         const response = await fetch(`${backendUrl}/api/blogs/${slug}`);
         
         if (response.ok) {
