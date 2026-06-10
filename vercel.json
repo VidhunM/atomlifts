@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://3.6.89.246/api/:path*"
+      "destination": "http://3.6.89.246/api/:path*"
     },
     {
       "source": "/uploads/:path*",
-      "destination": "https://3.6.89.246/uploads/:path*"
+      "destination": "http://3.6.89.246/uploads/:path*"
     }
   ]
 }
