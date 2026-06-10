@@ -25,23 +25,32 @@ const AdminLogin = () => {
         credentials: 'include',
         body: JSON.stringify({ 
           username: username.trim(), 
-          password: password.trim() 
+          password: password // Remove .trim() from password
         })
       });
 
       const data = await response.json();
-      console.log('Full login response:', { 
-        status: response.status, 
+      
+      // Improved logging for debugging
+      console.log('Login attempt:', {
+        username: username.trim(),
+        status: response.status,
         ok: response.ok,
-        data: JSON.stringify(data) 
+        data: data
       });
 
-      if (response.ok && data.success) {
-        localStorage.setItem('adminToken', data.token);
-        navigate('/admin');
+      // Be more flexible with the success condition
+      // Many backends just return 200 OK and a token if successful
+      if (response.ok && (data.success !== false)) {
+        if (data.token) {
+          localStorage.setItem('adminToken', data.token);
+          navigate('/admin');
+        } else {
+          setError('Login succeeded but no token was received.');
+        }
       } else {
         // Show the specific error message from the backend if available
-        const errorMsg = data.message || data.error || `Login failed (${response.status}).`;
+        const errorMsg = data.message || data.error || data.success === false && 'Invalid credentials' || `Login failed (${response.status}).`;
         setError(errorMsg);
         console.error('Login error details:', errorMsg);
       }
