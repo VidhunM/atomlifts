@@ -20,20 +20,20 @@ const AdminLogin = () => {
       const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: 'POST',
         headers: { 
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({ username, password })
       });
 
       const data = await response.json();
-      console.log('Login Full Response Data:', data);
+      console.log('Login response:', { status: response.status, data });
 
       if (response.ok && data.success) {
         localStorage.setItem('adminToken', data.token);
         navigate('/admin');
       } else {
-        // Show the actual error message from the backend if available
-        setError(data.message || 'Invalid credentials (401)');
+        setError(data.message || 'Invalid credentials');
       }
     } catch (err) {
       setError('Server error. Please try again later.');
