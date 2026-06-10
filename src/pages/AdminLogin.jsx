@@ -22,8 +22,7 @@ const AdminLogin = () => {
         headers: { 
           'Content-Type': 'application/json'
         },
-        // Removed credentials: 'include' as it can cause CORS/preflight issues on live sites
-        // when using localStorage for tokens.
+        credentials: 'include',
         body: JSON.stringify({ 
           username: username.trim(), 
           password: password.trim() 
