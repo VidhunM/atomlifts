@@ -22,6 +22,7 @@ const AdminLogin = () => {
         headers: { 
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify({ 
           username: username.trim(), 
           password: password.trim() 
@@ -32,7 +33,7 @@ const AdminLogin = () => {
       console.log('Full login response:', { 
         status: response.status, 
         ok: response.ok,
-        data: data 
+        data: JSON.stringify(data) 
       });
 
       if (response.ok && data.success) {
@@ -40,7 +41,9 @@ const AdminLogin = () => {
         navigate('/admin');
       } else {
         // Show the specific error message from the backend if available
-        setError(data.message || `Login failed (${response.status}). Please check your credentials.`);
+        const errorMsg = data.message || data.error || `Login failed (${response.status}).`;
+        setError(errorMsg);
+        console.error('Login error details:', errorMsg);
       }
     } catch (err) {
       setError('Server error. Please try again later.');

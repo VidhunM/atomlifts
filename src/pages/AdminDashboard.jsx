@@ -38,7 +38,9 @@ const AdminDashboard = () => {
 
   const fetchHeroImages = async () => {
     try {
-      const response = await fetch(`${backendUrl}/api/settings/heroFrontImages`);
+      const response = await fetch(`${backendUrl}/api/settings/heroFrontImages`, {
+        credentials: 'include'
+      });
       if (response.ok) {
         const data = await response.json();
         if (data && data.value) {
