@@ -17,27 +17,41 @@ const AdminLogin = () => {
     setError('');
 
     try {
+      // Prepare payload - some backends expect 'email' instead of 'username'
+      const payload = {
+        password: password
+      };
+      
+      // If it looks like an email, send it as both email and username
+      // to cover different backend implementations
+      if (username.includes('@')) {
+        payload.email = username.trim();
+        payload.username = username.trim();
+      } else {
+        payload.username = username.trim();
+        // Also send as email just in case the backend uses 'email' field for the username
+        payload.email = username.trim();
+      }
+
       const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json'
         },
         credentials: 'include',
-        body: JSON.stringify({ 
-          username: username.trim(), 
-          password: password // Remove .trim() from password
-        })
+        body: JSON.stringify(payload)
       });
 
       const data = await response.json();
       
       // Improved logging for debugging
-      console.log('Login attempt:', {
-        username: username.trim(),
-        status: response.status,
-        ok: response.ok,
-        data: data
-      });
+       console.log('Login attempt:', {
+         identifier: username.trim(),
+         payloadKeys: Object.keys(payload),
+         status: response.status,
+         ok: response.ok,
+         data: data
+       });
 
       // Be more flexible with the success condition
       // Many backends just return 200 OK and a token if successful
