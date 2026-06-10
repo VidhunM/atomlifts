@@ -19,11 +19,15 @@ const AdminLogin = () => {
     try {
       const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ username, password })
       });
 
       const data = await response.json();
+      console.log('Login response:', { status: response.status, data });
 
       if (response.ok && data.success) {
         localStorage.setItem('adminToken', data.token);
