@@ -65,9 +65,7 @@ const Footer = () => {
                 name: parsed[key].name,
                 partner: parsed[key].partner
               }));
-              if (items.length > 0) {
-                setBranches(items);
-              }
+              setBranches(items);
             } catch (e) {
               console.error('Error parsing overseas branches JSON:', e);
             }
@@ -248,9 +246,9 @@ const Footer = () => {
               <div className="footer-contact-item d-flex gap-3 align-items-start">
                  <Phone size={18} className="mt-1 flex-shrink-0" style={{ color: '#d4af37' }} />
                  <div className="d-flex flex-column small" style={{ fontSize: '0.85rem' }}>
-                    <span><strong>Main:</strong> <a href={`tel:${contactDetails.phoneMain.replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneMain}</a></span>
-                    <span><strong>Sales:</strong> <a href={`tel:${contactDetails.phoneSales.replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneSales}</a></span>
-                    <span><strong>Service:</strong> <a href={`tel:${contactDetails.phoneService.replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneService}</a></span>
+                    <span><strong>Main:</strong> <a href={`tel:${(contactDetails.phoneMain || '').replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneMain}</a></span>
+                    <span><strong>Sales:</strong> <a href={`tel:${(contactDetails.phoneSales || '').replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneSales}</a></span>
+                    <span><strong>Service:</strong> <a href={`tel:${(contactDetails.phoneService || '').replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneService}</a></span>
                  </div>
               </div>
             </div>
