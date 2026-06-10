@@ -17,41 +17,41 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      // Prepare payload - some backends expect 'email' instead of 'username'
-      const payload = {
-        password: password
-      };
-      
-      // If it looks like an email, send it as both email and username
-      // to cover different backend implementations
-      if (username.includes('@')) {
-        payload.email = username.trim();
-        payload.username = username.trim();
-      } else {
-        payload.username = username.trim();
-        // Also send as email just in case the backend uses 'email' field for the username
-        payload.email = username.trim();
-      }
-
       const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json'
         },
-        credentials: 'include',
-        body: JSON.stringify(payload)
+        // Removed credentials: 'include' as it can cause CORS/preflight issues on live sites
+        // when using localStorage for tokens.
+        body: JSON.stringify({ 
+          username: username.trim(), 
+          password: password.trim() 
+        })
       });
 
-      const data = await response.json();
+      let data;
+      const text = await response.text();
+      try {
+        data = JSON.parse(text);
+        // If the backend returns a double-encoded JSON string
+        if (typeof data === 'string') {
+          try {
+            data = JSON.parse(data);
+          } catch (e) {
+            // Not double encoded, keep as string
+          }
+        }
+      } catch (e) {
+        data = { message: text || 'Invalid response from server' };
+      }
       
-      // Improved logging for debugging
-       console.log('Login attempt:', {
-         identifier: username.trim(),
-         payloadKeys: Object.keys(payload),
-         status: response.status,
-         ok: response.ok,
-         data: data
-       });
+      // Detailed logging for live debugging
+      console.log('Login response details:', {
+        status: response.status,
+        ok: response.ok,
+        data: data
+      });
 
       // Be more flexible with the success condition
       // Many backends just return 200 OK and a token if successful
