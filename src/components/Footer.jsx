@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Mail, 
-  MapPin, 
-  Phone, 
-  Clock, 
-  Landmark, 
-  ShieldCheck, 
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Clock,
+  Landmark,
+  ShieldCheck,
   ArrowRight,
   Globe
 } from 'lucide-react';
@@ -84,14 +84,14 @@ const Footer = () => {
     <footer className="footer pt-5 overflow-hidden" style={{ background: '#0a0f1d', color: '#94a3b8' }}>
       <div className="container pt-5">
         <div className="row g-5 mb-5 pb-4">
-          
+
           {/* Column 1: Brand, Social & Corporate Registration info */}
           <div className="col-lg-3">
             <img src={logoImg} alt="AtomLifts Logo" style={{ height: '55px', marginBottom: '25px', objectFit: 'contain' }} />
             <p className="mb-4 leading-relaxed small-text" style={{ fontSize: '0.95rem', lineHeight: '1.6' }}>
               We are a premier global vertical transportation enterprise, dedicated to the engineering, installation, and smart modernization of high-performance elevators and escalators to ensure absolute safety.
             </p>
-            
+
             {/* Corporate Registration Details */}
             <div className="corporate-info d-flex flex-column gap-2 mb-4 p-3 rounded bg-dark-lighter border border-secondary border-opacity-15">
               <div className="d-flex align-items-center gap-2 text-white-50" style={{ fontSize: '0.8rem' }}>
@@ -106,43 +106,43 @@ const Footer = () => {
 
             <div className="d-flex gap-2 mt-3">
               {[
-                { 
-                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>, 
-                  url: 'https://facebook.com', 
-                  label: 'Facebook', 
-                  color: '#1877f2' 
+                {
+                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>,
+                  url: 'https://facebook.com',
+                  label: 'Facebook',
+                  color: '#1877f2'
                 },
-                { 
-                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>, 
-                  url: 'https://twitter.com', 
-                  label: 'Twitter / X', 
-                  color: '#1da1f2' 
+                {
+                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" /></svg>,
+                  url: 'https://twitter.com',
+                  label: 'Twitter / X',
+                  color: '#1da1f2'
                 },
-                { 
-                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>, 
-                  url: 'https://linkedin.com', 
-                  label: 'LinkedIn', 
-                  color: '#0a66c2' 
+                {
+                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>,
+                  url: 'https://linkedin.com',
+                  label: 'LinkedIn',
+                  color: '#0a66c2'
                 },
-                { 
-                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>, 
-                  url: 'https://instagram.com', 
-                  label: 'Instagram', 
-                  color: '#e1306c' 
+                {
+                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>,
+                  url: 'https://instagram.com',
+                  label: 'Instagram',
+                  color: '#e1306c'
                 },
-                { 
-                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"/><path d="m10 15 5-3-5-3z"/></svg>, 
-                  url: 'https://youtube.com', 
-                  label: 'YouTube', 
-                  color: '#ff0000' 
+                {
+                  svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z" /><path d="m10 15 5-3-5-3z" /></svg>,
+                  url: 'https://youtube.com',
+                  label: 'YouTube',
+                  color: '#ff0000'
                 }
               ].map(({ svg, url, label, color }, i) => (
-                <a 
-                  key={i} 
-                  href={url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="footer-social-btn transition-all" 
+                <a
+                  key={i}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-btn transition-all"
                   aria-label={label}
                   style={{ '--hover-color': color }}
                 >
@@ -171,9 +171,7 @@ const Footer = () => {
               <Link to="/contact" className="footer-link-new text-decoration-none d-flex align-items-center gap-1">
                 <ArrowRight size={12} className="link-arrow" /> Contact Us
               </Link>
-              <Link to="/admin" className="footer-link-new text-decoration-none d-flex align-items-center gap-1 text-info">
-                <ArrowRight size={12} className="link-arrow text-info" /> Admin Portal
-              </Link>
+
             </div>
           </div>
 
@@ -204,9 +202,9 @@ const Footer = () => {
             <h5 className="fw-bold mb-4 text-white text-uppercase tracking-wider" style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}>Branch Locations</h5>
             <div className="footer-links d-flex flex-column gap-3">
               {branches.map(branch => (
-                <Link 
-                  key={branch.key} 
-                  to={`/overseas/${branch.key}`} 
+                <Link
+                  key={branch.key}
+                  to={`/overseas/${branch.key}`}
                   className="footer-link-new text-decoration-none d-flex flex-column group"
                 >
                   <span className="fw-bold text-white-50 d-flex align-items-center gap-1">
@@ -221,7 +219,7 @@ const Footer = () => {
           {/* Column 4: Head Office Contact Info */}
           <div className="col-lg-3">
             <h5 className="fw-bold mb-4 text-white text-uppercase tracking-wider" style={{ fontSize: '0.85rem', letterSpacing: '0.05em' }}>Head Office</h5>
-            
+
             <div className="d-flex flex-column gap-3">
               <div className="footer-contact-item d-flex gap-3 align-items-start">
                 <Clock size={18} className="mt-1 flex-shrink-0" style={{ color: '#d4af37' }} />
@@ -244,12 +242,12 @@ const Footer = () => {
               </div>
 
               <div className="footer-contact-item d-flex gap-3 align-items-start">
-                 <Phone size={18} className="mt-1 flex-shrink-0" style={{ color: '#d4af37' }} />
-                 <div className="d-flex flex-column small" style={{ fontSize: '0.85rem' }}>
-                    <span><strong>Main:</strong> <a href={`tel:${(contactDetails.phoneMain || '').replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneMain}</a></span>
-                    <span><strong>Sales:</strong> <a href={`tel:${(contactDetails.phoneSales || '').replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneSales}</a></span>
-                    <span><strong>Service:</strong> <a href={`tel:${(contactDetails.phoneService || '').replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneService}</a></span>
-                 </div>
+                <Phone size={18} className="mt-1 flex-shrink-0" style={{ color: '#d4af37' }} />
+                <div className="d-flex flex-column small" style={{ fontSize: '0.85rem' }}>
+                  <span><strong>Main:</strong> <a href={`tel:${(contactDetails.phoneMain || '').replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneMain}</a></span>
+                  <span><strong>Sales:</strong> <a href={`tel:${(contactDetails.phoneSales || '').replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneSales}</a></span>
+                  <span><strong>Service:</strong> <a href={`tel:${(contactDetails.phoneService || '').replace(/\s+/g, '')}`} className="text-decoration-none text-secondary hover-primary">{contactDetails.phoneService}</a></span>
+                </div>
               </div>
             </div>
           </div>

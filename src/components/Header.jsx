@@ -26,7 +26,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       setScrolled(currentScrollY > 50);
 
       if (currentScrollY > lastScrollY && currentScrollY > 500) {
@@ -34,7 +34,7 @@ const Header = () => {
       } else {
         setVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
     window.addEventListener('scroll', handleScroll);
@@ -71,8 +71,8 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { 
-      name: 'Escalators', 
+    {
+      name: 'Escalators',
       path: '/escalators',
       isMega: true,
       dropdown: [
@@ -80,20 +80,20 @@ const Header = () => {
         { name: 'Moving Walkways', path: '/escalators/moving-walkways', img: walkwayThumb },
       ]
     },
-    { 
-      name: 'Lifts', 
+    {
+      name: 'Lifts',
       path: '/lifts',
       dropdown: [
-        { 
-          name: 'Residential', 
+        {
+          name: 'Residential',
           path: '/lifts/residential',
           subDropdown: [
             { name: 'Home Lifts', path: '/lifts/residential/home' },
             { name: 'Passenger Lifts', path: '/lifts/residential/passenger' },
           ]
         },
-        { 
-          name: 'Commercial', 
+        {
+          name: 'Commercial',
           path: '/lifts/commercial',
           subDropdown: [
             { name: 'Hospital Lifts', path: '/lifts/commercial/hospital' },
@@ -103,15 +103,15 @@ const Header = () => {
             { name: 'Vehicle Lifts', path: '/lifts/commercial/vehicle' },
           ]
         },
-        { 
-          name: 'Industrial', 
+        {
+          name: 'Industrial',
           path: '/lifts/industrial',
           subDropdown: [
             { name: 'Industrial Material Lifts', path: '/lifts/industrial/material' },
           ]
         },
-        { 
-          name: 'Parking Solutions', 
+        {
+          name: 'Parking Solutions',
           path: '/lifts/parking',
           subDropdown: [
             { name: 'Car Parking Lifts', path: '/lifts/parking/car' },
@@ -120,7 +120,7 @@ const Header = () => {
       ]
     },
     {
-      name: 'Overseas',
+      name: 'Branches',
       path: '#',
       dropdown: overseasDropdown
     },
@@ -132,55 +132,55 @@ const Header = () => {
 
   return (
     <>
-    <nav className={`navbar navbar-expand-lg fixed-top transition-all ${scrolled ? 'glass-nav py-1' : 'bg-transparent py-2'}`}
-         style={{ transform: visible ? 'translateY(0)' : 'translateY(-100%)', transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)' }}>
-      <div className="container">
-        <Link className="navbar-brand d-flex align-items-center" to="/">
-           <img 
-             src={logoImg} 
-             alt="Atomlifts Logo" 
-             style={{ height: '55px', objectFit: 'contain' }} 
-             className="me-2"
-           />
-        </Link>
+      <nav className={`navbar navbar-expand-lg fixed-top transition-all ${scrolled ? 'glass-nav py-1' : 'bg-transparent py-2'}`}
+        style={{ transform: visible ? 'translateY(0)' : 'translateY(-100%)', transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)' }}>
+        <div className="container">
+          <Link className="navbar-brand d-flex align-items-center" to="/">
+            <img
+              src={logoImg}
+              alt="Atomlifts Logo"
+              style={{ height: '55px', objectFit: 'contain' }}
+              className="me-2"
+            />
+          </Link>
 
-        <button 
-          className="navbar-toggler border-0 text-white shadow-none" 
-          type="button" 
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+          <button
+            className="navbar-toggler border-0 text-white shadow-none"
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
 
-        <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarNav">
-          <ul className="navbar-nav mx-auto align-items-center">
-            {navLinks.map((link) => (
-              <li key={link.name} className={`nav-item mx-lg-2 ${link.dropdown ? 'dropdown custom-dropdown' : ''}`}>
-                {link.dropdown ? (
-                  <>
-                    <Link 
-                      className={`nav-link fw-bold text-uppercase small tracking-widest dropdown-toggle nav-link-custom ${location.pathname.startsWith(link.path) ? 'text-white' : ''}`}
-                      to={link.path}
-                      id={`dropdown-${link.name}`}
-                      role="button"
-                      aria-expanded="false"
-                      onClick={(e) => {
-                        if (window.innerWidth < 992) {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          const parent = e.currentTarget.parentElement;
-                          const menu = parent.querySelector('.dropdown-menu');
-                          if (menu) {
-                            menu.style.maxHeight = menu.style.maxHeight === '1000px' ? '0px' : '1000px';
+          <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`} id="navbarNav">
+            <ul className="navbar-nav mx-auto align-items-center">
+              {navLinks.map((link) => (
+                <li key={link.name} className={`nav-item mx-lg-2 ${link.dropdown ? 'dropdown custom-dropdown' : ''}`}>
+                  {link.dropdown ? (
+                    <>
+                      <Link
+                        className={`nav-link fw-bold text-uppercase small tracking-widest dropdown-toggle nav-link-custom ${location.pathname.startsWith(link.path) ? 'text-white' : ''}`}
+                        to={link.path}
+                        id={`dropdown-${link.name}`}
+                        role="button"
+                        aria-expanded="false"
+                        onClick={(e) => {
+                          if (window.innerWidth < 992) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const parent = e.currentTarget.parentElement;
+                            const menu = parent.querySelector('.dropdown-menu');
+                            if (menu) {
+                              menu.style.maxHeight = menu.style.maxHeight === '1000px' ? '0px' : '1000px';
+                            }
                           }
-                        }
-                      }}
-                    >
-                      {link.name} <ChevronDown size={14} className="ms-1 dropdown-chevron" />
-                    </Link>
-                    {link.isMega ? (
-                      <div className="dropdown-menu mega-menu-box border-0 shadow-2xl overflow-hidden" aria-labelledby={`dropdown-${link.name}`}>
-                        <div className="p-4">
+                        }}
+                      >
+                        {link.name} <ChevronDown size={14} className="ms-1 dropdown-chevron" />
+                      </Link>
+                      {link.isMega ? (
+                        <div className="dropdown-menu mega-menu-box border-0 shadow-2xl overflow-hidden" aria-labelledby={`dropdown-${link.name}`}>
+                          <div className="p-4">
                             <div className="row g-4">
                               {link.dropdown.map((sub) => (
                                 <div className="col-12 col-md-6" key={sub.name}>
@@ -220,8 +220,8 @@ const Header = () => {
                                   <ul className="dropdown-menu glass-nav-dropdown border-0 shadow-2xl submenu-left">
                                     {sub.subDropdown.map((subChild) => (
                                       <li key={subChild.name}>
-                                        <Link 
-                                          className="dropdown-item text-white-50" 
+                                        <Link
+                                          className="dropdown-item text-white-50"
                                           to={subChild.path}
                                           onClick={() => setIsOpen(false)}
                                         >
@@ -232,8 +232,8 @@ const Header = () => {
                                   </ul>
                                 </>
                               ) : (
-                                <Link 
-                                  className="dropdown-item text-white-50" 
+                                <Link
+                                  className="dropdown-item text-white-50"
                                   to={sub.path}
                                   onClick={() => setIsOpen(false)}
                                 >
@@ -246,7 +246,7 @@ const Header = () => {
                       )}
                     </>
                   ) : (
-                    <Link 
+                    <Link
                       className={`nav-link fw-bold text-uppercase small tracking-widest transition-all nav-link-custom ${location.pathname === link.path ? 'text-white' : ''}`}
                       to={link.path}
                       onClick={() => setIsOpen(false)}
@@ -258,12 +258,12 @@ const Header = () => {
               ))}
             </ul>
             <div className="d-flex align-items-center justify-content-center pb-3 pb-lg-0">
-               <button 
-                  onClick={() => { setIsQuoteOpen(true); setIsOpen(false); }}
-                  className="btn-header-quote py-2 px-4 small text-decoration-none border-0"
-               >
-                  Ask for Quotation
-               </button>
+              <button
+                onClick={() => { setIsQuoteOpen(true); setIsOpen(false); }}
+                className="btn-header-quote py-2 px-4 small text-decoration-none border-0"
+              >
+                Ask for Quotation
+              </button>
             </div>
           </div>
         </div>

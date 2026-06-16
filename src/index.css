@@ -955,7 +955,7 @@ a {
 .stat-number-new {
   font-size: 3.5rem;
   font-weight: 800;
-  color: var(--primary);
+  color: #D4AF37;
   margin-bottom: 10px;
   letter-spacing: -0.02em;
 }

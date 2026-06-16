@@ -227,7 +227,7 @@ const TestimonialsStats = () => {
                       />
                     </div>
                   ) : stat.type === 'icon' || stat.isIcon ? (
-                    <div className="text-primary py-2 d-flex justify-content-center align-items-center">
+                    <div className="py-2 d-flex justify-content-center align-items-center" style={{ color: '#D4AF37' }}>
                       <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="m15 11-1-1q-1-1-2-1t-2 1l-1 1" />
                         <path d="M15 11c1 0 2 .5 3 1.5s1 2.5 1 3.5-1 2-2 3-2 1-3 1h-4c-1 0-2-.5-3-1.5S6 16.5 6 15.5s1-2 2-3 2-1 3-1" />
