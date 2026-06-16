@@ -16,7 +16,7 @@ const AdminDashboard = () => {
   // Contact Us Details States
   const [contactDetails, setContactDetails] = useState({
     hours: 'Mon - Sat 08:00 - 18:00',
-    address: 'No.30,Second  Street, Sidco Industrial estate, Ambattur, Chennai  600 098.',
+    address: 'No. 30, Sidco Industrial Estate, Pattravakkam, Ambattur, Chennai - 600 098.',
     email1: 'info@atomlifts.com',
     email2: 'admin@atomlifts.com',
     phoneMain: '+91 85508 55001',

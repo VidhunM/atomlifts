@@ -76,6 +76,8 @@ const Careers = () => {
                 <option>Chennai</option>
                 <option>Bangalore</option>
                 <option>Coimbatore</option>
+                <option>Salem</option>
+                <option>Thiruvannamalai</option>
               </select>
             </div>
             <div className="col-12 col-lg-2">

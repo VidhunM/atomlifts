@@ -15,7 +15,7 @@ const Contact = () => {
   const [status, setStatus] = useState({ type: '', message: '' });
   const [contactDetails, setContactDetails] = useState({
     hours: 'Mon - Sat 08:00 - 18:00',
-    address: 'No.30,Second  Street, Sidco Industrial estate, Ambattur, Chennai  600 098.',
+    address: 'No. 30, Sidco Industrial Estate, Pattravakkam, Ambattur, Chennai - 600 098.',
     email1: 'info@atomlifts.com',
     email2: 'admin@atomlifts.com',
     phoneMain: '+91 85508 55001',
@@ -253,7 +253,99 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Domestic Branches Section */}
+      <section className="domestic-branches-section py-5 bg-dark-lighter border-top border-secondary border-opacity-10">
+        <div className="container py-lg-4">
+          <div className="text-center mb-5" data-aos="fade-up">
+            <h6 className="text-primary text-uppercase tracking-widest fw-800 mb-3 small" style={{ letterSpacing: '0.15em' }}>OUR NETWORK</h6>
+            <h2 className="display-5 fw-900 text-white mb-0">Our Domestic <span className="text-primary">Branches</span></h2>
+          </div>
+          <div className="row g-4 justify-content-center">
+            {[
+              {
+                city: 'Chennai (Head Office)',
+                address: 'No. 30, Sidco Industrial Estate, Pattravakkam, Ambattur, Chennai - 600 098.',
+                phone: '+91 85508 55001',
+                email: 'info@atomlifts.com'
+              },
+              {
+                city: 'Coimbatore Branch',
+                address: '3rd Floor, No. 635, Sathy Road, GP Complex, Coimbatore - 641 012.',
+                phone: '+91 85508 55001',
+                email: 'info@atomlifts.com'
+              },
+              {
+                city: 'Salem Branch',
+                address: '2nd Flr, Kandaswarna Mega Mall, Saradha College, Opp. Fairlands, Salem - 636 016.',
+                phone: '+91 85508 55001',
+                email: 'info@atomlifts.com'
+              },
+              {
+                city: 'Thiruvannamalai Branch',
+                address: 'No. 1829/113, Thandurampattu Road, Parvathi Nagar, (Mariyamman Koil opp.), Thiruvannamalai - 606 603.',
+                phone: '+91 85508 55001',
+                email: 'info@atomlifts.com'
+              }
+            ].map((branch, index) => (
+              <div className="col-md-6 col-lg-3" key={index} data-aos="fade-up" data-aos-delay={index * 100}>
+                <div className="branch-card-domestic p-4 h-100 d-flex flex-column justify-content-between">
+                  <div>
+                    <div className="d-flex align-items-center gap-2 mb-3">
+                      <div className="branch-marker-icon">
+                        <MapPin size={18} />
+                      </div>
+                      <h5 className="text-white fw-bold mb-0" style={{ fontSize: '1.05rem' }}>{branch.city}</h5>
+                    </div>
+                    <p className="text-white-50 small mb-4 leading-relaxed" style={{ minHeight: '80px' }}>
+                      {branch.address}
+                    </p>
+                  </div>
+                  <div className="pt-3 border-top border-secondary border-opacity-15">
+                    <div className="d-flex align-items-center gap-2 mb-2 text-white-50 small">
+                      <Phone size={14} className="text-primary" />
+                      <span>{branch.phone}</span>
+                    </div>
+                    <div className="d-flex align-items-center gap-2 text-white-50 small">
+                      <Mail size={14} className="text-primary" />
+                      <a href={`mailto:${branch.email}`} className="text-decoration-none text-white-50 hover-primary">{branch.email}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <style>{`
+        .bg-dark-lighter {
+          background: rgba(255, 255, 255, 0.02);
+        }
+        .branch-card-domestic {
+          background: #141b2b;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 4px;
+          transition: all 0.3s ease;
+        }
+        .branch-card-domestic:hover {
+          transform: translateY(-5px);
+          border-color: var(--primary);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .branch-marker-icon {
+          width: 32px;
+          height: 32px;
+          background: rgba(248, 192, 45, 0.1);
+          color: var(--primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 4px;
+        }
+        .hover-primary:hover {
+          color: var(--primary) !important;
+        }
+
         .icon-box-yellow {
           background: var(--primary);
           color: var(--dark);
