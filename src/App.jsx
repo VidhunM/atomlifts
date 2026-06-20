@@ -54,6 +54,7 @@ import AdminTestimonialsStats from './pages/AdminTestimonialsStats';
 import AdminClients from './pages/AdminClients';
 import AdminBranches from './pages/AdminBranches';
 import AdminAboutStats from './pages/AdminAboutStats';
+import AdminSocialLinks from './pages/AdminSocialLinks';
 
 const MainLayout = () => (
   <>
@@ -96,6 +97,7 @@ function App() {
             <Route path="testimonials-stats" element={<AdminTestimonialsStats />} />
             <Route path="clients" element={<AdminClients />} />
             <Route path="about-stats" element={<AdminAboutStats />} />
+            <Route path="social-links" element={<AdminSocialLinks />} />
           </Route>
 
           {/* Public Routes */}

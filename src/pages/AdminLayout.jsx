@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation, Navigate, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FileText, Briefcase, Mail, LogOut, Menu, X, MessageSquare, Users, Globe, Award, PhoneCall } from 'lucide-react';
+import { LayoutDashboard, FileText, Briefcase, Mail, LogOut, Menu, X, MessageSquare, Users, Globe, Award, PhoneCall, Link2 } from 'lucide-react';
 import '../index.css';
 
 const AdminLayout = () => {
@@ -34,6 +34,7 @@ const AdminLayout = () => {
     { name: 'Testimonials & Stats', path: '/admin/testimonials-stats', icon: <MessageSquare size={20} /> },
     { name: 'Manage Clients', path: '/admin/clients', icon: <Users size={20} /> },
     { name: 'About Stats', path: '/admin/about-stats', icon: <Award size={20} /> },
+    { name: 'Icon Redirect Links', path: '/admin/social-links', icon: <Link2 size={20} /> },
   ];
 
   return (

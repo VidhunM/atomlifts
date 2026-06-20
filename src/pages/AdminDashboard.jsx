@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FileText, Briefcase, Mail, MessageSquare, Upload, Trash2, Image as ImageIcon, Plus, Video, Users, Globe, Award, PhoneCall } from 'lucide-react';
+import { FileText, Briefcase, Mail, MessageSquare, Upload, Trash2, Image as ImageIcon, Plus, Video, Users, Globe, Award, PhoneCall, Link2 } from 'lucide-react';
 import { API_BASE_URL } from '../config';
 
 const AdminDashboard = () => {
@@ -725,6 +725,23 @@ const AdminDashboard = () => {
                 Update the four running counter metrics (Awards, Riders, Uptime, Lifts) displayed on the About page.
               </p>
               <Link to="/admin/about-stats" className="btn btn-warning w-100 text-dark fw-bold" style={{ backgroundColor: '#ff8c00', borderColor: '#ff8c00', color: 'white' }}>Manage About Stats</Link>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-6">
+          <div className="card bg-dark text-white border-secondary h-100 shadow-sm hover-shadow-lg" style={{ transition: 'all 0.3s' }}>
+            <div className="card-body p-4">
+              <div className="d-flex align-items-center mb-3">
+                <div className="p-3 rounded-circle me-3 bg-primary text-white">
+                  <Link2 size={24} />
+                </div>
+                <h4 className="card-title mb-0">Icon Redirect Links</h4>
+              </div>
+              <p className="card-text text-secondary mb-4">
+                Configure redirect URLs for social media icons (Facebook, LinkedIn, Instagram, etc.) and WhatsApp communication.
+              </p>
+              <Link to="/admin/social-links" className="btn btn-primary w-100 fw-bold">Manage Redirect Links</Link>
             </div>
           </div>
         </div>

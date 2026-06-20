@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PhoneCall, FileText, X } from 'lucide-react';
 import QuoteModal from './QuoteModal';
+import { API_BASE_URL } from '../config';
 
 const WhatsAppIcon = ({ size = 24, className = "" }) => (
   <svg 
@@ -17,8 +18,32 @@ const WhatsAppIcon = ({ size = 24, className = "" }) => (
 const WhatsAppButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [whatsappNumber, setWhatsappNumber] = useState("919600087456");
 
-  const whatsappNumber = "919600087456";
+  useEffect(() => {
+    const fetchWhatsAppNumber = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/api/settings/socialLinks`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data && data.value) {
+            try {
+              const parsed = JSON.parse(data.value);
+              if (parsed && parsed.whatsapp) {
+                setWhatsappNumber(parsed.whatsapp.replace(/\D/g, ''));
+              }
+            } catch (e) {
+              console.error('Error parsing socialLinks JSON in WhatsAppButton:', e);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching socialLinks for WhatsAppButton:', error);
+      }
+    };
+    fetchWhatsAppNumber();
+  }, []);
+
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi, I'm interested in Atom Lifts services. Can you help me with a quote?`;
 
   return (
